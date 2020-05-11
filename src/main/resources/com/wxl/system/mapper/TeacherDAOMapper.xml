@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wxl.system.dao.TeacherDAO">
+
+    <!--批量插入-->
+    <!--录入教师档案信息-->
+    <!--    <insert id="insertTeacher" parameterType="Teacher" useGeneratedKeys="true" keyProperty="tno">
+        insert into teacher_tb
+        values (#{tno},#{tname},#{sex},#{worktime},#{pol},#{edurecord},#{position},#{dept},#{tel});
+    </insert>-->
+    <insert id="insertTeacher" parameterType="list">
+        insert into teacher_tb values
+            <foreach collection="list" item="teacher" separator=",">
+                 (#{teacher.tno},#{teacher.tname},#{teacher.sex},#{teacher.worktime},#{teacher.pol},#{teacher.edurecord},#{teacher.position},#{teacher.dept},#{teacher.tel})
+            </foreach>
+
+    </insert>
+
+</mapper>
