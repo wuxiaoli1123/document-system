@@ -36,6 +36,7 @@ public class TestStudentService {
         student.setBirth("19990914");
         student.setSex(0);
         student.setSname("苏祎晴");
+        student.setGrade("2016");
         studentService.update(student);
     }
 }

@@ -67,6 +67,7 @@ public class StudentController {
         Result result = new Result();
         try {
             studentService.update(student);
+            log.info(student.getSno());
             result.setMsg("修改信息成功");
         }catch (Exception e){
             e.printStackTrace();

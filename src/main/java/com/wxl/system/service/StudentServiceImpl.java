@@ -32,10 +32,4 @@ public class StudentServiceImpl implements StudentService {
     }
 
 
-    @Override
-    public List<Student> findByPage(Integer page, Integer rows){
-        int start = (page - 1)*rows;
-
-    }
-
 }

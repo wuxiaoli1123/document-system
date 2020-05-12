@@ -14,12 +14,6 @@ public interface StudentService {
     void update(Student student);
 
 
-    //参数1：当前页； 参数2：每页显示记录条数
-    List<Student> findByPage(Integer page,Integer rows);
-
-    //查询总条数
-    Integer findTotals();
-
 
 
 }
