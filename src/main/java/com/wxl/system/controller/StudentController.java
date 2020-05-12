@@ -2,10 +2,8 @@ package com.wxl.system.controller;
 
 import com.wxl.system.entity.Result;
 import com.wxl.system.entity.Student;
-import com.wxl.system.entity.Teacher;
 import com.wxl.system.entity.User;
 import com.wxl.system.service.StudentService;
-import com.wxl.system.service.TeacherService;
 import com.wxl.system.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

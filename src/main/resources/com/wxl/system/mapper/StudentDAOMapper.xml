@@ -22,7 +22,7 @@
 
     <!--修改学生信息-->
     <update id="update" parameterType="Student">
-        update student_tb set dept=#{dept},major=#{classno},pol=#{pol},gs=#{gs},birth=#{birth},sex=#{sex},sname=#{sname}
+        update student_tb set dept=#{dept},major=#{classno},pol=#{pol},gs=#{gs},birth=#{birth},sex=#{sex},sname=#{sname},grade=#{grade}
         where sno=#{sno}
     </update>
 
