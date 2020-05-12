@@ -2,6 +2,7 @@ package com.wxl.system.controller;
 
 import com.wxl.system.entity.Result;
 import com.wxl.system.entity.Student;
+import com.wxl.system.entity.Student_abbr;
 import com.wxl.system.entity.User;
 import com.wxl.system.service.StudentService;
 import com.wxl.system.service.UserService;
@@ -10,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("student")
@@ -76,7 +79,29 @@ public class StudentController {
         return result;
     }
 
+   //查询学生信息----分页查询----用于登记成绩中，展示学生信息
+    @GetMapping("findByPage")
+    public Map<String,Object> findByPage(Integer page,Integer rows,String cname,String grade, String classno){
+        page = page == null ? 1 : page;
+        rows = rows == null ? 2 : rows;
 
+        HashMap<String,Object> map = new HashMap<>();
+
+        //分页处理
+        List<Student_abbr> student_abbrs = studentService.findByPage(page,rows,cname,grade,classno);
+
+        log.info("student   size" + student_abbrs.size());
+
+        //计算总页数
+        Integer totals = studentService.findTotals(cname,grade,classno);
+        Integer totalPage = totals % rows == 0 ? totals / rows : totals / rows + 1;
+        map.put("students",student_abbrs);
+        map.put("totals",totals);
+        map.put("totalPage",totalPage);
+
+        return map;
+
+    }
 
 
 }

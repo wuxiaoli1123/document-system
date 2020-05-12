@@ -19,9 +19,9 @@ public interface BaseDAO<T, K> {
     List<T> findAll();
 
     //根据页码数返回结果集
-    List<T> findByPage(@Param("start") Integer start, @Param("rows") Integer rows);
+    List<T> findByPage(@Param("start") Integer start, @Param("rows") Integer rows, @Param("cname") String cname, @Param("grade") String grade, @Param("classno") String classno);
 
     //返回满足条件的结果集的大小
-    Integer findTotals();
+    Integer findTotals(@Param("cname") String cname, @Param("grade") String grade, @Param("classno") String classno);
 
 }

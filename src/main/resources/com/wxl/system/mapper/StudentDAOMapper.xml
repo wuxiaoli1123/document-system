@@ -11,7 +11,7 @@
     <insert id="insertStudent" parameterType="list">
         insert into student_tb values
         <foreach collection="list" item="student" separator=",">
-            (#{student.sno},#{student.sname},#{student.sex},#{student.birth},#{student.gs},#{student.pol},#{student.classno},#{student.major},#{student.dept})
+            (#{student.sno},#{student.sname},#{student.sex},#{student.birth},#{student.gs},#{student.pol},#{student.classno},#{student.major},#{student.dept},#{student.grade})
         </foreach>
     </insert>
 
@@ -26,6 +26,54 @@
         where sno=#{sno}
     </update>
 
+
+    <!--，根据班级号，分页查询所有学生信息-->
+    <select id="findByPage" resultType="Student_abbr">
+        SELECT
+            student_tb.sno,
+            student_tb.sname
+        FROM
+            student_tb,
+            sc_tb
+        WHERE
+            student_tb.sno = sc_tb.sno
+        AND sc_tb.cno = (
+            SELECT
+                cno
+            FROM
+                course_tb
+            WHERE
+                cname = #{cname}
+        )
+        AND student_tb.grade = #{grade}
+        AND sc_tb.classno = #{classno}
+
+
+        limit #{start},#{rows}
+
+    </select>
+
+
+    <!--查询总条数-->
+      <select id="findTotals" resultType="Integer">
+        SELECT
+             COUNT(student_tb.sno)
+        FROM
+            student_tb,
+            sc_tb
+        WHERE
+            student_tb.sno = sc_tb.sno
+        AND sc_tb.cno = (
+            SELECT
+                cno
+            FROM
+                course_tb
+            WHERE
+                cname = #{cname}
+        )
+        AND student_tb.grade = #{grade}
+        AND sc_tb.classno = #{classno}
+      </select>
 
 
 </mapper>
