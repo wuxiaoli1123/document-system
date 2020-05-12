@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface StudentDAO {
+public interface StudentDAO extends BaseDAO<Student,String> {
     //插入学生档案信息
     void insertStudent(List<Student> students);
 
@@ -14,5 +14,7 @@ public interface StudentDAO {
     Student findBySno(String sno);
 
     void update(Student student);
+
+
 }
 

@@ -15,15 +15,23 @@
         </foreach>
     </insert>
 
-
+    <!--根据学号查询学生信息-->
     <select id="findBySno" resultType="Student">
         select * from student_tb where sno = #{sno}
     </select>
 
+    <!--修改学生信息-->
     <update id="update" parameterType="Student">
         update student_tb set dept=#{dept},major=#{classno},pol=#{pol},gs=#{gs},birth=#{birth},sex=#{sex},sname=#{sname}
         where sno=#{sno}
     </update>
+
+
+    <!--，根据班级号，分页查询所有学生信息-->
+    <select id="findByPage" resultType="Student">
+        select sno,sname
+    </select>
+
 
 
 </mapper>

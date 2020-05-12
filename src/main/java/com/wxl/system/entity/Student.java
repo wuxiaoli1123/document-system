@@ -11,6 +11,7 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @ToString
 @Accessors(chain = true)
+
 public class Student {
     private String sno;
     private String sname;
@@ -21,4 +22,5 @@ public class Student {
     private String classno;
     private String major;
     private String dept;
+    private String grade;
 }

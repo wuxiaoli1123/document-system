@@ -31,4 +31,11 @@ public class StudentServiceImpl implements StudentService {
         studentDAO.update(student);
     }
 
+
+    @Override
+    public List<Student> findByPage(Integer page, Integer rows){
+        int start = (page - 1)*rows;
+
+    }
+
 }
