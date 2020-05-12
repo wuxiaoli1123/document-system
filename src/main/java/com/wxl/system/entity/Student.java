@@ -21,4 +21,5 @@ public class Student {
     private String classno;
     private String major;
     private String dept;
+    private String grade;
 }
