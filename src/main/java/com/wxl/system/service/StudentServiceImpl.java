@@ -23,4 +23,12 @@ public class StudentServiceImpl implements StudentService {
         studentDAO.insertStudent(students);
     }
 
+    @Override
+    public Student findBySno(String sno){return studentDAO.findBySno(sno);}
+
+    @Override
+    public void update(Student student) {
+        studentDAO.update(student);
+    }
+
 }

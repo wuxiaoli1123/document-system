@@ -8,4 +8,7 @@ public interface TeacherService {
 
     //录入教师档案信息
     void insertTeacher(List<Teacher> teachers);
+
+    Teacher findByTno(String tno);
+
 }

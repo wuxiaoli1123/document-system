@@ -13,8 +13,17 @@
         <foreach collection="list" item="student" separator=",">
             (#{student.sno},#{student.sname},#{student.sex},#{student.birth},#{student.gs},#{student.pol},#{student.classno},#{student.major},#{student.dept})
         </foreach>
-
     </insert>
+
+
+    <select id="findBySno" resultType="Student">
+        select * from student_tb where sno = #{sno}
+    </select>
+
+    <update id="update" parameterType="Student">
+        update student_tb set dept=#{dept},major=#{classno},pol=#{pol},gs=#{gs},birth=#{birth},sex=#{sex},sname=#{sname}
+        where sno=#{sno}
+    </update>
 
 
 </mapper>

@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface TeacherDAO {
     void insertTeacher(List<Teacher> teacher);
+
+    Teacher findByTno(String tno);
 }

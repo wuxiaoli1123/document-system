@@ -63,7 +63,10 @@ public class TeacherController {
         return result;
     }
 
-
+    @GetMapping("findByTno")
+    public Teacher findByTno(String tno){
+        return teacherService.findByTno(tno);
+    }
 
 
 }

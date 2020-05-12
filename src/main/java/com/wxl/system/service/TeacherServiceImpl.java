@@ -23,4 +23,7 @@ public class TeacherServiceImpl implements TeacherService {
         teacherDAO.insertTeacher(teachers);
     }
 
+    @Override
+    public Teacher findByTno(String tno){return teacherDAO.findByTno(tno);}
+
 }
