@@ -22,4 +22,25 @@
     </select>
 
 
+    <!--登记学生成绩-->
+    <update id="updateGrade" >
+        UPDATE sc_tb
+        SET grade = #{grade},
+        credit = CASE
+        WHEN grade >= 60 THEN
+	    (
+		SELECT
+			credit
+		FROM
+			course_tb
+		WHERE
+			cname = #{cname}
+	    )
+       ELSE
+	   0
+       END
+       WHERE sno = #{sno} AND cno = (SELECT cno FROM course_tb WHERE cname = #{cname})
+    </update>
+
+
 </mapper>

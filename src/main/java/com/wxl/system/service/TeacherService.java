@@ -11,4 +11,6 @@ public interface TeacherService {
 
     Teacher findByTno(String tno);
 
+    //登记学生成绩
+    void updateGrade(String sno,String cname,double grade);
 }

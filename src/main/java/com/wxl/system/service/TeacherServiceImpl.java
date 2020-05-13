@@ -26,4 +26,11 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public Teacher findByTno(String tno){return teacherDAO.findByTno(tno);}
 
+
+    //登记学生成绩
+    @Override
+    public void updateGrade(String sno,String cname,double grade){
+        teacherDAO.updateGrade(sno,cname,grade);
+    }
+
 }
