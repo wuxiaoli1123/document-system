@@ -29,7 +29,7 @@ public class TestStudentService {
     public void testupdate(){
         Student student = studentService.findBySno("2017110435");
         student.setDept("2018");
-        student.setMajor("软件工程");
+        student.setMajor("信息技术");
         student.setClassno("4");
         student.setPol("党员");
         student.setGs("xx");
