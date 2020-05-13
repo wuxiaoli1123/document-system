@@ -37,7 +37,7 @@ public class TestOptionalService {
         optional.setNumber(0);
         optional.setMax(10);
         list.add(optional);
-        optionalService.addOptional(list);
+        optionalService.save(optional);
     }
 
     @Test
