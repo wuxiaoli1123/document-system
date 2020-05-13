@@ -29,4 +29,9 @@ public class NoticeServiceImpl implements NoticeService{
         return noticeDAO.findTotals_Notice(account);
     }
 
+    @Override
+    public String findConBySnum(String snum){
+        return noticeDAO.findConBySnum(snum);
+    }
+
 }

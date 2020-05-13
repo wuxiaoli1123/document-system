@@ -39,5 +39,10 @@
 	    )
       </select>
 
+     <!--根据消息编号查询消息内容-->
+	<select id="findConBySnum" parameterType="String" resultType="String">
+		select content from sendinfo_tb where snum=#{snum}
+	</select>
+
 
 </mapper>

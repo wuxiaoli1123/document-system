@@ -2,6 +2,8 @@ package com.wxl.system.service;
 
 import com.wxl.system.entity.Notice;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,5 +15,8 @@ public interface NoticeService {
 
     //查询总条数----Notice
     Integer findTotals_Notice(String account);
+
+
+    String findConBySnum(String snum);
 
 }

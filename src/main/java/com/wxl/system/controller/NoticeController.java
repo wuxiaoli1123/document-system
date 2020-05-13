@@ -2,6 +2,7 @@ package com.wxl.system.controller;
 
 
 import com.wxl.system.entity.Notice;
+import com.wxl.system.entity.Result;
 import com.wxl.system.entity.Student_abbr;
 import com.wxl.system.service.NoticeService;
 import lombok.extern.slf4j.Slf4j;
@@ -51,6 +52,16 @@ public class NoticeController {
         map.put("totalPage",totalPage);
 
         return map;
-
     }
+
+    /**
+     * 查看消息具体内容
+     * by 吴小莉
+     */
+    @GetMapping("findConBySnum")
+    public String findConBySnum(String snum){
+          return noticeService.findConBySnum(snum);
+    }
+
+
 }

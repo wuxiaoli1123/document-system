@@ -15,4 +15,8 @@ public interface NoticeDAO {
     //返回满足条件的结果集的大小---notice
     Integer findTotals_Notice(@Param("account") String account);
 
+    void deleteByList(List<Notice> notices);
+
+    String findConBySnum(String snum);
+
 }
