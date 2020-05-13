@@ -21,7 +21,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    //用户登录
+    /**
+     * 用户登录
+     * by 吴小莉
+     */
     @RequestMapping("login")
     public Result login(@RequestBody User user, HttpServletRequest request) {
         Result result = new Result();
@@ -60,7 +63,10 @@ public class UserController {
         return result;
     }
 
-    //用户修改密码
+    /**
+     * 用户修改密码
+     * by 吴小莉
+     */
     @PostMapping("changePassword")
     public Result changePassword(String account,String oldpassword,String newpassword,String conpassword){
         Result result = new Result();
@@ -132,10 +138,6 @@ public class UserController {
             }
 
             }
-
-     /*       user.setPassword(newpassword);
-            userService.changePassword(user);
-            result.setMsg("密码修改成功！");*/
 
         }catch(Exception e){
             e.printStackTrace();

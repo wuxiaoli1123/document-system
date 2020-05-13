@@ -26,7 +26,10 @@ public class StudentController {
     @Autowired
     private UserService userService;
 
-    //录入学生档案信息
+    /**
+     * 批量录入学生档案信息，并自动插入用户表
+     * by 吴小莉
+     */
     @PostMapping("insertStudent")
     public Result insertStudent(@RequestBody List<Student> students){
         Result result = new Result();
@@ -79,10 +82,16 @@ public class StudentController {
         return result;
     }
 
-   //查询学生信息----分页查询----用于登记成绩中，展示学生信息
+
+    /**
+     * 查询学生信息----分页查询----用于登记成绩中，展示学生信息
+     * by 吴小莉
+     */
     @GetMapping("findByPage")
     public Map<String,Object> findByPage(Integer page,Integer rows,String cname,String grade, String classno){
         page = page == null ? 1 : page;
+
+        //前端页面应该是20.这里的“2”，仅用于后端测试
         rows = rows == null ? 2 : rows;
 
         HashMap<String,Object> map = new HashMap<>();

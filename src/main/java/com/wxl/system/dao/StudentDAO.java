@@ -1,8 +1,10 @@
 package com.wxl.system.dao;
 
+import com.wxl.system.entity.Notice;
 import com.wxl.system.entity.Student;
 import com.wxl.system.entity.Student_abbr;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,7 +17,6 @@ public interface StudentDAO extends BaseDAO<Student_abbr,String> {
     Student findBySno(String sno);
 
     void update(Student student);
-
 
 }
 

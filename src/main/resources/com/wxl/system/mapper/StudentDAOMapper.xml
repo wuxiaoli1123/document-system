@@ -54,7 +54,7 @@
     </select>
 
 
-    <!--查询总条数-->
+    <!--查询总条数,针对学生信息-->
       <select id="findTotals" resultType="Integer">
         SELECT
              COUNT(student_tb.sno)
@@ -74,6 +74,7 @@
         AND student_tb.grade = #{grade}
         AND sc_tb.classno = #{classno}
       </select>
+
 
 
 </mapper>

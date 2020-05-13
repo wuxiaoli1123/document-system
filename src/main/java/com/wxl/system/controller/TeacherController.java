@@ -25,7 +25,11 @@ public class TeacherController {
     @Autowired
     private UserService userService;
 
-    //录入教师档案信息
+
+    /**
+     * 批量录入教师档案信息，并自动插入用户表
+     * by 吴小莉
+     */
     @PostMapping("insertTeacher")
     public Result insertTeacher(@RequestBody List<Teacher> teachers){
         Result result = new Result();
@@ -66,6 +70,11 @@ public class TeacherController {
     }
 
 
+
+    /**
+     * 教师登录学生成绩
+     * by 吴小莉
+     */
     @PostMapping("updateGrade")
     public Result updateGrade(String sno,String cname,double grade){
         Result result = new Result();
