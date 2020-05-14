@@ -44,5 +44,32 @@
         </foreach>
     </update>
 
+    <!--根据学期、年级返回教师所教课程名-->
+       <select id="findCnameByTTG" resultType="String">
+            SELECT
+                DISTINCT cname
+            FROM
+                tc_tb,
+                course_tb
+            WHERE
+                tc_tb.cno = course_tb.cno
+            AND tc_tb.grade = #{grade}
+            AND tc_tb.term = #{term}
+            AND tc_tb.tno= #{tno}
+       </select>
 
+    <!--根据学期、年级、课程名返回教师所教班级-->
+       <select id="findClassnoByTTGC" resultType="String">
+            SELECT
+                classno
+            FROM
+                tc_tb,
+                course_tb
+            WHERE
+                tc_tb.cno = course_tb.cno
+            AND tc_tb.grade = #{grade}
+            AND tc_tb.term = #{term}
+            AND tc_tb.tno = #{tno}
+            AND tc_tb.cno = (SELECT cno from course_tb where cname= #{cname})
+       </select>
 </mapper>

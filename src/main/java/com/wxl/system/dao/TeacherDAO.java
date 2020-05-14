@@ -18,9 +18,10 @@ public interface TeacherDAO {
     //登记学生成绩
     void updateGrade(List<StuGrade> stuGrades);
 
+    List<String> findCnameByTTG(@Param("tno") String tno,@Param("term") String term,@Param("grade") String grade);
 
-    List<String> findCnameByTnoTerm(@Param("tno") String tno,@Param("term") String term);
+    List<String> findClassnoByTTGC(@Param("tno") String tno,@Param("term") String term,@Param("grade") String grade,@Param("cname") String cname);
 
-    List<String> findClassnoByTnoCname(@Param("tno") String tno,@Param("term") String term);
+
 
 }

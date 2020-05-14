@@ -33,4 +33,14 @@ public class TeacherServiceImpl implements TeacherService {
     public void updateGrade(List<StuGrade> stuGrades){
         teacherDAO.updateGrade(stuGrades);
     }
+
+   @Override
+   public List<String> findCnameByTTG(String tno,String term,String grade){
+        return teacherDAO.findCnameByTTG(tno, term, grade);
+   }
+
+    @Override
+    public List<String> findClassnoByTTGC(String tno,String term,String grade,String cname){
+        return teacherDAO.findClassnoByTTGC(tno, term, grade, cname);
+    }
 }

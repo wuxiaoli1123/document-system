@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("teacher")
@@ -86,7 +87,6 @@ public class TeacherController {
                     isTrue = false;
                 }
             }
-
             if(isTrue){
                 for(int i=0;i<stuGrades.size();i++){
                     StuGrade stuGrade = new StuGrade();
@@ -112,6 +112,23 @@ public class TeacherController {
     }
 
 
+    /**
+     * 根据学期、年级返回教师所教课程名
+     * by 吴小莉
+     */
+    @GetMapping("findCname")
+    public  List<String> findCnameByTTG(String tno,String term,String grade){
+        return teacherService.findCnameByTTG(tno, term, grade);
+    }
 
+
+    /**
+     * 根据学期、年级返回教师所教课程名
+     * by 吴小莉
+     */
+    @GetMapping("findClassno")
+    public List<String> findClassnoByTTGC(String tno,String term,String grade,String cname){
+        return teacherService.findClassnoByTTGC(tno, term, grade, cname);
+    }
 
 }
