@@ -94,6 +94,9 @@ public class TeacherController {
                     //保留两位小数
                     DecimalFormat df = new DecimalFormat( "0.00 ");
                     double g = Double.parseDouble(df.format(stuGrade.getGrade()));
+
+                    stuGrade.setGrade(g);
+                    log.info("成绩 "+stuGrade.getGrade());
                 }
                 teacherService.updateGrade(stuGrades);
                 result.setState(true).setMsg("成功登记学生成绩！");
