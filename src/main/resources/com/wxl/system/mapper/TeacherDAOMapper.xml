@@ -23,23 +23,25 @@
 
 
     <!--登记学生成绩-->
-    <update id="updateGrade" >
-        UPDATE sc_tb
-        SET grade = #{grade},
-        credit = CASE
-        WHEN grade >= 60 THEN
-	    (
-		SELECT
-			credit
-		FROM
-			course_tb
-		WHERE
-			cname = #{cname}
-	    )
-       ELSE
-	   0
-       END
-       WHERE sno = #{sno} AND cno = (SELECT cno FROM course_tb WHERE cname = #{cname})
+    <update id="updateGrade" parameterType="java.util.List">
+        <foreach collection="list" item="stuGrade" index="index" open="" close="" separator=";">
+            UPDATE sc_tb
+            SET grade = #{stuGrade.grade},
+            credit = CASE
+            WHEN grade >= 60 THEN
+            (
+            SELECT
+            credit
+            FROM
+            course_tb
+            WHERE
+            cname = #{stuGrade.cname}
+            )
+            ELSE
+            0
+            END
+            WHERE sno = #{stuGrade.sno} AND cno = (SELECT cno FROM course_tb WHERE cname = #{stuGrade.cname})
+        </foreach>
     </update>
 
 

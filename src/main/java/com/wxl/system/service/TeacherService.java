@@ -1,5 +1,6 @@
 package com.wxl.system.service;
 
+import com.wxl.system.entity.StuGrade;
 import com.wxl.system.entity.Teacher;
 
 import java.util.List;
@@ -12,5 +13,7 @@ public interface TeacherService {
     Teacher findByTno(String tno);
 
     //登记学生成绩
-    void updateGrade(String sno,String cname,double grade);
+    void updateGrade(List<StuGrade> stuGrades);
+
+
 }

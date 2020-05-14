@@ -2,6 +2,7 @@ package com.wxl.system.service;
 
 
 import com.wxl.system.dao.TeacherDAO;
+import com.wxl.system.entity.StuGrade;
 import com.wxl.system.entity.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,8 +30,7 @@ public class TeacherServiceImpl implements TeacherService {
 
     //登记学生成绩
     @Override
-    public void updateGrade(String sno,String cname,double grade){
-        teacherDAO.updateGrade(sno,cname,grade);
+    public void updateGrade(List<StuGrade> stuGrades){
+        teacherDAO.updateGrade(stuGrades);
     }
-
 }

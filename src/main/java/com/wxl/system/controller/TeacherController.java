@@ -1,8 +1,6 @@
 package com.wxl.system.controller;
 
-import com.wxl.system.entity.Result;
-import com.wxl.system.entity.Teacher;
-import com.wxl.system.entity.User;
+import com.wxl.system.entity.*;
 import com.wxl.system.service.TeacherService;
 import com.wxl.system.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -76,21 +74,32 @@ public class TeacherController {
      * by 吴小莉
      */
     @PostMapping("updateGrade")
-    public Result updateGrade(String sno,String cname,double grade){
+    public Result updateGrade(@RequestBody List<StuGrade> stuGrades){
         Result result = new Result();
+
         try{
-              if(grade >=0 && grade <= 100){
+            boolean isTrue = true;
+            for(int i=0;i<stuGrades.size();i++){
+                StuGrade stuGrade = new StuGrade();
+                stuGrade = stuGrades.get(i);
+                if(stuGrade.getGrade()<0 || stuGrade.getGrade()>100){
+                    isTrue = false;
+                }
+            }
 
-                  //保留两位小数
-                  DecimalFormat df = new DecimalFormat( "0.00 ");
-                  double g = Double.parseDouble(df.format(grade));
-                  teacherService.updateGrade(sno,cname,g);
-
-                  result.setState(true).setMsg("成功登记学生成绩！");
-
-              }else {
-                  result.setState(false).setMsg("分数值不位于0-100！");
-              }
+            if(isTrue){
+                for(int i=0;i<stuGrades.size();i++){
+                    StuGrade stuGrade = new StuGrade();
+                    stuGrade = stuGrades.get(i);
+                    //保留两位小数
+                    DecimalFormat df = new DecimalFormat( "0.00 ");
+                    double g = Double.parseDouble(df.format(stuGrade.getGrade()));
+                }
+                teacherService.updateGrade(stuGrades);
+                result.setState(true).setMsg("成功登记学生成绩！");
+            }else{
+                result.setState(false).setMsg("存在分数值不位于0-100！");
+            }
 
         }catch (Exception e){
             e.printStackTrace();
@@ -98,5 +107,8 @@ public class TeacherController {
         }
         return result;
     }
+
+
+
 
 }
