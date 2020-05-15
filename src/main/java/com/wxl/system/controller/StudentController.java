@@ -63,11 +63,13 @@ public class StudentController {
     }
 
 
+    //按学号查找学生
     @GetMapping("findBySno")
     public Student findBySno(String sno){
         return studentService.findBySno(sno);
     }
 
+    //修改学生个人信息
     @PostMapping("update")
     public Result update(@RequestBody Student student) {
         Result result = new Result();

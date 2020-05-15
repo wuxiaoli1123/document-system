@@ -18,19 +18,33 @@ public class OptionalController {
     @Autowired
     private OptionalService optionalService;
 
+    //    按cno查找单个课程
     @GetMapping("findByCno")
     public Optional findByCno(String cno){
         return optionalService.findByCno(cno);
     }
 
-
+    //  学生选课
     @GetMapping("update")
-    public void update(String cno){
+    public Result update(String cno){
         Result result = new Result();
-        optionalService.update(cno);
-        result.setMsg("选课成功");
+        try {
+            Optional optional = optionalService.findByCno(cno);
+            if (optional.getMax()>optional.getNumber()){
+                optionalService.update(cno);
+
+                result.setMsg("选课成功");
+            } else {
+                throw new RuntimeException("课程已满!!!");
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            result.setMsg(e.getMessage()).setState(false);
+        }
+        return result;
     }
 
+    //   分页呈现选课
     @GetMapping("sfindByPage")
     public Map<String, Object> sfindByPage(Integer page, Integer rows) {
         page = page == null ? 1 : page;
@@ -46,20 +60,6 @@ public class OptionalController {
         map.put("totalPage", totalPage);
         map.put("page", page);
         return map;
-    }
-
-    //发布单个选课
-    @PostMapping("save")
-    public Result save(@RequestBody Optional optional) {
-        Result result = new Result();
-        try {
-            optionalService.save(optional);
-            result.setMsg("添加课程成功");
-        } catch (Exception e) {
-            e.printStackTrace();
-            result.setState(false).setMsg("添加课程失败!!!");
-        }
-        return result;
     }
 
     //    批量发布选课

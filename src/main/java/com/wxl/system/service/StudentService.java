@@ -12,8 +12,10 @@ public interface StudentService {
     //录入学生档案信息
     void insertStudent(List<Student> students);
 
+    //按学号查找学生
     Student findBySno(String sno);
 
+    //修改学生个人信息
     void update(Student student);
 
 

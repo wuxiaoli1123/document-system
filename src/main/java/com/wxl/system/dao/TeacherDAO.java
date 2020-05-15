@@ -13,6 +13,7 @@ import java.util.List;
 public interface TeacherDAO {
     void insertTeacher(List<Teacher> teacher);
 
+    //按教师号查找教师
     Teacher findByTno(String tno);
 
     //登记学生成绩

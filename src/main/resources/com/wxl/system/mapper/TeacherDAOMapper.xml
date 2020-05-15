@@ -16,7 +16,7 @@
 
     </insert>
 
-
+    <!--查询教师-->
     <select id="findByTno" resultType="Teacher">
         select * from teacher_tb where tno = #{tno}
     </select>
