@@ -72,4 +72,25 @@
             AND tc_tb.tno = #{tno}
             AND tc_tb.cno = (SELECT cno from course_tb where cname= #{cname})
        </select>
+
+
+    <!--教师根据学期查看课表-->
+       <select id="findScheduleT" resultType="TeaSchedule">
+            SELECT
+                course_tb.cno,
+                course_tb.cname,
+                tc_tb.classno,
+                tc_tb.term,
+                tc_tb.`hour`,
+                tc_tb.place,
+                tc_tb.time,
+                tc_tb.grade
+            FROM
+                tc_tb,
+                course_tb
+            WHERE
+                tc_tb.cno = course_tb.cno
+            AND tc_tb.tno = #{tno}
+            AND tc_tb.term = #{term}
+       </select>
 </mapper>

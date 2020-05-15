@@ -3,6 +3,7 @@ package com.wxl.system.service;
 
 import com.wxl.system.dao.TeacherDAO;
 import com.wxl.system.entity.StuGrade;
+import com.wxl.system.entity.TeaSchedule;
 import com.wxl.system.entity.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,5 +43,10 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public List<String> findClassnoByTTGC(String tno,String term,String grade,String cname){
         return teacherDAO.findClassnoByTTGC(tno, term, grade, cname);
+    }
+
+    @Override
+    public List<TeaSchedule> findScheduleT(String tno, String term){
+        return teacherDAO.findScheduleT(tno, term);
     }
 }

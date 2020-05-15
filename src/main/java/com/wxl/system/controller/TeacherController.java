@@ -1,5 +1,6 @@
 package com.wxl.system.controller;
 
+import com.alibaba.druid.sql.visitor.functions.Lcase;
 import com.wxl.system.entity.*;
 import com.wxl.system.service.TeacherService;
 import com.wxl.system.service.UserService;
@@ -8,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("teacher")
@@ -129,6 +128,112 @@ public class TeacherController {
     @GetMapping("findClassno")
     public List<String> findClassnoByTTGC(String tno,String term,String grade,String cname){
         return teacherService.findClassnoByTTGC(tno, term, grade, cname);
+    }
+
+    /**
+     * 根据学期，教师账号返回教师本学期的课表
+     * by 吴小莉
+     */
+    @GetMapping("findScheduleT")
+    public Object[] findScheduleT (String tno,String term){
+
+           List<TeaSchedule> teaSchedules= teacherService.findScheduleT(tno, term);
+
+           Object[]  ScheduleT= new Object[teaSchedules.size()];
+
+           //针对教师的每门课的上课时间
+           for (int i = 0; i<teaSchedules.size(); i++){
+
+                String tm = teaSchedules.get(i).getTime();
+                HashMap<String,Object> map1 = new HashMap<>();
+
+                String[] t = tm.split(",",7);
+
+                Object[]  Objtime= new Object[t.length];
+
+                for(int j=0;j<t.length;j++){
+
+                    HashMap<String,Object> map2 = new HashMap<>();
+
+                    //截取第一位
+                    char k = t[j].charAt(0);
+
+                    //截取剩下的字符串
+                    String item = t[j].substring(1);
+
+                    int num = Integer.parseInt(String.valueOf(k));
+
+                    String day = null;
+                    String time = null;
+
+                    switch (num){
+                        case 1:
+                            day="星期一";
+                            break;
+                        case 2:
+                            day="星期二";
+                            break;
+                        case 3:
+                            day="星期三";
+                            break;
+                        case 4:
+                            day="星期四";
+                            break;
+                        case 5:
+                            day="星期五";
+                            break;
+                        case 6:
+                            day="星期六";
+                            break;
+                        case 7:
+                            day="星期七";
+                            break;
+                    }
+
+                    boolean status = t[j].contains("0");
+
+                    if(status){
+                        if(t[j].length()==5){
+                            //String item = t[j].substring(1);
+                            if(item.equals("0102")){
+                                time = "1112";
+                            }else if(item.equals("0203")){
+                                time = "1213";
+                            }else if(item.equals("8900")){
+                                time = "8910";
+                            }
+                        }else if(t[j].length() == 4){
+                            if(item.equals("900")){
+                                time = "910";
+                            }
+                        }else if(t[j].length() == 7){
+                            if(item.equals("010203")){
+                                time = "111213";
+                            }
+                        }
+                    }else{
+                        time = item;
+                    }
+
+                    map2.put("time",time);
+                    map2.put("day",day);
+
+
+                    Objtime[j] = map2;
+                }
+
+                map1.put("cno",teaSchedules.get(i).getCno());
+                map1.put("cname",teaSchedules.get(i).getCname());
+                map1.put("classno",teaSchedules.get(i).getClassno());
+                map1.put("place",teaSchedules.get(i).getPlace());
+                map1.put("grade",teaSchedules.get(i).getGrade());
+                map1.put("time",Objtime);
+
+               ScheduleT[i] = map1;
+
+               log.info("S "+ScheduleT[i]);
+           }
+           return ScheduleT;
     }
 
 }

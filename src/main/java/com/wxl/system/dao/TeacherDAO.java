@@ -1,10 +1,7 @@
 package com.wxl.system.dao;
 
-import com.wxl.system.entity.Notice;
-import com.wxl.system.entity.StuGrade;
-import com.wxl.system.entity.Student;
+import com.wxl.system.entity.*;
 import org.apache.ibatis.annotations.Mapper;
-import com.wxl.system.entity.Teacher;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -21,6 +18,8 @@ public interface TeacherDAO {
     List<String> findCnameByTTG(@Param("tno") String tno,@Param("term") String term,@Param("grade") String grade);
 
     List<String> findClassnoByTTGC(@Param("tno") String tno,@Param("term") String term,@Param("grade") String grade,@Param("cname") String cname);
+
+    List<TeaSchedule> findScheduleT(@Param("tno") String tno,@Param("term") String term);
 
 
 
