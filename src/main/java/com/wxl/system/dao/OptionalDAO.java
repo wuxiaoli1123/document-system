@@ -11,7 +11,7 @@ public interface OptionalDAO extends BaseDAO<Optional,String>{
     Optional findByCno(String cno);
 
     //  学生选课
-    void update(String cno);
+    void update(String cno,String sno);
 
     //    批量发布选课
     Integer addOptional(List<Optional> list);

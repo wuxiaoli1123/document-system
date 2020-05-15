@@ -2,6 +2,7 @@ package com.wxl.system.controller;
 
 import com.wxl.system.entity.Optional;
 import com.wxl.system.entity.Result;
+import com.wxl.system.entity.Sc;
 import com.wxl.system.service.OptionalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,14 +27,21 @@ public class OptionalController {
 
     //  学生选课
     @GetMapping("update")
-    public Result update(String cno){
+    public Result update(String cno,String sno){
         Result result = new Result();
         try {
             Optional optional = optionalService.findByCno(cno);
             if (optional.getMax()>optional.getNumber()){
-                optionalService.update(cno);
-
-                result.setMsg("选课成功");
+                optionalService.update(cno,sno);
+                Sc sc = new Sc();
+                sc.setCno(cno);
+                sc.setClassno("0");
+                sc.setCredit(optional.getCredit());
+                sc.setGrade(0.00);
+                sc.setSno(sno);
+                sc.setType("公共课");
+                optionalService.addSc(sc);
+                result.setMsg("选课成功!");
             } else {
                 throw new RuntimeException("课程已满!!!");
             }

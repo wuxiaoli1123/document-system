@@ -3,6 +3,7 @@ package com.wxl;
 
 import com.wxl.system.System01Application;
 import com.wxl.system.entity.Optional;
+import com.wxl.system.entity.Sc;
 import com.wxl.system.service.OptionalService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,24 +23,17 @@ public class TestOptionalService {
 
 //  更新选课人数
     @Test
-    public void testupdate(){
-        optionalService.update("06");
+    public void testadd(){
+        Sc sc = new Sc();
+        sc.setCno("08");
+        sc.setClassno("4");
+        sc.setCredit(4);
+        sc.setGrade(0.00);
+        sc.setSno("2017110435");
+        sc.setType("公共课");
+        optionalService.addSc(sc);
     }
 
-    @Test
-    public void testsave(){
-        List<Optional> list = new ArrayList<>();
-        Optional optional = new Optional();
-        optional.setCno("10");
-        optional.setCname("软件工程");
-        optional.setCredit(4);
-        optional.setTname("美华");
-        optional.setPlace("A403");
-        optional.setNumber(0);
-        optional.setMax(10);
-        list.add(optional);
-        optionalService.save(optional);
-    }
 
     @Test
     public void testaddOptional(){

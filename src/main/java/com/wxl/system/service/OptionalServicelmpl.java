@@ -1,7 +1,9 @@
 package com.wxl.system.service;
 
 import com.wxl.system.dao.OptionalDAO;
+import com.wxl.system.dao.ScDAO;
 import com.wxl.system.entity.Optional;
+import com.wxl.system.entity.Sc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,9 @@ public class OptionalServicelmpl implements OptionalService{
     @Autowired
     private OptionalDAO optionalDAO;
 
+    @Autowired
+    private ScDAO scDAO;
+
     @Override
     public Optional findByCno(String cno){return optionalDAO.findByCno(cno);}
 
@@ -24,17 +29,14 @@ public class OptionalServicelmpl implements OptionalService{
     }
 
     @Override
-    public void update(String cno) { optionalDAO.update(cno);}
+    public void update(String cno,String sno) { optionalDAO.update(cno,sno);}
+
+    @Override
+    public void addSc(Sc sc) { scDAO.addSc(sc);}
 
     @Override
     public Integer findTotal() {
         return optionalDAO.findTotal();
-    }
-
-
-    @Override
-    public void save(Optional optional) {
-        optionalDAO.save(optional);
     }
 
     @Override
