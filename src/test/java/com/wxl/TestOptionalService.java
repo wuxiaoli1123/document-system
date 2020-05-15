@@ -20,9 +20,10 @@ public class TestOptionalService {
     @Autowired
     private OptionalService optionalService;
 
+//  更新选课人数
     @Test
     public void testupdate(){
-        optionalService.update("01");
+        optionalService.update("06");
     }
 
     @Test

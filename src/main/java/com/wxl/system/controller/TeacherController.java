@@ -62,6 +62,7 @@ public class TeacherController {
         return result;
     }
 
+    //按学号查找教师
     @GetMapping("findByTno")
     public Teacher findByTno(String tno){
         return teacherService.findByTno(tno);

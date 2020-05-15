@@ -16,12 +16,12 @@
         select count(cno) from optional_tb
     </select>
 
-
+    <!--查询课程-->
     <select id="findByCno" resultType="Optional">
         select * from Optional_tb where cno = #{cno}
     </select>
 
-
+    <!--学生选课-->
     <update id="update" parameterType="Optional">
         update optional_tb set number=number+1
         where cno=#{cno}

@@ -12,6 +12,7 @@ public interface TeacherService {
     //录入教师档案信息
     void insertTeacher(List<Teacher> teachers);
 
+    //按教师号查找教师
     Teacher findByTno(String tno);
 
     //登记学生成绩

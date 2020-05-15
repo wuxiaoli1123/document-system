@@ -25,6 +25,7 @@ public class TeacherServiceImpl implements TeacherService {
         teacherDAO.insertTeacher(teachers);
     }
 
+    //按教师号查找教师
     @Override
     public Teacher findByTno(String tno){return teacherDAO.findByTno(tno);}
 

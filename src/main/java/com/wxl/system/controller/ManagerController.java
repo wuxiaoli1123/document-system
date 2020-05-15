@@ -19,6 +19,7 @@ public class ManagerController {
     @Autowired
     private ManagerService managerService;
 
+//    查看管理员个人信息
     @GetMapping("findByMno")
     public Manager findByMno(String mno){
         log.info("admin:"+mno);
