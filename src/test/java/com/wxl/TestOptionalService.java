@@ -21,7 +21,7 @@ public class TestOptionalService {
     @Autowired
     private OptionalService optionalService;
 
-//  更新选课人数
+//  测试选课
     @Test
     public void testadd(){
         Sc sc = new Sc();
