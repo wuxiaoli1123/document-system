@@ -5,6 +5,7 @@ import com.wxl.system.System01Application;
 import com.wxl.system.entity.Optional;
 import com.wxl.system.entity.Sc;
 import com.wxl.system.service.OptionalService;
+import com.wxl.system.service.ScService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class TestOptionalService {
     @Autowired
     private OptionalService optionalService;
 
+    @Autowired
+    private ScService scService;
+
 //  测试选课
     @Test
     public void testadd(){
@@ -31,7 +35,7 @@ public class TestOptionalService {
         sc.setGrade(0.00);
         sc.setSno("2017110435");
         sc.setType("公共课");
-        optionalService.addSc(sc);
+        scService.addSc(sc);
     }
 
 

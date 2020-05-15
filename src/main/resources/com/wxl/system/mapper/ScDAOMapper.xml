@@ -9,6 +9,23 @@
         insert into sc_tb values(#{grade},#{credit},#{type},#{cno},#{classno},#{sno})
     </insert>
 
+    <select id="checkGrade">
+        select * from sc_tb where sno = #{sno}
+    </select>
 
+
+    <!--分页查询所有-->
+    <select id="gradefindByPage" resultType="Sc">
+        select *
+        from sc_tb
+        where sno = #{sno}
+        order by cno
+        limit #{start},#{rows}
+    </select>
+
+    <!--查询总条数-->
+    <select id="findTotal" resultType="Integer">
+        select count(cno) from sc_tb where sno = #{sno};
+    </select>
 </mapper>
 

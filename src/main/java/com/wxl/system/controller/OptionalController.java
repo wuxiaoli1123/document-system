@@ -4,6 +4,7 @@ import com.wxl.system.entity.Optional;
 import com.wxl.system.entity.Result;
 import com.wxl.system.entity.Sc;
 import com.wxl.system.service.OptionalService;
+import com.wxl.system.service.ScService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,9 @@ public class OptionalController {
 
     @Autowired
     private OptionalService optionalService;
+
+    @Autowired
+    private ScService scService;
 
     //    按cno查找单个课程
     @GetMapping("findByCno")
@@ -40,7 +44,7 @@ public class OptionalController {
                 sc.setGrade(0.00);
                 sc.setSno(sno);
                 sc.setType("公共课");
-                optionalService.addSc(sc);
+                scService.addSc(sc);
                 result.setMsg("选课成功!");
             } else {
                 throw new RuntimeException("课程已满!!!");
@@ -83,5 +87,6 @@ public class OptionalController {
         }
         return result;
     }
+
 
 }

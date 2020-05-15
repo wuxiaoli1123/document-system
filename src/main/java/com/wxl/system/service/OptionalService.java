@@ -1,14 +1,10 @@
 package com.wxl.system.service;
 
 import com.wxl.system.entity.Optional;
-import com.wxl.system.entity.Sc;
 
 import java.util.List;
 
 public interface OptionalService {
-
-    //选课成功后将选课信息插入sc表
-    void addSc(Sc sc);
 
     Optional findByCno(String cno);
 
