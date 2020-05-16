@@ -1,8 +1,7 @@
 package com.wxl.system.service;
 
 import com.wxl.system.dao.StudentDAO;
-import com.wxl.system.entity.Student;
-import com.wxl.system.entity.Student_abbr;
+import com.wxl.system.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -42,5 +41,16 @@ public class StudentServiceImpl implements StudentService {
         return studentDAO.findTotals(cname,grade,classno);
     }
 
+
+    @Override
+    public List<StuSchedule> findScheduleS(List<StuClassData> stuClassData){
+        return studentDAO.findScheduleS(stuClassData);
+
+    }
+
+    @Override
+    public List<StuClassData> findStuClassData(String sno, String term){
+           return studentDAO.findStuClassData(sno, term);
+    }
 
 }

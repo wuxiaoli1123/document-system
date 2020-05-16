@@ -1,9 +1,6 @@
 package com.wxl.system.controller;
 
-import com.wxl.system.entity.Result;
-import com.wxl.system.entity.Student;
-import com.wxl.system.entity.Student_abbr;
-import com.wxl.system.entity.User;
+import com.wxl.system.entity.*;
 import com.wxl.system.service.StudentService;
 import com.wxl.system.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -112,6 +109,123 @@ public class StudentController {
 
         return map;
 
+    }
+
+
+    /**
+     * 根据学期，学生账号返回学生本学期的课表
+     * by 吴小莉
+     */
+    @GetMapping("findScheduleS")
+    public Object[] findScheduleT (String sno,String term){
+
+        List<StuClassData> stuClassData = studentService.findStuClassData(sno, term);
+
+        List<StuSchedule> stuSchedules = studentService.findScheduleS(stuClassData);
+
+        /*for(int i=0;i<stuSchedules.size();i++){
+            log.info("example "+stuSchedules.get(i));
+        }*/
+
+        Object[]  ScheduleS= new Object[stuSchedules.size()];
+
+        //针对学生的每门课的上课时间
+        for (int i = 0; i<stuSchedules.size(); i++){
+
+            String tm = stuSchedules.get(i).getTime();
+            HashMap<String,Object> map1 = new HashMap<>();
+
+            String[] t = tm.split(",",7);
+
+            Object[]  Objtime= new Object[t.length];
+
+            for(int j=0;j<t.length;j++){
+
+                HashMap<String,Object> map2 = new HashMap<>();
+
+                //截取第一位
+                char k = t[j].charAt(0);
+
+                //截取剩下的字符串
+                String item = t[j].substring(1);
+
+                int num = Integer.parseInt(String.valueOf(k));
+
+                String day = null;
+                String time = null;
+
+                switch (num){
+                    case 1:
+                        day="星期一";
+                        break;
+                    case 2:
+                        day="星期二";
+                        break;
+                    case 3:
+                        day="星期三";
+                        break;
+                    case 4:
+                        day="星期四";
+                        break;
+                    case 5:
+                        day="星期五";
+                        break;
+                    case 6:
+                        day="星期六";
+                        break;
+                    case 7:
+                        day="星期七";
+                        break;
+                }
+
+                boolean status = t[j].contains("0");
+
+                if(status){
+                    if(t[j].length()==5){
+                        //String item = t[j].substring(1);
+                        if(item.equals("0102")){
+                            time = "1112";
+                        }else if(item.equals("0203")){
+                            time = "1213";
+                        }else if(item.equals("8900")){
+                            time = "8910";
+                        }
+                    }else if(t[j].length() == 4){
+                        if(item.equals("900")){
+                            time = "910";
+                        }
+                    }else if(t[j].length() == 7){
+                        if(item.equals("010203")){
+                            time = "111213";
+                        }
+                    }
+                }else{
+                    time = item;
+                }
+
+                map2.put("time",time);
+                map2.put("day",day);
+
+
+                Objtime[j] = map2;
+            }
+
+            map1.put("cname",stuSchedules.get(i).getCname());
+            map1.put("classno",stuSchedules.get(i).getClassno());
+            map1.put("tname",stuSchedules.get(i).getTname());
+            map1.put("hour",stuSchedules.get(i).getHour());
+            map1.put("place",stuSchedules.get(i).getPlace());
+            map1.put("time",Objtime);
+
+            ScheduleS[i] = map1;
+
+            log.info("S "+ScheduleS[i]);
+        }
+
+
+
+
+        return ScheduleS;
     }
 
 

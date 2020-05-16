@@ -1,8 +1,6 @@
 package com.wxl.system.service;
 
-import com.wxl.system.entity.Notice;
-import com.wxl.system.entity.Student;
-import com.wxl.system.entity.Student_abbr;
+import com.wxl.system.entity.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -25,7 +23,10 @@ public interface StudentService {
     //查询总条数----student
     Integer findTotals(String cname,String grade,String classno);
 
+    //学生查询课表
+    List<StuSchedule> findScheduleS(List<StuClassData> stuClassData);
 
-
+    //根据学生学号、学期查询本学期所选修课程
+    List<StuClassData> findStuClassData(String sno,String term);
 
 }

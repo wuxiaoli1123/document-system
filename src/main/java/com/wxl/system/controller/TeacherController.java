@@ -228,6 +228,7 @@ public class TeacherController {
                 map1.put("classno",teaSchedules.get(i).getClassno());
                 map1.put("place",teaSchedules.get(i).getPlace());
                 map1.put("grade",teaSchedules.get(i).getGrade());
+                map1.put("hour",teaSchedules.get(i).getHour());
                 map1.put("time",Objtime);
 
                ScheduleT[i] = map1;
