@@ -64,5 +64,30 @@ public class NoticeController {
     }
 
 
+    @GetMapping("MfindByPage")
+    public Map<String,Object> findAttention(Integer page, Integer rows, String role){
+        page = page == null ? 1 : page;
+
+        //前端页面应该是6.这里的“2”，仅用于后端测试
+        rows = rows == null ? 2 : rows;
+
+        HashMap<String,Object> map = new HashMap<>();
+
+        //分页处理
+        List<Notice> notices = noticeService.findByPage_NoticeTS(page,rows,role);
+
+
+        //计算总页数
+        Integer totals = noticeService.findTotals_NoticeTS(role);
+        Integer totalPage = totals % rows == 0 ? totals / rows : totals / rows + 1;
+
+        map.put("notices",notices);
+        map.put("totals",totals);
+        map.put("totalPage",totalPage);
+
+        return map;
+    }
+
+
 
 }

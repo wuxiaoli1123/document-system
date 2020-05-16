@@ -76,5 +76,40 @@
       </select>
 
 
+    <!--学生根据学期，查看课表-->
+
+    <select id="findScheduleS" parameterType="list" resultType="StuSchedule">
+        SELECT
+        course_tb.cname,
+        tc_tb.classno,
+        teacher_tb.tname,
+        tc_tb.place,
+        tc_tb.`hour`,
+        tc_tb.time
+        FROM
+        tc_tb,
+        course_tb,
+        teacher_tb
+        WHERE
+        tc_tb.cno = course_tb.cno
+        AND tc_tb.tno = teacher_tb.tno
+        AND tc_tb.id in
+        <foreach collection="list" item="stuClassData" separator="," open="(" close=")">
+            #{stuClassData.tc_id}
+        </foreach>
+    </select>
+
+    <!--根据学号、学期返回学生本学期所选修课程-->
+    <select id="findStuClassData" resultType="StuClassData">
+        SELECT
+            sc_tb.tc_id
+        FROM
+            sc_tb,
+            student_tb
+        WHERE
+            sc_tb.sno = student_tb.sno
+        AND sc_tb.sno = #{sno}
+        AND sc_tb.term= #{term}
+    </select>
 
 </mapper>

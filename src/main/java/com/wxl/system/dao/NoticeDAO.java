@@ -9,14 +9,19 @@ import java.util.List;
 @Mapper
 public interface NoticeDAO {
 
-    //根据页码数返回结果集---Notice
+    //（学生和教师端查看自己的）根据页码数返回结果集---Notice
     List<Notice> findByPage_Notice(@Param("start") Integer start, @Param("rows") Integer rows, @Param("account") String account);
 
     //返回满足条件的结果集的大小---notice
     Integer findTotals_Notice(@Param("account") String account);
 
-    void deleteByList(List<Notice> notices);
-
     String findConBySnum(String snum);
+
+
+    //管理员端返回学生和教师的广播消息
+    List<Notice> findByPage_NoticeTS(@Param("start") Integer start, @Param("rows") Integer rows, @Param("role") String role);
+
+    //返回满足条件的结果集的大小---notice
+    Integer findTotals_NoticeTS(@Param("role") String role);
 
 }

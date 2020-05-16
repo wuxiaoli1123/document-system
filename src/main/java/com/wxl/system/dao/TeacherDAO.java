@@ -20,6 +20,7 @@ public interface TeacherDAO {
 
     List<String> findClassnoByTTGC(@Param("tno") String tno,@Param("term") String term,@Param("grade") String grade,@Param("cname") String cname);
 
+    //教师查看课表
     List<TeaSchedule> findScheduleT(@Param("tno") String tno,@Param("term") String term);
 
 

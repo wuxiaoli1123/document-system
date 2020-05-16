@@ -21,6 +21,27 @@
         limit #{start},#{rows}
     </select>
 
+	<!--返回管理员端的消息-->
+       <select id="findByPage_NoticeTS" resultType="Notice">
+           SELECT
+			*
+		   FROM
+			sendinfo_tb
+		   WHERE
+			role = #{role}
+			limit #{start},#{rows}
+	   </select>
+
+	<!--返回消息的总条数-->
+	  <select id="findTotals_NoticeTS" resultType="Integer">
+		  select
+		    count(snum)
+		  FROM
+	        sendinfo_tb
+          WHERE
+	        role = #{role}
+	  </select>
+
 
     <!--查询总条数,针对广播信息-->
     <select id="findTotals_Notice" resultType="Integer">

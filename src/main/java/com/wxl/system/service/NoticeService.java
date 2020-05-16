@@ -19,4 +19,11 @@ public interface NoticeService {
 
     String findConBySnum(String snum);
 
+
+    //管理员端返回学生和教师的广播消息
+    List<Notice> findByPage_NoticeTS(Integer start,Integer rows,String role);
+
+    //返回满足条件的结果集的大小---notice
+    Integer findTotals_NoticeTS(String role);
+
 }
