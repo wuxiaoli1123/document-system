@@ -36,7 +36,8 @@ public class NoticeServiceImpl implements NoticeService{
 
     //管理员端返回学生和教师的广播消息
     @Override
-    public List<Notice> findByPage_NoticeTS(Integer start,Integer rows,String role){
+    public List<Notice> findByPage_NoticeTS(Integer page,Integer rows,String role){
+        int start = (page - 1)*rows;
         return noticeDAO.findByPage_NoticeTS(start,rows,role);
     }
 

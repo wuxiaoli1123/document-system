@@ -67,7 +67,7 @@ public class NoticeController {
         page = page == null ? 1 : page;
 
         //前端页面应该是6.这里的“2”，仅用于后端测试
-        rows = rows == null ? 2 : rows;
+        rows = rows == null ? 3 : rows;
 
         HashMap<String,Object> map = new HashMap<>();
 
