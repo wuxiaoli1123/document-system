@@ -29,8 +29,10 @@ public class TeacherController {
      * by 吴小莉
      */
     @PostMapping("insertTeacher")
-    public Result insertTeacher(@RequestBody List<Teacher> teachers){
+    public Result insertTeacher(@RequestBody Teacher []teachers_l){
+        List<Teacher> teachers = (List<Teacher>) java.util.Arrays.asList(teachers_l);
         Result result = new Result();
+        log.info(teachers.toString());
         try {
             teacherService.insertTeacher(teachers);
             result.setMsg("成功录入教师档案信息！");
@@ -75,7 +77,8 @@ public class TeacherController {
      * by 吴小莉
      */
     @PostMapping("updateGrade")
-    public Result updateGrade(@RequestBody List<StuGrade> stuGrades){
+    public Result updateGrade(@RequestBody StuGrade []l_stuGrades){
+        List<StuGrade> stuGrades = (List<StuGrade>)java.util.Arrays.asList(l_stuGrades);
         Result result = new Result();
 
         try{

@@ -31,8 +31,10 @@ public class StudentController {
      * by 吴小莉
      */
     @PostMapping("insertStudent")
-    public Result insertStudent(@RequestBody List<Student> students){
+    public Result insertStudent(@RequestBody Student[] students_l){
+        List<Student> students = (List<Student>)java.util.Arrays.asList(students_l);
         Result result = new Result();
+        log.info(students.toString());
         try {
             studentService.insertStudent(students);
             result.setMsg("成功录入学生档案信息！");
@@ -94,7 +96,7 @@ public class StudentController {
         page = page == null ? 1 : page;
 
         //前端页面应该是20.这里的“2”，仅用于后端测试
-        rows = rows == null ? 2 : rows;
+        rows = rows == null ? 5 : rows;
 
         HashMap<String,Object> map = new HashMap<>();
 
