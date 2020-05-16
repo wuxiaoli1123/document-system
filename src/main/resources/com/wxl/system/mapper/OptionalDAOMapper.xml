@@ -4,7 +4,7 @@
 <mapper namespace="com.wxl.system.dao.OptionalDAO">
 
     <!--分页查询所有-->
-    <select id="findByPage" resultType="Optional">
+    <select id="sfindByPage" resultType="Optional">
         select *
         from optional_tb
         order by cno
@@ -12,7 +12,7 @@
     </select>
 
     <!--查询总条数-->
-    <select id="findTotals" resultType="Integer">
+    <select id="findTotal" resultType="Integer">
         select count(cno) from optional_tb
     </select>
 

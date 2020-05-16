@@ -12,10 +12,7 @@ public interface OptionalService {
 
     Integer findTotal();
     //修改省份信息
-    void update(String cno);
-
-    void save(Optional optional);
+    void update(String cno,String sno);
 
     Integer addOptional(List<Optional> list);
-//    boolean isfull(String cno);
 }
