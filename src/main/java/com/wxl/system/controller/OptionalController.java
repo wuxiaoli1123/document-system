@@ -2,8 +2,9 @@ package com.wxl.system.controller;
 
 import com.wxl.system.entity.Optional;
 import com.wxl.system.entity.Result;
+import com.wxl.system.entity.Sc;
 import com.wxl.system.service.OptionalService;
-import lombok.extern.slf4j.Slf4j;
+import com.wxl.system.service.ScService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,27 +13,52 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin //允许跨域
+@CrossOrigin
 @RequestMapping("optional")
-@Slf4j
 public class OptionalController {
 
     @Autowired
     private OptionalService optionalService;
 
+    @Autowired
+    private ScService scService;
+
+    //学生选课功能相关
+    //按cno查找单个课程
     @GetMapping("findByCno")
     public Optional findByCno(String cno){
         return optionalService.findByCno(cno);
     }
 
-
+    //  学生选课
     @GetMapping("update")
-    public void update(String cno){
+    public Result update(String cno,String sno){
         Result result = new Result();
-        optionalService.update(cno);
-        result.setMsg("选课成功");
+        try {
+            Optional optional = optionalService.findByCno(cno);
+            if (optional.getMax()>optional.getNumber()){
+                optionalService.update(cno,sno);
+                Sc sc = new Sc();
+                sc.setCno(cno);
+                sc.setClassno("0");
+                sc.setCredit(optional.getCredit());
+                sc.setGrade(0.00);
+                sc.setSno(sno);
+                sc.setType("公共课");
+                sc.setTerm(optional.getTerm());
+                scService.addSc(sc);
+                result.setMsg("选课成功!");
+            } else {
+                throw new RuntimeException("课程已满!!!");
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            result.setMsg(e.getMessage()).setState(false);
+        }
+        return result;
     }
 
+    //   分页呈现选课
     @GetMapping("sfindByPage")
     public Map<String, Object> sfindByPage(Integer page, Integer rows) {
         page = page == null ? 1 : page;
@@ -43,32 +69,17 @@ public class OptionalController {
         //计算总页数
         Integer totals = optionalService.findTotal();
         Integer totalPage = totals % rows == 0 ? totals / rows : totals / rows + 1;
-        map.put("provinces", optionals);
+        map.put("optionals", optionals);
         map.put("totals", totals);
         map.put("totalPage", totalPage);
         map.put("page", page);
         return map;
     }
 
-    //发布单个选课
-    @PostMapping("save")
-    public Result save(@RequestBody Optional optional) {
-        Result result = new Result();
-        try {
-            optionalService.save(optional);
-            result.setMsg("添加课程成功");
-        } catch (Exception e) {
-            e.printStackTrace();
-            result.setState(false).setMsg("添加课程失败!!!");
-        }
-        return result;
-    }
-
+    //发布选课功能相关
     //    批量发布选课
     @PostMapping("addOptional")
-    public Result addOptional(@RequestBody Optional[] op_list) {
-        log.info(op_list.toString());
-        List<Optional> list = (List<Optional>) java.util.Arrays.asList(op_list);
+    public Result addOptional(@RequestBody List<Optional> list) {
         Result result = new Result();
         try {
             optionalService.addOptional(list);
@@ -80,4 +91,12 @@ public class OptionalController {
         return result;
     }
 
+    // 管理员选择需要添加的课程
+    @GetMapping("findTcByCno")
+    public Map<String, Object> findTcByCno(String cno) {
+        HashMap<String, Object> map = new HashMap<>();
+        List<Optional> optionals = optionalService.findTcByCno(cno);
+        map.put("optional", optionals);
+        return map;
+    }
 }

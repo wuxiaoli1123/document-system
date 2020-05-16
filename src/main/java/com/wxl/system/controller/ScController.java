@@ -1,6 +1,7 @@
 package com.wxl.system.controller;
 
 import com.wxl.system.entity.Sc;
+import com.wxl.system.entity.StuCheckGrade;
 import com.wxl.system.service.ScService;
 import com.wxl.system.service.ScServicelmpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +26,11 @@ public class ScController {
         rows = rows == null ? 4 : rows;
         HashMap<String, Object> map = new HashMap<>();
         //分页处理
-        List<Sc> sc = scService.gradefindByPage(page, rows, sno);
+        List<StuCheckGrade> sc = scService.gradefindByPage(page, rows, sno);
         //计算总页数
         Integer totals = scService.findTotal(sno);
         Integer totalPage = totals % rows == 0 ? totals / rows : totals / rows + 1;
-        map.put("provinces", sc);
+        map.put("sc", sc);
         map.put("totals", totals);
         map.put("totalPage", totalPage);
         map.put("page", page);

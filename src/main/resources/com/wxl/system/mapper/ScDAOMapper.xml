@@ -6,7 +6,7 @@
 
     <!--插入单个课程-->
     <insert id="addSc" parameterType="Sc">
-        insert into sc_tb values(#{grade},#{credit},#{type},#{cno},#{classno},#{sno})
+        insert into sc_tb values(#{tc_id},#{sno},#{classno},#{cno},#{type},#{credit},#{grade},#{term})
     </insert>
 
     <select id="checkGrade">
@@ -15,10 +15,10 @@
 
 
     <!--分页查询所有-->
-    <select id="gradefindByPage" resultType="Sc">
-        select *
-        from sc_tb
-        where sno = #{sno}
+    <select id="gradefindByPage" resultType="StuCheckGrade">
+        select classno,sc_tb.cno,sc_tb.type,sc_tb.credit,grade,term,cname
+        from sc_tb,course_tb
+        where sno = #{sno} and sc_tb.cno = course_tb.cno
         order by cno
         limit #{start},#{rows}
     </select>
