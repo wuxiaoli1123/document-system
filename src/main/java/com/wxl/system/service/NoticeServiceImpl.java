@@ -34,4 +34,16 @@ public class NoticeServiceImpl implements NoticeService{
         return noticeDAO.findConBySnum(snum);
     }
 
+    //管理员端返回学生和教师的广播消息
+    @Override
+    public List<Notice> findByPage_NoticeTS(Integer start,Integer rows,String role){
+        return noticeDAO.findByPage_NoticeTS(start,rows,role);
+    }
+
+    //返回满足条件的结果集的大小---notice
+    @Override
+    public Integer findTotals_NoticeTS(String role){
+        return noticeDAO.findTotals_NoticeTS(role);
+    }
+
 }
