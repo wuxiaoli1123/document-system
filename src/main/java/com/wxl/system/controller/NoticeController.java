@@ -2,8 +2,6 @@ package com.wxl.system.controller;
 
 
 import com.wxl.system.entity.Notice;
-import com.wxl.system.entity.Result;
-import com.wxl.system.entity.Student_abbr;
 import com.wxl.system.service.NoticeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

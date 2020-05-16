@@ -4,6 +4,7 @@ package com.wxl;
 import com.wxl.system.System01Application;
 import com.wxl.system.entity.Optional;
 import com.wxl.system.entity.Sc;
+import com.wxl.system.entity.Student;
 import com.wxl.system.service.OptionalService;
 import com.wxl.system.service.ScService;
 import org.junit.Test;
@@ -24,6 +25,12 @@ public class TestOptionalService {
 
     @Autowired
     private ScService scService;
+
+    @Test
+    public void testFindByCno(){
+        Optional optional = optionalService.findByCno("08");
+        System.out.println(optional);
+    }
 
 //  测试选课
     @Test

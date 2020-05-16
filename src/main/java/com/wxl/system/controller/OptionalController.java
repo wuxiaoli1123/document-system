@@ -23,7 +23,8 @@ public class OptionalController {
     @Autowired
     private ScService scService;
 
-    //    按cno查找单个课程
+    //学生选课功能相关
+    //按cno查找单个课程
     @GetMapping("findByCno")
     public Optional findByCno(String cno){
         return optionalService.findByCno(cno);
@@ -44,6 +45,7 @@ public class OptionalController {
                 sc.setGrade(0.00);
                 sc.setSno(sno);
                 sc.setType("公共课");
+                sc.setTerm(optional.getTerm());
                 scService.addSc(sc);
                 result.setMsg("选课成功!");
             } else {
@@ -67,13 +69,14 @@ public class OptionalController {
         //计算总页数
         Integer totals = optionalService.findTotal();
         Integer totalPage = totals % rows == 0 ? totals / rows : totals / rows + 1;
-        map.put("provinces", optionals);
+        map.put("optionals", optionals);
         map.put("totals", totals);
         map.put("totalPage", totalPage);
         map.put("page", page);
         return map;
     }
 
+    //发布选课功能相关
     //    批量发布选课
     @PostMapping("addOptional")
     public Result addOptional(@RequestBody List<Optional> list) {
@@ -88,5 +91,12 @@ public class OptionalController {
         return result;
     }
 
-
+    // 管理员选择需要添加的课程
+    @GetMapping("findTcByCno")
+    public Map<String, Object> findTcByCno(String cno) {
+        HashMap<String, Object> map = new HashMap<>();
+        List<Optional> optionals = optionalService.findTcByCno(cno);
+        map.put("optional", optionals);
+        return map;
+    }
 }

@@ -3,6 +3,7 @@
 
 <mapper namespace="com.wxl.system.dao.OptionalDAO">
 
+    <!-- 学生选课相关 -->
     <!--分页查询所有-->
     <select id="sfindByPage" resultType="Optional">
         select *
@@ -27,18 +28,24 @@
         where cno=#{cno}
     </update>
 
-    <!--插入单个课程-->
-    <insert id="save" parameterType="Optional">
-        insert into optional_tb values(#{cno},#{cname},#{credit},#{tname},#{place},#{number},#{max})
-    </insert>
 
+
+
+    <!-- 发布选课相关 -->
     <!--批量插入课程-->
     <insert id="addOptional" parameterType="List">
         insert into optional_tb values
         <foreach collection="list" item="optional" index="index" separator=",">
-        (#{optional.cno},#{optional.cname},#{optional.credit},#{optional.tname},#{optional.place},#{optional.number},#{optional.max})
+        (#{optional.cno},#{optional.cname},#{optional.credit},#{optional.tname},#{optional.place},#{optional.number},#{optional.max},#{optional.grade})
          </foreach>
     </insert>
+
+    <!--管理员选择需要添加的课程-->
+    <select id="findTcByCno" resultType="Optional">
+        select tc_tb.cno,cname,credit,tname,place,number,grade,term
+        from tc_tb,course_tb,teacher_tb
+        where tc_tb.cno = course_tb.cno and tc_tb.tno = teacher_tb.tno and tc_tb.cno like "%"#{cno}"%"
+    </select>
 
 
 </mapper>
