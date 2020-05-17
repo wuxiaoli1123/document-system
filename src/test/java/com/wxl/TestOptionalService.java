@@ -50,22 +50,28 @@ public class TestOptionalService {
     public void testaddOptional(){
         List<Optional> list = new ArrayList<>();
         Optional optional = new Optional();
-        optional.setCno("08");
+        optional.setCno("21");
         optional.setCname("软件工程");
         optional.setCredit(4);
         optional.setTname("美华");
         optional.setPlace("A403");
         optional.setNumber(0);
         optional.setMax(10);
+        optional.setGrade("2017");
+        optional.setTerm("xx");
+        optional.setTc_id(1);
 
         Optional o2 = new Optional();
-        o2.setCno("09");
+        o2.setCno("20");
         o2.setCname("软件工程");
         o2.setCredit(4);
         o2.setTname("美华");
         o2.setPlace("A403");
         o2.setNumber(0);
         o2.setMax(10);
+        o2.setGrade("2017");
+        o2.setTerm("xx");
+        o2.setTc_id(1);
 
         list.add(optional);
         list.add(o2);

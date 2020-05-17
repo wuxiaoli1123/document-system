@@ -39,6 +39,7 @@ public class OptionalController {
             if (optional.getMax()>optional.getNumber()){
                 optionalService.update(cno,sno);
                 Sc sc = new Sc();
+                sc.setTc_id(optional.getTc_id());
                 sc.setCno(cno);
                 sc.setClassno("0");
                 sc.setCredit(optional.getCredit());

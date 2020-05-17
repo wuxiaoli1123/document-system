@@ -36,7 +36,7 @@
     <insert id="addOptional" parameterType="List">
         insert into optional_tb values
         <foreach collection="list" item="optional" index="index" separator=",">
-        (#{optional.cno},#{optional.cname},#{optional.credit},#{optional.tname},#{optional.place},#{optional.number},#{optional.max},#{optional.grade})
+        (#{optional.cno},#{optional.cname},#{optional.credit},#{optional.tname},#{optional.place},#{optional.number},#{optional.max},#{optional.grade},#{optional.term},#{optional.tc_id})
          </foreach>
     </insert>
 
