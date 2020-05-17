@@ -25,5 +25,5 @@ public interface OptionalService {
     Integer addOptional(List<Optional> list);
 
     //管理员选择需要添加的课程
-    List<Optional> findTcByCno(String cno);
+    Optional findTcByCno(String cno);
 }
