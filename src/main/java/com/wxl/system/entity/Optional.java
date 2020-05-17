@@ -13,6 +13,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain=true)
 //选课实体类
 public class Optional {
+    private Integer Tc_id;
     private String cno;
     private Integer credit;
     private String cname;
