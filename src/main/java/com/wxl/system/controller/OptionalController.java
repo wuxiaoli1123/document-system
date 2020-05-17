@@ -48,9 +48,9 @@ public class OptionalController {
                 sc.setType("公共课");
                 sc.setTerm(optional.getTerm());
                 scService.addSc(sc);
-                result.setMsg("选课成功!");
+                result.setMsg("选课成功!该课选课人数为"+optional.getNumber());
             } else {
-                throw new RuntimeException("课程已满!!!");
+                throw new RuntimeException("课程已满!!!该课选课人数为"+optional.getNumber());
             }
         }catch (Exception e) {
             e.printStackTrace();
@@ -94,10 +94,7 @@ public class OptionalController {
 
     // 管理员选择需要添加的课程
     @GetMapping("findTcByCno")
-    public Map<String, Object> findTcByCno(String cno) {
-        HashMap<String, Object> map = new HashMap<>();
-        List<Optional> optionals = optionalService.findTcByCno(cno);
-        map.put("optional", optionals);
-        return map;
+    public Optional findTcByCno(String cno) {
+        return optionalService.findTcByCno(cno);
     }
 }

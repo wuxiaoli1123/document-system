@@ -47,6 +47,6 @@ public class OptionalServicelmpl implements OptionalService{
 
     //管理员选择需要添加的课程
     @Override
-    public List<Optional> findTcByCno(String cno){return optionalDAO.findTcByCno(cno);}
+    public Optional findTcByCno(String cno){return optionalDAO.findTcByCno(cno);}
 
 }

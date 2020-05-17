@@ -42,9 +42,9 @@
 
     <!--管理员选择需要添加的课程-->
     <select id="findTcByCno" resultType="Optional">
-        select tc_tb.cno,cname,credit,tname,place,number,grade,term
+        select tc_tb.cno,cname,credit,tname,place,max,grade,term,id as tc_id
         from tc_tb,course_tb,teacher_tb
-        where tc_tb.cno = course_tb.cno and tc_tb.tno = teacher_tb.tno and tc_tb.cno like "%"#{cno}"%"
+        where tc_tb.cno = course_tb.cno and tc_tb.tno = teacher_tb.tno and tc_tb.cno = #{cno}
     </select>
 
 
