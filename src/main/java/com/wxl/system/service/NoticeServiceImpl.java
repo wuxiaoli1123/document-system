@@ -3,8 +3,7 @@ package com.wxl.system.service;
 
 import com.wxl.system.dao.NoticeDAO;
 import com.wxl.system.entity.Notice;
-import com.wxl.system.entity.Student_abbr;
-import org.apache.ibatis.annotations.Param;
+import com.wxl.system.entity.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,5 +45,9 @@ public class NoticeServiceImpl implements NoticeService{
     public Integer findTotals_NoticeTS(String role){
         return noticeDAO.findTotals_NoticeTS(role);
     }
+
+    //管理员发布通知相关          --syq
+    @Override
+    public  Integer addNotice(Notice notice){return noticeDAO.addNotice(notice);}
 
 }

@@ -66,4 +66,10 @@
 	</select>
 
 
+	<!--管理员发布通知相关  syq-->
+	<!--useGeneratedKeys="true" keyProperty="snum"-->
+	<insert id="addNotice" parameterType="Notice" useGeneratedKeys="true" keyProperty="snum">
+		insert into sendinfo_tb values(#{role},#{content},#{day},#{title},#{snum})
+	</insert>
+
 </mapper>

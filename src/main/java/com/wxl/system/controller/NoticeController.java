@@ -2,13 +2,11 @@ package com.wxl.system.controller;
 
 
 import com.wxl.system.entity.Notice;
+import com.wxl.system.entity.Result;
 import com.wxl.system.service.NoticeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -86,6 +84,19 @@ public class NoticeController {
         return map;
     }
 
+    //管理员发布通知相关          --syq
+    @PostMapping("addNotice")
+    public Result save(@RequestBody Notice notice) {
+        Result result = new Result();
+        try {
+            noticeService.addNotice(notice);
+            result.setMsg("发布公告成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.setState(false).setMsg("发布公告失败!!!");
+        }
+        return result;
+    }
 
 
 }

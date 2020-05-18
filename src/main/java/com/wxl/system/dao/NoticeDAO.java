@@ -24,4 +24,8 @@ public interface NoticeDAO {
     //返回满足条件的结果集的大小---notice
     Integer findTotals_NoticeTS(@Param("role") String role);
 
+    //管理员发布通知相关          --syq
+    Integer addNotice(Notice notice);
+
+
 }
