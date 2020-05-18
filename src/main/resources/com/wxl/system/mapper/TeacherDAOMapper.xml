@@ -93,4 +93,10 @@
             AND tc_tb.tno = #{tno}
             AND tc_tb.term = #{term}
        </select>
+
+    <!--修改教师信息-->
+    <update id="update" parameterType="Teacher">
+        update teacher_tb set tel=#{tel},dept=#{dept},position=#{position},edurecord=#{edurecord},pol=#{pol},worktime=#{worktime},sex=#{sex},tname=#{tname}
+        where tno=#{tno}
+    </update>
 </mapper>

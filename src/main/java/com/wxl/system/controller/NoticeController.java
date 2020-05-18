@@ -55,7 +55,7 @@ public class NoticeController {
      * by 吴小莉
      */
     @GetMapping("findConBySnum")
-    public String findConBySnum(String snum){
+    public String findConBySnum(Integer snum){
           return noticeService.findConBySnum(snum);
     }
 

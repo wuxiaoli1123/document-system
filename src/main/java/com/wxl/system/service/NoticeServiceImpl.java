@@ -29,7 +29,7 @@ public class NoticeServiceImpl implements NoticeService{
     }
 
     @Override
-    public String findConBySnum(String snum){
+    public String findConBySnum(Integer snum){
         return noticeDAO.findConBySnum(snum);
     }
 

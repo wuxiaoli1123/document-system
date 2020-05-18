@@ -17,7 +17,7 @@ public interface NoticeService {
     Integer findTotals_Notice(String account);
 
 
-    String findConBySnum(String snum);
+    String findConBySnum(Integer snum);
 
 
     //管理员端返回学生和教师的广播消息
