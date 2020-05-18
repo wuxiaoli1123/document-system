@@ -98,5 +98,18 @@ public class NoticeController {
         return result;
     }
 
+    //管理员删除通知相关          --syq
+    @PostMapping("delNotice")
+    public Result delNotice(@RequestBody List<Integer> snum){
+        Result result = new Result();
+        try {
+            noticeService.delNotice(snum);
+            result.setMsg("删除通知成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.setState(false).setMsg("删除通知失败!!!");
+        }
+        return result;
+    }
 
 }

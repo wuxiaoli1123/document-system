@@ -66,10 +66,19 @@
 	</select>
 
 
-	<!--管理员发布通知相关  syq-->
+	<!--管理员发布公告相关  syq-->
 	<!--useGeneratedKeys="true" keyProperty="snum"-->
 	<insert id="addNotice" parameterType="Notice" useGeneratedKeys="true" keyProperty="snum">
 		insert into sendinfo_tb values(#{role},#{content},#{day},#{title},#{snum})
 	</insert>
+
+	<!--管理员删除公告相关  syq-->
+	<delete id="delNotice" parameterType="Integer">
+		DELETE from sendinfo_tb where snum in
+		<foreach item="snum" collection="list" open="(" close=")" separator=",">
+			#{snum}
+		</foreach>
+	</delete>
+
 
 </mapper>

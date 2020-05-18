@@ -29,4 +29,7 @@ public interface NoticeService {
     //管理员发布通知相关          --syq
     Integer addNotice(Notice notice);
 
+    //管理员删除通知相关          --syq
+    Integer delNotice(List<Integer> snum);
+
 }

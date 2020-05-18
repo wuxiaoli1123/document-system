@@ -50,4 +50,7 @@ public class NoticeServiceImpl implements NoticeService{
     @Override
     public  Integer addNotice(Notice notice){return noticeDAO.addNotice(notice);}
 
+    //管理员删除通知相关          --syq
+    @Override
+    public  Integer delNotice(List<Integer> snum){return noticeDAO.delNotice(snum);}
 }
