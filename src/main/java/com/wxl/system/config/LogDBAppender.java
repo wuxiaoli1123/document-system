@@ -40,6 +40,8 @@ public class LogDBAppender extends DBAppenderBase<ILoggingEvent> {
         GET_GENERATED_KEYS_METHOD = getGeneratedKeysMethod;
     }
 
+
+
     @Override
     public void start() {
         // 将写好的sql语句赋值给insertSQL
