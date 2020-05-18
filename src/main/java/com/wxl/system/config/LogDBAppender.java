@@ -47,7 +47,6 @@ public class LogDBAppender extends DBAppenderBase<ILoggingEvent> {
         super.start();
     }
 
-
     // 自己写新增sql语句
     private static String buildInsertSQL() {
         return "INSERT INTO `logging`(`message`,`level_string`,`created_time`,`logger_name`)" +
