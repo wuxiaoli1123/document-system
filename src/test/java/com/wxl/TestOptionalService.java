@@ -5,6 +5,7 @@ import com.wxl.system.System01Application;
 import com.wxl.system.entity.Optional;
 import com.wxl.system.entity.Sc;
 import com.wxl.system.entity.Student;
+import com.wxl.system.service.NoticeService;
 import com.wxl.system.service.OptionalService;
 import com.wxl.system.service.ScService;
 import org.junit.Test;
@@ -26,6 +27,9 @@ public class TestOptionalService {
     @Autowired
     private ScService scService;
 
+    @Autowired
+    private NoticeService noticeService;
+
     @Test
     public void testFindByCno(){
         Optional optional = optionalService.findByCno("08");
@@ -45,6 +49,14 @@ public class TestOptionalService {
         scService.addSc(sc);
     }
 
+    @Test
+    public void testdelNotice(){
+        List<Integer> snum = new ArrayList<Integer>();
+        snum.add(1);
+        snum.add(2);
+        noticeService.delNotice(snum);
+
+    }
 
     @Test
     public void testaddOptional(){

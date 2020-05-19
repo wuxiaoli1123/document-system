@@ -1,6 +1,7 @@
 package com.wxl.system.service;
 
 import com.wxl.system.entity.StuGrade;
+import com.wxl.system.entity.Student;
 import com.wxl.system.entity.TeaSchedule;
 import com.wxl.system.entity.Teacher;
 import org.apache.ibatis.annotations.Param;
@@ -14,6 +15,9 @@ public interface TeacherService {
 
     //按教师号查找教师
     Teacher findByTno(String tno);
+
+    //修改教师个人信息
+    void update(Teacher teacher);
 
     //登记学生成绩
     void updateGrade(List<StuGrade> stuGrades);

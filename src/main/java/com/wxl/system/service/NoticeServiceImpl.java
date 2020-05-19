@@ -3,8 +3,7 @@ package com.wxl.system.service;
 
 import com.wxl.system.dao.NoticeDAO;
 import com.wxl.system.entity.Notice;
-import com.wxl.system.entity.Student_abbr;
-import org.apache.ibatis.annotations.Param;
+import com.wxl.system.entity.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +29,7 @@ public class NoticeServiceImpl implements NoticeService{
     }
 
     @Override
-    public String findConBySnum(String snum){
+    public String findConBySnum(Integer snum){
         return noticeDAO.findConBySnum(snum);
     }
 
@@ -47,4 +46,11 @@ public class NoticeServiceImpl implements NoticeService{
         return noticeDAO.findTotals_NoticeTS(role);
     }
 
+    //管理员发布通知相关          --syq
+    @Override
+    public  Integer addNotice(Notice notice){return noticeDAO.addNotice(notice);}
+
+    //管理员删除通知相关          --syq
+    @Override
+    public  Integer delNotice(List<Integer> snum){return noticeDAO.delNotice(snum);}
 }

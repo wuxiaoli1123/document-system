@@ -3,6 +3,7 @@ package com.wxl.system.service;
 
 import com.wxl.system.dao.TeacherDAO;
 import com.wxl.system.entity.StuGrade;
+import com.wxl.system.entity.Student;
 import com.wxl.system.entity.TeaSchedule;
 import com.wxl.system.entity.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,11 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public Teacher findByTno(String tno){return teacherDAO.findByTno(tno);}
 
+    //修改教师信息
+    @Override
+    public void update(Teacher teacher) {
+        teacherDAO.update(teacher);
+    }
 
     //登记学生成绩
     @Override

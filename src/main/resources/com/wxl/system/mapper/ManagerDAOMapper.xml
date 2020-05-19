@@ -7,5 +7,10 @@
         select * from manager_tb where mno = #{mno}
     </select>
 
+    <!--修改教师信息-->
+    <update id="update" parameterType="Manager">
+        update manager_tb set tel=#{tel},position=#{position},edurecord=#{edurecord},pol=#{pol},worktime=#{worktime},msex=#{msex},mname=#{mname}
+        where mno=#{mno}
+    </update>
 
 </mapper>

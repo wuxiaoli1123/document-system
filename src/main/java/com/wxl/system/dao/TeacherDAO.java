@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 @Mapper
-public interface TeacherDAO {
+public interface TeacherDAO extends BaseDAO<Teacher,String> {
     void insertTeacher(List<Teacher> teacher);
 
     //按教师号查找教师

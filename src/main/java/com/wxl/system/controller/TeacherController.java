@@ -241,4 +241,18 @@ public class TeacherController {
            return ScheduleT;
     }
 
+    //修改教师个人信息
+    @PostMapping("update")
+    public Result update(@RequestBody Teacher teacher) {
+        Result result = new Result();
+        try {
+            teacherService.update(teacher);
+            log.info(teacher.getTno());
+            result.setMsg("修改信息成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            result.setState(false).setMsg(e.getMessage());
+        }
+        return result;
+    }
 }
