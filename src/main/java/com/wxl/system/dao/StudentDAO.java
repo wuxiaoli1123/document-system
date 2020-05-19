@@ -20,5 +20,12 @@ public interface StudentDAO extends BaseDAO<Student_abbr,String> {
 
     //根据学号、学期查询学生本学期所选修课程
     List<StuClassData> findStuClassData(@Param("sno") String sno, @Param("term") String term);
+
+    //学生查看成绩相关
+    //分页查看成绩
+    List<StuCheckGrade> gradefindByPage(@Param("start") Integer start, @Param("rows") Integer rows, @Param("sno") String sno);
+
+    //查询课程总数
+    Integer findTotal(String sno);
 }
 

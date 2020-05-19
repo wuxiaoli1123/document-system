@@ -112,4 +112,17 @@
         AND sc_tb.term= #{term}
     </select>
 
+    <!--分页查询所有-->
+    <select id="gradefindByPage" resultType="StuCheckGrade">
+        select classno,sc_tb.cno,sc_tb.type,sc_tb.credit,grade,term,cname
+        from sc_tb,course_tb
+        where sno = #{sno} and sc_tb.cno = course_tb.cno and grade != null
+        order by cno
+        limit #{start},#{rows}
+    </select>
+
+    <!--查询总条数-->
+    <select id="findTotal" resultType="Integer">
+        select count(cno) from sc_tb where sno = #{sno};
+    </select>
 </mapper>

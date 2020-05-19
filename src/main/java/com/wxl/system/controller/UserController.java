@@ -1,8 +1,10 @@
 package com.wxl.system.controller;
 
+import com.wxl.system.entity.Notice;
 import com.wxl.system.entity.Result;
 import com.wxl.system.entity.Teacher;
 import com.wxl.system.entity.User;
+import com.wxl.system.service.NoticeService;
 import com.wxl.system.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.RandomStringUtils;
@@ -17,7 +19,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,6 +34,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private NoticeService noticeService;
 
     /**
      * 用户登录
@@ -52,9 +59,9 @@ public class UserController {
 
         try {
 
-            if(user1.getUser_status().equals("0")){
+            if (user1.getUser_status().equals("0")) {
                 result.setState(false).setMsg("用户不存在！");
-            }else {
+            } else {
                 //执行登录方法，如果没有异常，就登录成功
                 subject.login(token);
 
@@ -64,8 +71,8 @@ public class UserController {
 
                 String username;
 
-                //根据用户角色，查询表，获取用户姓名
                 if (role.equals("3")) {
+                    //根据用户角色，查询表，获取用户姓名
                     username = userService.findNameByAccountM(user.getAccount());
                     log.info("用户名:" + username);
                 } else if (role.equals("2")) {
@@ -129,45 +136,44 @@ public class UserController {
      * by 吴小莉
      */
     @PostMapping("changePassword")
-    public Result changePassword(String account,String oldpassword,String newpassword,String conpassword){
+    public Result changePassword(String account, String oldpassword, String newpassword, String conpassword) {
 
         Result result = new Result();
         User user = userService.findByAccount(account);
 
 
-
         try {
 
-            if(user == null) {
+            if (user == null) {
                 result.setState(false).setMsg("用户账号输入错误！");
-            }else{
+            } else {
 
                 //盐值加密
                 String salt = user.getPrivate_salt();
 
-                Md5Hash md5Hash = new Md5Hash(oldpassword,salt);//模拟MD5加密一次
+                Md5Hash md5Hash = new Md5Hash(oldpassword, salt);//模拟MD5加密一次
 
                 String moldpassword = md5Hash.toString();
 
 
-                if(user.getPassword().equals(moldpassword)){
+                if (user.getPassword().equals(moldpassword)) {
 
-                    if((newpassword == null || newpassword.trim().equals(""))&&(conpassword == null || conpassword.trim().equals(""))){
+                    if ((newpassword == null || newpassword.trim().equals("")) && (conpassword == null || conpassword.trim().equals(""))) {
                         result.setState(false).setMsg("新密码和确认密码不能为空！");
-                    }else {
-                        if(newpassword == null || newpassword.trim().equals("")){
+                    } else {
+                        if (newpassword == null || newpassword.trim().equals("")) {
                             result.setState(false).setMsg("新密码不能为空！");
-                        }else if(conpassword == null || conpassword.trim().equals("")){
+                        } else if (conpassword == null || conpassword.trim().equals("")) {
                             result.setState(false).setMsg("确认密码不能为空！");
-                        }else {
+                        } else {
                             /*newpassword.length()<8 || newpassword.length()>20*/
-                            if(newpassword.length()<8 || newpassword.length()>20){
+                            if (newpassword.length() < 8 || newpassword.length() > 20) {
                                 result.setState(false).setMsg("密码长度需要设置在8-20之间！");
-                            }else {
+                            } else {
                                 boolean isDigit = false;
                                 boolean isLetter = false;
                                 boolean isChinese = false;
-                                for (int i= 0;i<newpassword.length();i++){
+                                for (int i = 0; i < newpassword.length(); i++) {
                                     if (Character.isDigit(newpassword.charAt(i))) {  //用char包装类中的判断数字的方法判断每一个字符
                                         isDigit = true;
                                     } else if (Character.isLetter(newpassword.charAt(i))) { //用char包装类中的判断字母的方法判断每一个字符
@@ -178,22 +184,22 @@ public class UserController {
                                 Pattern p = Pattern.compile("[\u4e00-\u9fa5]");
                                 Matcher m = p.matcher(newpassword);
 
-                                if(m.find()){
+                                if (m.find()) {
                                     isChinese = true;
                                 }
 
-                                if(isChinese){
+                                if (isChinese) {
                                     result.setState(false).setMsg("密码中不能包含中文！");
-                                }else if(!isDigit&&!isLetter){
+                                } else if (!isDigit && !isLetter) {
                                     result.setState(false).setMsg("密码必须包含数字和字母！");
-                                }else if(!isDigit){
+                                } else if (!isDigit) {
                                     result.setState(false).setMsg("密码必须包含数字！");
-                                }else if(!isLetter){
+                                } else if (!isLetter) {
                                     result.setState(false).setMsg("密码必须包含字母！");
-                                }else {
-                                    if (!newpassword.equals(conpassword)){
+                                } else {
+                                    if (!newpassword.equals(conpassword)) {
                                         result.setState(false).setMsg("两次密码输入不一致！");
-                                    }else {
+                                    } else {
                                         user.setPassword(newpassword);
 
                                         //修改密码
@@ -205,13 +211,13 @@ public class UserController {
                             }
                         }
                     }
-                }else {
+                } else {
                     result.setState(false).setMsg("原密码输入错误");
                 }
 
             }
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             result.setState(false).setMsg(e.getMessage());
         }
@@ -225,12 +231,12 @@ public class UserController {
     }
 
     @RequestMapping("insertAdmin")
-    public Result insertAdmin(@RequestBody List<User> users){
+    public Result insertAdmin(@RequestBody List<User> users) {
         Result result = new Result();
-        try{
+        try {
 
             List<User> users1 = new ArrayList<>();
-            for(int i = 0;i<users.size();i++){
+            for (int i = 0; i < users.size(); i++) {
                 User user = new User();
                 user.setAccount(users.get(i).getAccount());
                 user.setPassword(users.get(i).getPassword());
@@ -238,14 +244,51 @@ public class UserController {
                 users1.add(user);
             }
 
-            log.info("users "+users1);
+            log.info("users " + users1);
             userService.insertUser(users1);
             result.setState(true).setMsg("成功录入管理员信息！");
 
-        }catch (Exception e){
+        } catch (Exception e) {
             result.setState(false).setMsg("未成功录入管理员信息！");
         }
         return result;
+    }
+
+    /**
+     * 分页查询广播通知，展示在页面
+     * by 吴小莉
+     */
+    @GetMapping("findByPage")
+    public Map<String,Object> findStuAttention(Integer page, Integer rows, String account){
+        page = page == null ? 1 : page;
+
+        //前端页面应该是6.这里的“2”，仅用于后端测试
+        rows = rows == null ? 2 : rows;
+
+        HashMap<String,Object> map = new HashMap<>();
+
+        //分页处理
+        List<Notice> notices = noticeService.findByPage_Notice(page,rows,account);
+
+
+        //计算总页数
+        Integer totals = noticeService.findTotals_Notice(account);
+        Integer totalPage = totals % rows == 0 ? totals / rows : totals / rows + 1;
+
+        map.put("notices",notices);
+        map.put("totals",totals);
+        map.put("totalPage",totalPage);
+
+        return map;
+    }
+
+    /**
+     * 查看消息具体内容
+     * by 吴小莉
+     */
+    @GetMapping("findConBySnum")
+    public String findConBySnum(Integer snum){
+        return noticeService.findConBySnum(snum);
     }
 
 }

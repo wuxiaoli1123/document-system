@@ -3,6 +3,7 @@ package com.wxl.system.service;
 import com.wxl.system.dao.OptionalDAO;
 import com.wxl.system.entity.IsChoose;
 import com.wxl.system.entity.Optional;
+import com.wxl.system.entity.Sc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,6 +48,10 @@ public class OptionalServicelmpl implements OptionalService{
     public void StuChangeCourse(String cno, String sno) {
         optionalDAO.StuChangeCourse(cno,sno);
     }
+
+    //选课成功后将选课信息插入sc表
+    @Override
+    public void addSc(Sc sc) { optionalDAO.addSc(sc);}
 
     //发布选课相关
     //批量发布选课

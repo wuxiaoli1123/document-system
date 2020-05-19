@@ -4,6 +4,7 @@ package com.wxl.system.service;
 import com.wxl.system.dao.ManagerDAO;
 import com.wxl.system.entity.Manager;
 import com.wxl.system.entity.Student;
+import com.wxl.system.entity.Tc;
 import com.wxl.system.entity.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,24 @@ public class ManagerServiceImpl implements ManagerService {
         return managerDAO.findStudentByDG(dept, grade);
     }
 
-   //注销账号
+    //修改管理员信息
+    @Override
+    public void update(Manager manager) {
+        managerDAO.update(manager);
+    }
+
+    //发布课表插入到tc表
+    @Override
+    public void addScheduleTc(List<Tc> list) { managerDAO.addScheduleTc(list); }
+
+    //发布课表插入到sc表
+    @Override
+    public void addScheduleSc(List<Tc> list) { managerDAO.addScheduleSc(list);
+
+    }
+
+
+    //注销账号
     @Override
    public void cancelAccounts(List<String> accounts){
         managerDAO.cancelAccounts(accounts);

@@ -22,10 +22,10 @@ public class NoticeController {
     private NoticeService noticeService;
 
 
-    /**
+   /* *//**
      * 分页查询广播通知，展示在页面
      * by 吴小莉
-     */
+     *//*
     @GetMapping("findByPage")
     public Map<String,Object> findStuAttention(Integer page, Integer rows, String account){
         page = page == null ? 1 : page;
@@ -50,17 +50,17 @@ public class NoticeController {
         return map;
     }
 
-    /**
+    *//**
      * 查看消息具体内容
      * by 吴小莉
-     */
+     *//*
     @GetMapping("findConBySnum")
     public String findConBySnum(Integer snum){
           return noticeService.findConBySnum(snum);
-    }
+    }*/
 
 
-    @GetMapping("MfindByPage")
+    /*@GetMapping("MfindByPage")
     public Map<String,Object> findAttention(Integer page, Integer rows, Integer role_id){
         page = page == null ? 1 : page;
 
@@ -111,5 +111,5 @@ public class NoticeController {
         }
         return result;
     }
-
+*/
 }

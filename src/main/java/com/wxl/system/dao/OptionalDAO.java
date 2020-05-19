@@ -2,6 +2,7 @@ package com.wxl.system.dao;
 
 import com.wxl.system.entity.IsChoose;
 import com.wxl.system.entity.Optional;
+import com.wxl.system.entity.Sc;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -26,6 +27,9 @@ public interface OptionalDAO extends BaseDAO<Optional,String>{
 
     //学生更改选课
     void StuChangeCourse(String cno,String sno);
+
+    //选课成功后将选课信息插入sc表
+    void addSc(Sc sc);
 
     //发布选课相关
     //批量发布选课

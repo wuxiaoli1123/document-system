@@ -5,44 +5,62 @@
     <!-- 登录 -->
     <!-- 通过账号查询用户 -->
     <select id="findByAccount" parameterType="String" resultType="User">
-        select * from user_tb where account = #{account}
+        select *
+        from user_tb
+        where account = #{account}
     </select>
 
 
     <!--通过账号查询用户角色-->
     <select id="findRoleByAccount" parameterType="String" resultType="String">
-         select role_id from user_tb where account = #{account}
+        select role_id
+        from user_tb
+        where account = #{account}
     </select>
 
     <!--通过账号查询用户名-->
-        <!--学生-->
-        <select id="findNameByAccountS" parameterType="String" resultType="String">
-            select student_tb.sname from student_tb,user_tb where student_tb.sno=user_tb.account and user_tb.account = #{account}
-        </select>
-    
-        <!--教师-->
-        <select id="findNameByAccountT" parameterType="String" resultType="String">
-            SELECT teacher_tb.tname FROM teacher_tb,user_tb WHERE teacher_tb.tno = user_tb.account AND user_tb.account = #{account}
-        </select>
-    
-        <!--管理员-->
-        <select id="findNameByAccountM" parameterType="String" resultType="String">
-            SELECT manager_tb.mname FROM manager_tb,user_tb WHERE manager_tb.mno = user_tb.account AND user_tb.account = #{account}
-        </select>
+    <!--学生-->
+    <select id="findNameByAccountS" parameterType="String" resultType="String">
+        select student_tb.sname
+        from student_tb,
+             user_tb
+        where student_tb.sno = user_tb.account
+          and user_tb.account = #{account}
+    </select>
+
+    <!--教师-->
+    <select id="findNameByAccountT" parameterType="String" resultType="String">
+        SELECT teacher_tb.tname
+        FROM teacher_tb,
+             user_tb
+        WHERE teacher_tb.tno = user_tb.account
+          AND user_tb.account = #{account}
+    </select>
+
+    <!--管理员-->
+    <select id="findNameByAccountM" parameterType="String" resultType="String">
+        SELECT manager_tb.mname
+        FROM manager_tb,
+             user_tb
+        WHERE manager_tb.mno = user_tb.account
+          AND user_tb.account = #{account}
+    </select>
 
 
     <!-- 修改用户密码 -->
     <update id="changePassword" parameterType="User">
-        update user_tb set password=#{password},private_salt=#{private_salt}
+        update user_tb
+        set password=#{password},
+            private_salt=#{private_salt}
         where account = #{account}
     </update>
 
 
     <!-- 插入用户表 -->
-      <!-- &lt;!&ndash; 学生 &ndash;&gt;
-       <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="account">
-           insert into user_tb values (#{account},#{password},#{role})
-       </insert>-->
+    <!-- &lt;!&ndash; 学生 &ndash;&gt;
+     <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="account">
+         insert into user_tb values (#{account},#{password},#{role})
+     </insert>-->
 
     <insert id="insertUser" parameterType="list">
         insert into user_tb values
@@ -50,5 +68,25 @@
             (#{user.account},#{user.password},#{user.role_id},#{user.private_salt},#{user.user_status})
         </foreach>
     </insert>
+
+    <!--通过用户账号返回R_code-->
+    <select id="findRCodeByAccount" parameterType="String" resultType="String">
+        SELECT DISTINCT role_tb.`code`
+        FROM role_tb,
+             user_tb
+        WHERE role_tb.id = user_tb.role_id
+          AND user_tb.account = #{account}
+    </select>
+
+    <!--通过用户账号返回P_code-->
+    <select id="findPCodeByAccount" parameterType="String" resultType="String">
+        SELECT DISTINCT permission_tb.`code`
+        FROM user_tb,
+             role_perm_tb,
+             permission_tb
+        WHERE user_tb.role_id = role_perm_tb.role_id
+          AND role_perm_tb.perm_id = permission_tb.id
+          AND user_tb.account = #{account}
+    </select>
 
 </mapper>

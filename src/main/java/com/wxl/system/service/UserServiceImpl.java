@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -81,6 +82,7 @@ public class UserServiceImpl implements UserService {
     }
 
     //插入用户表
+    @Override
     public void insertUser(List<User> users){
 
         List<User> users1 = new ArrayList();
@@ -100,4 +102,16 @@ public class UserServiceImpl implements UserService {
 
         userDAO.insertUser(users1);
     };
+
+    //根据账号返回用户role_code
+    @Override
+    public Set<String> findRCodeByAccount(String account){
+          return userDAO.findRCodeByAccount(account);
+    }
+
+    //根据账号返回用户perm_code
+    @Override
+    public Set<String> findPCodeByAccount(String account){
+         return userDAO.findPCodeByAccount(account);
+    }
 }

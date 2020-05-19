@@ -4,6 +4,7 @@ import com.wxl.system.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Set;
 
 @Mapper
 public interface UserDAO {
@@ -28,6 +29,11 @@ public interface UserDAO {
     //插入用户表
     void insertUser(List<User> users);
 
+    //根据账号返回用户role_code
+    Set<String> findRCodeByAccount(String account);
 
+
+    //根据账号返回用户perm_code
+    Set<String> findPCodeByAccount(String account);
 
 }

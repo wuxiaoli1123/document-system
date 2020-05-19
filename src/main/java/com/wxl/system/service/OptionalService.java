@@ -2,6 +2,7 @@ package com.wxl.system.service;
 
 import com.wxl.system.entity.IsChoose;
 import com.wxl.system.entity.Optional;
+import com.wxl.system.entity.Sc;
 
 import java.util.List;
 
@@ -25,6 +26,9 @@ public interface OptionalService {
 
     //学生更改选课
     void StuChangeCourse(String cno,String sno);
+
+    //选课成功后将选课信息插入sc表
+    void addSc(Sc sc);
 
     //发布选课相关
     //批量发布选课
