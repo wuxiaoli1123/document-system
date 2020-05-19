@@ -17,7 +17,7 @@ import java.util.Map;
 @RequestMapping("optional")
 public class OptionalController {
 
-    @Autowired
+   /* @Autowired
     private OptionalService optionalService;
 
     //学生选课功能相关
@@ -107,8 +107,8 @@ public class OptionalController {
         map.put("page", page);
         return map;
     }
-
-    //发布选课功能相关
+*/
+/*    //发布选课功能相关
     //    批量发布选课
     @PostMapping("addOptional")
     public Result addOptional(@RequestBody List<Optional> list) {
@@ -127,5 +127,5 @@ public class OptionalController {
     @GetMapping("findTcByCno")
     public Optional findTcByCno(String cno) {
         return optionalService.findTcByCno(cno);
-    }
+    }*/
 }

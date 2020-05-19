@@ -1,6 +1,7 @@
 package com.wxl.system.controller;
 
 import com.wxl.system.entity.*;
+import com.wxl.system.service.OptionalService;
 import com.wxl.system.service.StudentService;
 import com.wxl.system.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -23,10 +24,10 @@ public class StudentController {
     @Autowired
     private UserService userService;
 
-    /**
+   /* *//**
      * 批量录入学生档案信息，并自动插入用户表
      * by 吴小莉
-     */
+     *//*
     @PostMapping("insertStudent")
     public Result insertStudent(@RequestBody List<Student> students){
         Result result = new Result();
@@ -57,7 +58,7 @@ public class StudentController {
             result.setState(false).setMsg("未成功录入学生档案信息！");
         }
         return result;
-    }
+    }*/
 
 
     //按学号查找学生
@@ -82,10 +83,10 @@ public class StudentController {
     }
 
 
-    /**
+   /* *//**
      * 查询学生信息----分页查询----用于登记成绩中，展示学生信息
      * by 吴小莉
-     */
+     *//*
     @GetMapping("findByPage")
     public Map<String,Object> findByPage(Integer page,Integer rows,String cname,String grade, String classno){
         page = page == null ? 1 : page;
@@ -110,7 +111,7 @@ public class StudentController {
         return map;
 
     }
-
+*/
 
     /**
      * 根据学期，学生账号返回学生本学期的课表
@@ -240,6 +241,98 @@ public class StudentController {
         Integer totals = studentService.findTotal(sno);
         Integer totalPage = totals % rows == 0 ? totals / rows : totals / rows + 1;
         map.put("sc", sc);
+        map.put("totals", totals);
+        map.put("totalPage", totalPage);
+        map.put("page", page);
+        return map;
+    }
+
+
+    @Autowired
+    private OptionalService optionalService;
+
+    //学生选课功能相关
+    //按cno查找单个课程
+    @GetMapping("findByCno")
+    public Optional findByCno(String cno){
+        return optionalService.findByCno(cno);
+    }
+
+    //  学生选课
+    @GetMapping("updateNumber")
+    public Result updateNumber(String cno,String sno){
+        Result result = new Result();
+        try {
+            Optional optional = optionalService.findByCno(cno);
+            IsChoose isChoose = optionalService.isChoose(sno);
+            if (optional.getMax()>optional.getNumber()){
+                if(isChoose.getIsChoose() == 0) {
+                    Sc sc = new Sc();
+                    sc.setTc_id(optional.getTc_id());
+                    sc.setCno(cno);
+                    sc.setClassno("0");
+                    sc.setCredit(optional.getCredit());
+                    sc.setSno(sno);
+                    sc.setType("公共课");
+                    sc.setTerm(optional.getTerm());
+                    optionalService.updateNumber(cno, sno);
+                    result.setMsg("选课成功!该课选课人数为" + optional.getNumber());
+                } else {
+                    throw new RuntimeException("已选择"+isChoose.getIsChoose()+"门课，"+"是否放弃课程"+isChoose.getCname());
+                }
+            } else {
+                throw new RuntimeException("课程已满!!!该课选课人数为"+optional.getNumber());
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            result.setMsg(e.getMessage()).setState(false);
+        }
+        return result;
+    }
+
+
+    //学生更改选课
+    @GetMapping("StuChangeCourse")
+    public Result StuChangeCourse(String cno,String sno){
+        Result result = new Result();
+        try {
+            Optional optional = optionalService.findByCno(cno);
+            IsChoose isChoose = optionalService.isChoose(sno);
+            if (optional.getMax()>optional.getNumber()){
+                optionalService.StuChangeCourse(isChoose.getCno(),sno);
+                Sc sc = new Sc();
+                sc.setTc_id(optional.getTc_id());
+                sc.setCno(cno);
+                sc.setClassno("0");
+                sc.setCredit(optional.getCredit());
+                sc.setSno(sno);
+                sc.setType("公共课");
+                sc.setTerm(optional.getTerm());
+                optionalService.addSc(sc);
+                optionalService.updateNumber(cno, sno);
+                result.setMsg("选课成功!该课选课人数为" + optional.getNumber());
+            } else {
+                throw new RuntimeException("课程已满!!!该课选课人数为"+optional.getNumber());
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            result.setMsg(e.getMessage()).setState(false);
+        }
+        return result;
+    }
+
+    //   分页呈现选课
+    @GetMapping("sfindByPage")
+    public Map<String, Object> sfindByPage(Integer page, Integer rows) {
+        page = page == null ? 1 : page;
+        rows = rows == null ? 4 : rows;
+        HashMap<String, Object> map = new HashMap<>();
+        //分页处理
+        List<Optional> optionals = optionalService.sfindByPage(page, rows);
+        //计算总页数
+        Integer totals = optionalService.findTotal();
+        Integer totalPage = totals % rows == 0 ? totals / rows : totals / rows + 1;
+        map.put("optionals", optionals);
         map.put("totals", totals);
         map.put("totalPage", totalPage);
         map.put("page", page);

@@ -3,6 +3,7 @@ package com.wxl.system.service;
 import com.wxl.system.entity.User;
 
 import java.util.List;
+import java.util.Set;
 
 public interface UserService {
 
@@ -28,4 +29,10 @@ public interface UserService {
 
     //插入用户表
     void insertUser(List<User> users);
+
+    //根据账号返回用户role_code
+    Set<String> findRCodeByAccount(String account);
+
+    //根据账号返回用户perm_code
+    Set<String> findPCodeByAccount(String account);
 }

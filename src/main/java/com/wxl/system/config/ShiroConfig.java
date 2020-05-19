@@ -19,45 +19,63 @@ import java.util.Map;
 @Slf4j
 public class ShiroConfig {
 
-    //ShiroFilterFactoryBean:3
+    //ShiroFilterFactoryBean:3 @Qualifier("securityManager")  DefaultWebSecurityManager defaultWebSecurityManager
     @Bean
-    public ShiroFilterFactoryBean getShiroFilterFactoryBean(@Qualifier("securityManager") DefaultWebSecurityManager defaultWebSecurityManager){
+    public ShiroFilterFactoryBean getShiroFilterFactoryBean(){
         ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
         //设置安全管理器
-        bean.setSecurityManager(defaultWebSecurityManager);
+        bean.setSecurityManager(getDefaultWebSecurityManager());
 
         //添加shiro的内置过滤器
-
         /** anon: 无需认证即可访问
          * authc: 必须认证以了才能访问
          * user: 必须拥有 记住我 功能才能访问
          * perms: 拥有对某个资源的权限才能访问
          * role: 拥有某个角色权限访问
          */
+
+        //有序序列（优先级）
         Map<String, String> filterMap = new LinkedHashMap<>();
 
-        //（权限操作）
-        //拦截：
-        //登录请求（所有人都可以访问）
-        filterMap.put("/system/teacher/*","perms[teacher:add]");
+        log.info("页面限制");
 
-        //授权
+        //（权限操作）
+        //登录请求（所有人都可以访问）
+        filterMap.put("/user/login","authc");
+
+        //权限控制
+        filterMap.put("/user/*","perms[user:power]");
+        filterMap.put("/teacher/**","perms[teacher:power]");
+        filterMap.put("/student/**","perms[student:power]");
+        filterMap.put("/manager/**","perms[manager:power]");
+
+        filterMap.put("/user/*","roles[role_student]");
+
+
+
+
+
+
+        //退出
+        filterMap.put("/user/logout","logout");
+
         bean.setFilterChainDefinitionMap(filterMap);
 
         //设置登录的请求
-        bean.setLoginUrl("/system/user/login");
+        bean.setLoginUrl("/user/login");
         //未授权页面
-        bean.setUnauthorizedUrl("/system/user/noauth");
+        bean.setUnauthorizedUrl("/user/noauth");
 
         return bean;
     }
 
     //DefaultWebSecurityManager:2
     @Bean(name="securityManager")
-    public DefaultWebSecurityManager getDefaultWebSecurityManager(@Qualifier("userRealm") UserRealm userRealm){
+    //@Qualifier("userRealm") UserRealm userRealm
+    public DefaultWebSecurityManager getDefaultWebSecurityManager(){
         DefaultWebSecurityManager securityManager=new DefaultWebSecurityManager();
         //关联UserRealm
-        securityManager.setRealm(userRealm);
+        securityManager.setRealm(userRealm());
         return securityManager;
     }
 
