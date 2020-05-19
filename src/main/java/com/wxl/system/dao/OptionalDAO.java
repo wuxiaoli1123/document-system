@@ -1,5 +1,6 @@
 package com.wxl.system.dao;
 
+import com.wxl.system.entity.IsChoose;
 import com.wxl.system.entity.Optional;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,14 +12,20 @@ public interface OptionalDAO extends BaseDAO<Optional,String>{
     //按cno查找单个课程
     Optional findByCno(String cno);
 
-    //学生选课
-    void update(String cno,String sno);
+    //更新当前选课人数
+    void updateNumber(String cno,String sno);
 
     //分页呈现选课
     List<Optional> sfindByPage(@Param("start") Integer start, @Param("rows") Integer rows);
 
     //查询课程总数
     Integer findTotal();
+
+    //判断该学生是否已选课
+    IsChoose isChoose(String sno);
+
+    //学生更改选课
+    void StuChangeCourse(String cno,String sno);
 
     //发布选课相关
     //批量发布选课

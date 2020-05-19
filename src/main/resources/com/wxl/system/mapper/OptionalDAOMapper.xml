@@ -23,11 +23,20 @@
     </select>
 
     <!--学生选课-->
-    <update id="update" parameterType="Optional">
-        update optional_tb set number=number+1
+    <update id="updateNumber" parameterType="Optional">
+        update optional_tb set number = (select count(*) from  sc_tb where cno = #{cno})
         where cno=#{cno}
     </update>
 
+    <!--判断该学生是否已选课-->
+    <select id="isChoose" resultType="IsChoose">
+        select count(*),cname,sc_tb.cno from sc_tb,course_tb where sc_tb.cno in (select cno from optional_tb) and sno = #{sno} and course_tb.cno=sc_tb.cno
+    </select>
+
+    <!--学生更改选课-->
+    <delete id="StuChangeCourse" parameterType="Sc">
+        DELETE from sc_tb where sno = #{sno} and cno = #{cno}
+    </delete>
 
 
 

@@ -61,7 +61,7 @@
       </select>
 
      <!--根据消息编号查询消息内容-->
-	<select id="findConBySnum" parameterType="String" resultType="String">
+	<select id="findConBySnum" parameterType="Integer" resultType="String">
 		select content from sendinfo_tb where snum=#{snum}
 	</select>
 
@@ -69,7 +69,7 @@
 	<!--管理员发布公告相关  syq-->
 	<!--useGeneratedKeys="true" keyProperty="snum"-->
 	<insert id="addNotice" parameterType="Notice" useGeneratedKeys="true" keyProperty="snum">
-		insert into sendinfo_tb values(#{role},#{content},#{day},#{title},#{snum})
+		insert into sendinfo_tb values(#{snum},#{title},#{day},#{content},#{role})
 	</insert>
 
 	<!--管理员删除公告相关  syq-->

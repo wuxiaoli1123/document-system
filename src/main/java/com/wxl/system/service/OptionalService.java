@@ -1,5 +1,6 @@
 package com.wxl.system.service;
 
+import com.wxl.system.entity.IsChoose;
 import com.wxl.system.entity.Optional;
 
 import java.util.List;
@@ -17,8 +18,13 @@ public interface OptionalService {
     Integer findTotal();
 
     //学生选课
-    void update(String cno,String sno);
+    void updateNumber(String cno,String sno);
 
+    //判断该学生是否已选课
+    IsChoose isChoose(String sno);
+
+    //学生更改选课
+    void StuChangeCourse(String cno,String sno);
 
     //发布选课相关
     //批量发布选课
