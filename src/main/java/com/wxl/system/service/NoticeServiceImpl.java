@@ -35,15 +35,15 @@ public class NoticeServiceImpl implements NoticeService{
 
     //管理员端返回学生和教师的广播消息
     @Override
-    public List<Notice> findByPage_NoticeTS(Integer page,Integer rows,String role){
+    public List<Notice> findByPage_NoticeTS(Integer page,Integer rows,Integer role_id){
         int start = (page - 1)*rows;
-        return noticeDAO.findByPage_NoticeTS(start,rows,role);
+        return noticeDAO.findByPage_NoticeTS(start,rows,role_id);
     }
 
     //返回满足条件的结果集的大小---notice
     @Override
-    public Integer findTotals_NoticeTS(String role){
-        return noticeDAO.findTotals_NoticeTS(role);
+    public Integer findTotals_NoticeTS(Integer role_id){
+        return noticeDAO.findTotals_NoticeTS(role_id);
     }
 
     //管理员发布通知相关          --syq

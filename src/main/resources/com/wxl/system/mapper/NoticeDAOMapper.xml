@@ -10,9 +10,9 @@
        FROM
 	    sendinfo_tb
        WHERE
-	    role = (
+	    role_id = (
 		SELECT
-			role
+			role_id
 		FROM
 			user_tb
 		WHERE
@@ -28,7 +28,7 @@
 		   FROM
 			sendinfo_tb
 		   WHERE
-			role = #{role}
+			role_id = #{role_id}
 			limit #{start},#{rows}
 	   </select>
 
@@ -39,7 +39,7 @@
 		  FROM
 	        sendinfo_tb
           WHERE
-	        role = #{role}
+	        role_id = #{role_id}
 	  </select>
 
 
@@ -50,9 +50,9 @@
        FROM
 	    sendinfo_tb
        WHERE
-	    role = (
+	    role_id = (
 		SELECT
-			role
+			role_id
 		FROM
 			user_tb
 		WHERE

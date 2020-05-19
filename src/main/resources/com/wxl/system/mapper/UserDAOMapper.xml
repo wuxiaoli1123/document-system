@@ -11,7 +11,7 @@
 
     <!--通过账号查询用户角色-->
     <select id="findRoleByAccount" parameterType="String" resultType="String">
-         select role from user_tb where account = #{account}
+         select role_id from user_tb where account = #{account}
     </select>
 
     <!--通过账号查询用户名-->
@@ -33,7 +33,7 @@
 
     <!-- 修改用户密码 -->
     <update id="changePassword" parameterType="User">
-        update user_tb set password=#{password}
+        update user_tb set password=#{password},private_salt=#{private_salt}
         where account = #{account}
     </update>
 
@@ -47,9 +47,8 @@
     <insert id="insertUser" parameterType="list">
         insert into user_tb values
         <foreach collection="list" item="user" separator=",">
-            (#{user.account},#{user.password},#{user.role})
+            (#{user.account},#{user.password},#{user.role_id},#{user.private_salt},#{user.user_status})
         </foreach>
-
     </insert>
 
 </mapper>
