@@ -21,9 +21,9 @@ public interface NoticeService {
 
 
     //管理员端返回学生和教师的广播消息
-    List<Notice> findByPage_NoticeTS(Integer start,Integer rows,String role);
+    List<Notice> findByPage_NoticeTS(Integer start,Integer rows,Integer role_id);
 
     //返回满足条件的结果集的大小---notice
-    Integer findTotals_NoticeTS(String role);
+    Integer findTotals_NoticeTS(Integer role_id);
 
 }

@@ -18,5 +18,5 @@ public class Notice {
     private String title;
     private String day;
     private String content;
-    private String role;
+    private Integer role_id;
 }

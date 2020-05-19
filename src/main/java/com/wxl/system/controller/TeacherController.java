@@ -45,7 +45,7 @@ public class TeacherController {
                      User user = new User();
                      user.setAccount(teachers.get(i).getTno());
                      user.setPassword(teachers.get(i).getTno());
-                     user.setRole("2");
+                     user.setRole_id(2);
 
                      users.add(user);
                   }
