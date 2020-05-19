@@ -14,7 +14,8 @@ import lombok.experimental.Accessors;
 public class User {
     private String account;
     private String password;
-    private String role;
+    private Integer role_id;
     private String username;
-
+    private String private_salt;
+    private String user_status;
 }

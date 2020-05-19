@@ -1,5 +1,6 @@
 package com.wxl.system.controller;
 
+import com.wxl.system.entity.IsChoose;
 import com.wxl.system.entity.Optional;
 import com.wxl.system.entity.Result;
 import com.wxl.system.entity.Sc;
@@ -31,24 +32,58 @@ public class OptionalController {
     }
 
     //  学生选课
-    @GetMapping("update")
-    public Result update(String cno,String sno){
+    @GetMapping("updateNumber")
+    public Result updateNumber(String cno,String sno){
         Result result = new Result();
         try {
             Optional optional = optionalService.findByCno(cno);
+            IsChoose isChoose = optionalService.isChoose(sno);
             if (optional.getMax()>optional.getNumber()){
-                optionalService.update(cno,sno);
-                Sc sc = new Sc();
-                sc.setTc_id(optional.getTc_id());
-                sc.setCno(cno);
-                sc.setClassno("0");
-                sc.setCredit(optional.getCredit());
-                sc.setGrade(0.00);
-                sc.setSno(sno);
-                sc.setType("公共课");
-                sc.setTerm(optional.getTerm());
-                scService.addSc(sc);
-                result.setMsg("选课成功!该课选课人数为"+optional.getNumber());
+                if(isChoose.getIsChoose()==0) {
+                    Sc sc = new Sc();
+                    sc.setTc_id(optional.getTc_id());
+                    sc.setCno(cno);
+                    sc.setClassno("0");
+                    sc.setCredit(optional.getCredit());
+                    sc.setSno(sno);
+                    sc.setType("公共课");
+                    sc.setTerm(optional.getTerm());
+                    scService.addSc(sc);
+                    optionalService.updateNumber(cno, sno);
+                    result.setMsg("选课成功!该课选课人数为" + optional.getNumber());
+                }else {
+                    throw new RuntimeException("已选择"+isChoose.getIsChoose()+"门课，"+"是否放弃课程"+isChoose.getCname());
+                }
+            } else {
+                throw new RuntimeException("课程已满!!!该课选课人数为"+optional.getNumber());
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            result.setMsg(e.getMessage()).setState(false);
+        }
+        return result;
+    }
+
+    //学生更改选课
+    @GetMapping("StuChangeCourse")
+    public Result StuChangeCourse(String cno,String sno){
+        Result result = new Result();
+        try {
+            Optional optional = optionalService.findByCno(cno);
+            IsChoose isChoose = optionalService.isChoose(sno);
+            if (optional.getMax()>optional.getNumber()){
+                    Sc sc = new Sc();
+                    sc.setTc_id(optional.getTc_id());
+                    sc.setCno(cno);
+                    sc.setClassno("0");
+                    sc.setCredit(optional.getCredit());
+                    sc.setSno(sno);
+                    sc.setType("公共课");
+                    sc.setTerm(optional.getTerm());
+                    scService.addSc(sc);
+                    optionalService.StuChangeCourse(isChoose.getCno(),sno);
+                    optionalService.updateNumber(cno, sno);
+                    result.setMsg("选课成功!该课选课人数为" + optional.getNumber());
             } else {
                 throw new RuntimeException("课程已满!!!该课选课人数为"+optional.getNumber());
             }

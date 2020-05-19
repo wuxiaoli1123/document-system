@@ -1,10 +1,8 @@
 package com.wxl.system.service;
 
 import com.wxl.system.dao.OptionalDAO;
-import com.wxl.system.dao.ScDAO;
+import com.wxl.system.entity.IsChoose;
 import com.wxl.system.entity.Optional;
-import com.wxl.system.entity.Sc;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +29,7 @@ public class OptionalServicelmpl implements OptionalService{
 
     //学生选课
     @Override
-    public void update(String cno,String sno) { optionalDAO.update(cno,sno);}
+    public void updateNumber(String cno,String sno) { optionalDAO.updateNumber(cno,sno);}
 
     //查询课程总数
     @Override
@@ -39,6 +37,16 @@ public class OptionalServicelmpl implements OptionalService{
         return optionalDAO.findTotal();
     }
 
+
+    //判断该学生是否已选课
+    @Override
+    public IsChoose isChoose(String sno){ return optionalDAO.isChoose(sno); }
+
+    //学生更改选课
+    @Override
+    public void StuChangeCourse(String cno, String sno) {
+        optionalDAO.StuChangeCourse(cno,sno);
+    }
 
     //发布选课相关
     //批量发布选课

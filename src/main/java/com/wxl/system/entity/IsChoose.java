@@ -1,6 +1,5 @@
 package com.wxl.system.entity;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,12 +10,9 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Accessors(chain = true)
-
-public class Notice {
-    private Integer snum;
-    private String title;
-    private String day;
-    private String content;
-    private Integer role_id;
+@Accessors(chain=true)
+public class IsChoose {
+    private Integer isChoose;
+    private String cname;
+    private String cno;
 }

@@ -44,7 +44,7 @@ public class StudentController {
                     User user = new User();
                     user.setAccount(students.get(i).getSno());
                     user.setPassword(students.get(i).getSno());
-                    user.setRole("1");
+                    user.setRole_id(1);
 
                     users.add(user);
                 }

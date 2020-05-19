@@ -19,10 +19,10 @@ public interface NoticeDAO {
 
 
     //管理员端返回学生和教师的广播消息
-    List<Notice> findByPage_NoticeTS(@Param("start") Integer start, @Param("rows") Integer rows, @Param("role") String role);
+    List<Notice> findByPage_NoticeTS(@Param("start") Integer start, @Param("rows") Integer rows, @Param("role_id") Integer role_id);
 
     //返回满足条件的结果集的大小---notice
-    Integer findTotals_NoticeTS(@Param("role") String role);
+    Integer findTotals_NoticeTS(@Param("role_id") Integer role_id);
 
     //管理员发布通知相关          --syq
     Integer addNotice(Notice notice);

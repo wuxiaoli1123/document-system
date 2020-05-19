@@ -13,4 +13,22 @@
         where mno=#{mno}
     </update>
 
+    <!--根据学院返回教师-->
+    <select id="findTeacherByDept" parameterType="String" resultType="Teacher">
+        SELECT * from teacher_tb where dept = #{dept}
+    </select>
+
+    <!--根据学院、年级返回学生-->
+    <select id="findStudentByDG" resultType="Student">
+        SELECT * from student_tb where dept = #{dept} and grade=#{grade}
+    </select>
+
+
+    <!--注销账号-->
+    <update id="cancelAccounts" parameterType="java.util.List">
+        <foreach collection="list" item="account" index="index" open="" close="" separator=";">
+            UPDATE user_tb set user_status='0' where account= #{account}
+        </foreach>
+    </update>
+
 </mapper>
