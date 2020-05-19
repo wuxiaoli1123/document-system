@@ -2,6 +2,7 @@ package com.wxl.system.service;
 
 import com.wxl.system.entity.Manager;
 import com.wxl.system.entity.Student;
+import com.wxl.system.entity.Tc;
 import com.wxl.system.entity.Teacher;
 
 import java.util.List;
@@ -21,5 +22,11 @@ public interface ManagerService {
 
     //修改才个人信息
     void update(Manager manager);
+
+    //发布课表插入到tc表
+    void addScheduleTc(List<Tc> list);
+
+    //发布课表插入到sc表
+    void addScheduleSc(List<Tc> list);
 
 }

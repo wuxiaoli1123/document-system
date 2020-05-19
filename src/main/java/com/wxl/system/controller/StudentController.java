@@ -228,7 +228,7 @@ public class StudentController {
         return ScheduleS;
     }
 
-
+    //学生查询成绩
     @GetMapping("gradefindByPage")
     public Map<String, Object> gradefindByPage(Integer page, Integer rows, String sno) {
         page = page == null ? 1 : page;

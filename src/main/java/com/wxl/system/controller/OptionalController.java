@@ -35,7 +35,7 @@ public class OptionalController {
             Optional optional = optionalService.findByCno(cno);
             IsChoose isChoose = optionalService.isChoose(sno);
             if (optional.getMax()>optional.getNumber()){
-                if(isChoose.getIsChoose()==0) {
+                if(isChoose.getIsChoose() == 0) {
                     Sc sc = new Sc();
                     sc.setTc_id(optional.getTc_id());
                     sc.setCno(cno);
@@ -44,10 +44,9 @@ public class OptionalController {
                     sc.setSno(sno);
                     sc.setType("公共课");
                     sc.setTerm(optional.getTerm());
-                    optionalService.addSc(sc);
                     optionalService.updateNumber(cno, sno);
                     result.setMsg("选课成功!该课选课人数为" + optional.getNumber());
-                }else {
+                } else {
                     throw new RuntimeException("已选择"+isChoose.getIsChoose()+"门课，"+"是否放弃课程"+isChoose.getCname());
                 }
             } else {
@@ -59,6 +58,7 @@ public class OptionalController {
         }
         return result;
     }
+
 
     //学生更改选课
     @GetMapping("StuChangeCourse")

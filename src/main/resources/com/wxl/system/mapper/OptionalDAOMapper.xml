@@ -29,8 +29,8 @@
     </update>
 
     <!--判断该学生是否已选课-->
-    <select id="isChoose" resultType="IsChoose">
-        select count(*),cname,sc_tb.cno from sc_tb,course_tb where sc_tb.cno in (select cno from optional_tb) and sno = #{sno} and course_tb.cno=sc_tb.cno
+    <select id="isChoose" resultType="IsChoose" parameterType="String">
+        select count(*) as ischoose,cname,sc_tb.cno from sc_tb,course_tb where sc_tb.cno in (select cno from optional_tb) and sno = #{sno} and course_tb.cno=sc_tb.cno
     </select>
 
     <!--学生更改选课-->

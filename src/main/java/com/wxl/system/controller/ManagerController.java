@@ -2,13 +2,11 @@ package com.wxl.system.controller;
 
 
 
-import com.wxl.system.entity.Manager;
-import com.wxl.system.entity.Result;
-import com.wxl.system.entity.Student;
-import com.wxl.system.entity.Teacher;
+import com.wxl.system.entity.*;
 import com.wxl.system.service.ManagerService;
 import com.wxl.system.service.StudentService;
 import com.wxl.system.service.TeacherService;
+import com.wxl.system.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +27,8 @@ public class ManagerController {
     @Autowired
     private StudentService studentService;
 
+    @Autowired
+    private UserService userService;
 //    查看管理员个人信息
     @GetMapping("findByMno")
     public Manager findByMno(String mno){
@@ -89,4 +89,19 @@ public class ManagerController {
         }
         return result;
     }
+
+    //发布课表
+    @PostMapping("addSchedule")
+    public Result addSchedule(@RequestBody List<Tc> list){
+        Result result = new Result();
+        try {
+            managerService.addScheduleTc(list);
+            result.setMsg("发布课表成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            result.setState(false).setMsg(e.getMessage());
+        }
+        return result;
+    }
+
 }

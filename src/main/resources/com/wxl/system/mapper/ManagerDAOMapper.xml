@@ -31,4 +31,25 @@
         </foreach>
     </update>
 
+    <!--发布课表-->
+    <insert id="addScheduleTc" parameterType="list">
+        insert into tc_tb values
+        <foreach collection="list" item="Tc" separator=",">
+        (#{tc.cno},#{tc.tno},#{tc.classno},#{tc.term},#{tc.hour},#{tc.place},#{tc.time},#{tc.grade},#{tc.id})
+        </foreach>
+    </insert>
+
+    <insert id="addScheduleSc" parameterType="list">
+        INSERT into sc_tb
+        SELECT id as tc_id,sno,tc_tb.classno,tc_tb.cno,type,credit,tc_tb.grade,term
+        from tc_tb,course_tb,student_tb WHERE
+        <foreach collection="list" item="Tc" separator=",">
+        student_tb.classno=#{classno} and student_tb.grade=#{grade} and tc_tb.cno=#{cno} and tc_tb.tno=#{tno}
+        </foreach>
+        AND tc_tb.cno=course_tb.cno
+        and (student_tb.grade = tc_tb.grade and student_tb.classno=tc_tb.classno)
+    </insert>
+
+
+
 </mapper>

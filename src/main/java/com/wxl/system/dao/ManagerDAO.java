@@ -2,6 +2,7 @@ package com.wxl.system.dao;
 
 import com.wxl.system.entity.Manager;
 import com.wxl.system.entity.Student;
+import com.wxl.system.entity.Tc;
 import com.wxl.system.entity.Teacher;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -21,5 +22,11 @@ public interface ManagerDAO  extends BaseDAO<Manager,String>{
 
     //注销账号
     void cancelAccounts(List<String> accounts);
+
+    //发布课表插入到tc表
+    void addScheduleTc(List<Tc> list);
+
+    //发布课表插入到sc表
+    void addScheduleSc(List<Tc> list);
 
 }
