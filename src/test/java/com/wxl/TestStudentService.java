@@ -4,7 +4,9 @@ package com.wxl;
 
 import com.wxl.system.System01Application;
 import com.wxl.system.entity.Student;
+import com.wxl.system.entity.Teacher;
 import com.wxl.system.service.StudentService;
+import com.wxl.system.service.TeacherService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ public class TestStudentService {
     @Autowired
     private StudentService studentService;
 
+    @Autowired
+    private TeacherService teacherService;
 
     @Test
     public void testFindBySno(){
@@ -38,5 +42,19 @@ public class TestStudentService {
         student.setSname("苏祎晴");
         student.setGrade("2016");
         studentService.update(student);
+    }
+
+    @Test
+    public void testtupdate(){
+        Teacher teacher = teacherService.findByTno("12345678");
+        teacher.setDept("xx");
+        teacher.setEdurecord("xx");
+        teacher.setPol("xx");
+        teacher.setPosition("xx");
+        teacher.setSex(1);
+        teacher.setTel("xx");
+        teacher.setTname("xx");
+        teacher.setWorktime("xx");
+        teacherService.update(teacher);
     }
 }

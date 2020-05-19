@@ -2,6 +2,7 @@ package com.wxl.system.service;
 
 import com.wxl.system.dao.ScDAO;
 import com.wxl.system.entity.Sc;
+import com.wxl.system.entity.StuCheckGrade;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class ScServicelmpl implements ScService{
     private ScDAO scDAO;
 
     @Override
-    public  List<Sc> gradefindByPage(Integer page, Integer rows ,@Param("sno") String sno) {
+    public  List<StuCheckGrade> gradefindByPage(Integer page, Integer rows , @Param("sno") String sno) {
         int start = (page-1)*rows;
         return scDAO.gradefindByPage(start,rows,sno);
     }

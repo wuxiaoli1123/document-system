@@ -1,5 +1,6 @@
 package com.wxl.system.entity;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,17 +12,14 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @ToString
 @Accessors(chain=true)
-//选课实体类
-public class Optional {
-    private Integer Tc_id;
+//学生查成绩
+public class StuCheckGrade {
     private String cno;
     private Integer credit;
-    private String cname;
-    private String tname;
-    private String place;
-    private Integer number;
-    private Integer max;
-    private String grade;
+    private Double grade;
+    private String classno;
+    private String type;
     private String term;
+    private String cname;
 
 }

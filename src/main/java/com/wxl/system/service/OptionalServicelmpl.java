@@ -17,37 +17,36 @@ public class OptionalServicelmpl implements OptionalService{
     @Autowired
     private OptionalDAO optionalDAO;
 
+    //学生选课功能相关
+    //按cno查找单个课程
     @Override
     public Optional findByCno(String cno){return optionalDAO.findByCno(cno);}
 
-
+    //分页呈现选课
     @Override
     public List<Optional> sfindByPage(Integer page, Integer rows) {
         int start = (page-1)*rows;
         return optionalDAO.sfindByPage(start,rows);
     }
 
+    //学生选课
     @Override
     public void update(String cno,String sno) { optionalDAO.update(cno,sno);}
 
-
+    //查询课程总数
     @Override
     public Integer findTotal() {
         return optionalDAO.findTotal();
     }
 
+
+    //发布选课相关
+    //批量发布选课
     @Override
     public  Integer addOptional(List<Optional> list){return optionalDAO.addOptional(list);}
 
-//    @Override
-//    public boolean isfull(String cno) {
-//        Optional optional = optionalDAO.findByCno(cno);
-//        if (optional != null) {
-//            if (optional.getNumber() <= optional.getMax()) {
-//                optionalDAO.update(cno);
-//            } else {
-//                throw new RuntimeException("该课已选满！");
-//            }
-//        }
-//    }
+    //管理员选择需要添加的课程
+    @Override
+    public Optional findTcByCno(String cno){return optionalDAO.findTcByCno(cno);}
+
 }

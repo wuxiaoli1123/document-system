@@ -15,7 +15,7 @@ public interface NoticeDAO {
     //返回满足条件的结果集的大小---notice
     Integer findTotals_Notice(@Param("account") String account);
 
-    String findConBySnum(String snum);
+    String findConBySnum(Integer snum);
 
 
     //管理员端返回学生和教师的广播消息
@@ -23,5 +23,13 @@ public interface NoticeDAO {
 
     //返回满足条件的结果集的大小---notice
     Integer findTotals_NoticeTS(@Param("role_id") Integer role_id);
+
+    //管理员发布通知相关          --syq
+    Integer addNotice(Notice notice);
+
+    //管理员删除通知相关          --syq
+    Integer delNotice(List<Integer> snum);
+
+
 
 }

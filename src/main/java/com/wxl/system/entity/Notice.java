@@ -14,7 +14,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 
 public class Notice {
-    private String snum;
+    private Integer snum;
     private String title;
     private String day;
     private String content;
