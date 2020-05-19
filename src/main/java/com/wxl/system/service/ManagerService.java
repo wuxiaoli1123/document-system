@@ -19,4 +19,7 @@ public interface ManagerService {
     //注销账号
     void cancelAccounts(List<String> accounts);
 
+    //修改才个人信息
+    void update(Manager manager);
+
 }

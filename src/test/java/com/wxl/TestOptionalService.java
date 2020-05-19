@@ -4,10 +4,8 @@ package com.wxl;
 import com.wxl.system.System01Application;
 import com.wxl.system.entity.Optional;
 import com.wxl.system.entity.Sc;
-import com.wxl.system.entity.Student;
 import com.wxl.system.service.NoticeService;
 import com.wxl.system.service.OptionalService;
-import com.wxl.system.service.ScService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +22,6 @@ public class TestOptionalService {
     @Autowired
     private OptionalService optionalService;
 
-    @Autowired
-    private ScService scService;
 
     @Autowired
     private NoticeService noticeService;
@@ -46,7 +42,7 @@ public class TestOptionalService {
         sc.setGrade(0.00);
         sc.setSno("2017110435");
         sc.setType("公共课");
-        scService.addSc(sc);
+        optionalService.addSc(sc);
     }
 
     @Test

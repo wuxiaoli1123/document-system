@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 @Mapper
-public interface ManagerDAO {
+public interface ManagerDAO  extends BaseDAO<Manager,String>{
     Manager findByMno(String mno);
 
 

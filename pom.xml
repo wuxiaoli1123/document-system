@@ -25,6 +25,12 @@
             realm 连接数据库
         -->
 
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.4</version>
+        </dependency>
+
         <!--连接mysql驱动-->
         <dependency>
             <groupId>mysql</groupId>

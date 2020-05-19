@@ -5,7 +5,6 @@ import com.wxl.system.entity.Optional;
 import com.wxl.system.entity.Result;
 import com.wxl.system.entity.Sc;
 import com.wxl.system.service.OptionalService;
-import com.wxl.system.service.ScService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,9 +19,6 @@ public class OptionalController {
 
     @Autowired
     private OptionalService optionalService;
-
-    @Autowired
-    private ScService scService;
 
     //学生选课功能相关
     //按cno查找单个课程
@@ -48,7 +44,7 @@ public class OptionalController {
                     sc.setSno(sno);
                     sc.setType("公共课");
                     sc.setTerm(optional.getTerm());
-                    scService.addSc(sc);
+                    optionalService.addSc(sc);
                     optionalService.updateNumber(cno, sno);
                     result.setMsg("选课成功!该课选课人数为" + optional.getNumber());
                 }else {
@@ -72,6 +68,7 @@ public class OptionalController {
             Optional optional = optionalService.findByCno(cno);
             IsChoose isChoose = optionalService.isChoose(sno);
             if (optional.getMax()>optional.getNumber()){
+                    optionalService.StuChangeCourse(isChoose.getCno(),sno);
                     Sc sc = new Sc();
                     sc.setTc_id(optional.getTc_id());
                     sc.setCno(cno);
@@ -80,8 +77,7 @@ public class OptionalController {
                     sc.setSno(sno);
                     sc.setType("公共课");
                     sc.setTerm(optional.getTerm());
-                    scService.addSc(sc);
-                    optionalService.StuChangeCourse(isChoose.getCno(),sno);
+                    optionalService.addSc(sc);
                     optionalService.updateNumber(cno, sno);
                     result.setMsg("选课成功!该课选课人数为" + optional.getNumber());
             } else {

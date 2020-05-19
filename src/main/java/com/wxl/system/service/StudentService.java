@@ -29,4 +29,11 @@ public interface StudentService {
     //根据学生学号、学期查询本学期所选修课程
     List<StuClassData> findStuClassData(String sno,String term);
 
+    //学生查看成绩相关
+    //分页查看成绩
+    List<StuCheckGrade> gradefindByPage(@Param("start") Integer start, @Param("rows") Integer rows, @Param("sno") String sno);
+
+    //查询课程总数
+    Integer findTotal(String sno);
+
 }

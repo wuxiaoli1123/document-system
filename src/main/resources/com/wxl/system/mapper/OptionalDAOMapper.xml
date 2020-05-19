@@ -38,7 +38,10 @@
         DELETE from sc_tb where sno = #{sno} and cno = #{cno}
     </delete>
 
-
+    <!--插入单个课程-->
+    <insert id="addSc" parameterType="Sc">
+        insert into sc_tb values(#{tc_id},#{sno},#{classno},#{cno},#{type},#{credit},#{grade},#{term})
+    </insert>
 
     <!-- 发布选课相关 -->
     <!--批量插入课程-->

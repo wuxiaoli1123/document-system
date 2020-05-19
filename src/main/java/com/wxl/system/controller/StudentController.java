@@ -229,6 +229,22 @@ public class StudentController {
     }
 
 
+    @GetMapping("gradefindByPage")
+    public Map<String, Object> gradefindByPage(Integer page, Integer rows, String sno) {
+        page = page == null ? 1 : page;
+        rows = rows == null ? 4 : rows;
+        HashMap<String, Object> map = new HashMap<>();
+        //分页处理
+        List<StuCheckGrade> sc = studentService.gradefindByPage(page, rows, sno);
+        //计算总页数
+        Integer totals = studentService.findTotal(sno);
+        Integer totalPage = totals % rows == 0 ? totals / rows : totals / rows + 1;
+        map.put("sc", sc);
+        map.put("totals", totals);
+        map.put("totalPage", totalPage);
+        map.put("page", page);
+        return map;
+    }
 
 
 }

@@ -33,7 +33,13 @@ public class ManagerServiceImpl implements ManagerService {
         return managerDAO.findStudentByDG(dept, grade);
     }
 
-   //注销账号
+    //修改管理员信息
+    @Override
+    public void update(Manager manager) {
+        managerDAO.update(manager);
+    }
+
+    //注销账号
     @Override
    public void cancelAccounts(List<String> accounts){
         managerDAO.cancelAccounts(accounts);

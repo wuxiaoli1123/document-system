@@ -75,4 +75,18 @@ public class ManagerController {
         return result;
     }
 
+    //修改管理员个人信息
+    @PostMapping("update")
+    public Result update(@RequestBody Manager manager) {
+        Result result = new Result();
+        try {
+            managerService.update(manager);
+            log.info(manager.getMno());
+            result.setMsg("修改信息成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            result.setState(false).setMsg(e.getMessage());
+        }
+        return result;
+    }
 }
