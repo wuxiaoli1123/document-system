@@ -104,7 +104,12 @@ public class ManagerController {
         Result result = new Result();
         try {
             managerService.addScheduleTc(list);
-            managerService.addScheduleSc(list);
+            if (result.getState()){
+                List<Sc> sc = new ArrayList<>();
+                for (int i = 0;i<list.size();i++){
+                    managerService.addScheduleSc(list.get(i));
+                }
+            }
             result.setMsg("发布课表成功");
         }catch (Exception e){
             e.printStackTrace();

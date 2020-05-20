@@ -46,9 +46,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     //发布课表插入到sc表
     @Override
-    public void addScheduleSc(List<Tc> list) { managerDAO.addScheduleSc(list);
-
-    }
+    public void addScheduleSc(Tc tc) { managerDAO.addScheduleSc(tc); }
 
 
     //注销账号

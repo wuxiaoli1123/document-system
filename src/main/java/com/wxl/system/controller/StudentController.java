@@ -298,12 +298,14 @@ public class StudentController {
 
     //学生更改选课
     @GetMapping("StuChangeCourse")
-    public Result StuChangeCourse(String cno,String sno){
-        Result result = new Result();
+    public SpcResult StuChangeCourse(String cno,String sno){
+        SpcResult result = new SpcResult();
         try {
             Optional optional = optionalService.findByCno(cno);
             IsChoose isChoose = optionalService.isChoose(sno);
+            result.setIschoose(false);
             if (optional.getMax()>optional.getNumber()){
+                result.setIsfull(false);
                 optionalService.StuChangeCourse(isChoose.getCno(),sno);
                 Sc sc = new Sc();
                 sc.setTc_id(optional.getTc_id());
@@ -315,7 +317,9 @@ public class StudentController {
                 sc.setTerm(optional.getTerm());
                 optionalService.addSc(sc);
                 optionalService.updateNumber(cno, sno);
-                result.setMsg("选课成功!该课选课人数为" + optional.getNumber());
+                optional = optionalService.findByCno(cno);
+                optionalService.updateNumber(isChoose.getCno(), sno);
+                result.setMsg("选课成功!该课选课人数为" + (optional.getNumber()));
             } else {
                 throw new RuntimeException("课程已满!!!该课选课人数为"+optional.getNumber());
             }
