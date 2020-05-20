@@ -37,6 +37,7 @@
             <version>1.4</version>
         </dependency>
 
+
         <!--连接mysql驱动-->
         <dependency>
             <groupId>mysql</groupId>
@@ -68,6 +69,13 @@
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.mybatis.caches</groupId>
+            <artifactId>mybatis-ehcache</artifactId>
+            <version>1.1.0</version>
         </dependency>
 
         <dependency>

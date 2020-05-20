@@ -4,8 +4,12 @@ package com.wxl.system.config;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.cache.CacheManager;
+import org.apache.shiro.session.mgt.SessionManager;
+import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,7 +53,13 @@ public class ShiroConfig {
         filterMap.put("/student/**","perms[student:power]");
         filterMap.put("/manager/**","perms[manager:power]");
 
-        filterMap.put("/user/*","roles[role_student]");
+        filterMap.put("/user/**","roles[role_student]");
+        filterMap.put("/user/**","roles[role_admin]");
+        filterMap.put("/user/**","roles[role_teacher]");
+        filterMap.put("/student/**","roles[role_student]");
+        filterMap.put("/teacher/**","roles[role_teacher]");
+        filterMap.put("/manager/**","roles[role_admin]");
+
 
 
         //退出
@@ -81,8 +91,14 @@ public class ShiroConfig {
     public UserRealm userRealm(){
         UserRealm userRealm = new UserRealm();
         userRealm.setCredentialsMatcher(credentialsMatcher());
+
+        //告诉realm密码匹配方式
+        userRealm.setAuthorizationCacheName("perms");
+
         return userRealm;
     }
+
+
 
     //密码加密
     @Bean
@@ -91,5 +107,7 @@ public class ShiroConfig {
         hashedMatcher.setHashAlgorithmName("md5");
        return hashedMatcher;
     }
+
+
 
 }
