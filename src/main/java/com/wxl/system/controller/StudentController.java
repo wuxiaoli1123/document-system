@@ -278,6 +278,7 @@ public class StudentController {
                     sc.setTerm(optional.getTerm());
                     optionalService.updateNumber(cno, sno);
                     optionalService.addSc(sc);
+                    optional = optionalService.findByCno(cno);
                     result.setMsg("选课成功!该课选课人数为" + optional.getNumber());
                     result.setIschoose(false);
                 } else {
@@ -317,7 +318,7 @@ public class StudentController {
                 optionalService.updateNumber(cno, sno);
                 optional = optionalService.findByCno(cno);
                 optionalService.updateNumber(isChoose.getCno(), sno);
-                result.setMsg("选课成功!该课选课人数为" + (optional.getNumber()));
+                result.setMsg("选课成功!该课选课人数为" + optional.getNumber());
             } else {
                 throw new RuntimeException("课程已满!!!该课选课人数为"+optional.getNumber());
             }
