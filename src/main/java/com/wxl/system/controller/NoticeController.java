@@ -100,7 +100,8 @@ public class NoticeController {
 
     //管理员删除通知相关          --syq
     @PostMapping("delNotice")
-    public Result delNotice(@RequestBody List<Integer> snum){
+    public Result delNotice(@RequestBody Integer[] l_snum){
+        List<Integer> snum = (List<Integer>)java.util.Arrays.asList(l_snum);
         Result result = new Result();
         try {
             noticeService.delNotice(snum);

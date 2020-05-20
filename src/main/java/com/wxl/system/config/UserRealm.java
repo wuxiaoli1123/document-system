@@ -39,6 +39,8 @@ public class UserRealm extends AuthorizingRealm {
 
         String account =user.getAccount();
 
+        log.info("获取权限");
+
         Set<String> roles = userService.findRCodeByAccount(account);
         if(roles != null && roles.size()>0){
             simpleAuthorizationInfo.addRoles(roles);

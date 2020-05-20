@@ -71,7 +71,8 @@ public class ManagerController {
 
     //注销学生、教师账号
     @PostMapping("cancelAccount")
-    public Result cancelAccounts(@RequestBody List<String> accounts){
+    public Result cancelAccounts(@RequestBody String[] l_accounts){
+        List<String> accounts = java.util.Arrays.asList(l_accounts);
         Result result = new Result();
         try{
             managerService.cancelAccounts(accounts);
