@@ -39,9 +39,9 @@ public class ShiroConfig {
 
         log.info("页面限制");
 
-        //（权限操作）
-        //登录请求（所有人都可以访问）
-//        filterMap.put("/user/login","authc");
+//        //（权限操作）
+//        //登录请求（所有人都可以访问）
+//        filterMap.put("/user/login","anon");
 //
 //        //权限控制
 //        filterMap.put("/user/*","perms[user:power]");
@@ -50,21 +50,17 @@ public class ShiroConfig {
 //        filterMap.put("/manager/**","perms[manager:power]");
 //
 //        filterMap.put("/user/*","roles[role_student]");
-//
-//
-//
-//
-//
-//
-//        //退出
-//        filterMap.put("/user/logout","logout");
-//
-//        bean.setFilterChainDefinitionMap(filterMap);
-//
-//        //设置登录的请求
-//        bean.setLoginUrl("/user/login");
-//        //未授权页面
-//        bean.setUnauthorizedUrl("/user/noauth");
+
+
+        //退出
+        filterMap.put("/user/logout","logout");
+
+        bean.setFilterChainDefinitionMap(filterMap);
+
+        //设置登录的请求
+        bean.setLoginUrl("/user/login");
+        //未授权页面
+        bean.setUnauthorizedUrl("/user/noauth");
 
         return bean;
     }
