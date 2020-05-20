@@ -260,12 +260,13 @@ public class StudentController {
 
     //  学生选课
     @GetMapping("updateNumber")
-    public Result updateNumber(String cno,String sno){
-        Result result = new Result();
+    public SpcResult updateNumber(String cno,String sno){
+        SpcResult result = new SpcResult();
         try {
             Optional optional = optionalService.findByCno(cno);
             IsChoose isChoose = optionalService.isChoose(sno);
             if (optional.getMax()>optional.getNumber()){
+                result.setIsfull(false);
                 if(isChoose.getIsChoose() == 0) {
                     Sc sc = new Sc();
                     sc.setTc_id(optional.getTc_id());
@@ -278,6 +279,7 @@ public class StudentController {
                     optionalService.updateNumber(cno, sno);
                     optionalService.addSc(sc);
                     result.setMsg("选课成功!该课选课人数为" + optional.getNumber());
+                    result.setIschoose(false);
                 } else {
                     throw new RuntimeException("已选择"+isChoose.getIsChoose()+"门课，"+"是否放弃课程"+isChoose.getCname());
                 }
