@@ -1,9 +1,6 @@
 package com.wxl.system.controller;
 
-import com.wxl.system.entity.Notice;
-import com.wxl.system.entity.Result;
-import com.wxl.system.entity.Teacher;
-import com.wxl.system.entity.User;
+import com.wxl.system.entity.*;
 import com.wxl.system.service.NoticeService;
 import com.wxl.system.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -136,10 +133,10 @@ public class UserController {
      * by 吴小莉
      */
     @PostMapping("changePassword")
-    public Result changePassword(String account, String oldpassword, String newpassword, String conpassword) {
+    public Result changePassword(@RequestBody UserChangePwd userChangePwd ) {
 
         Result result = new Result();
-        User user = userService.findByAccount(account);
+        User user = userService.findByAccount(userChangePwd.getAccount());
 
 
         try {
@@ -151,38 +148,38 @@ public class UserController {
                 //盐值加密
                 String salt = user.getPrivate_salt();
 
-                Md5Hash md5Hash = new Md5Hash(oldpassword, salt);//模拟MD5加密一次
+                Md5Hash md5Hash = new Md5Hash(userChangePwd.getOldpassword(), salt);//模拟MD5加密一次
 
                 String moldpassword = md5Hash.toString();
 
 
                 if (user.getPassword().equals(moldpassword)) {
 
-                    if ((newpassword == null || newpassword.trim().equals("")) && (conpassword == null || conpassword.trim().equals(""))) {
+                    if ((userChangePwd.getNewpassword() == null || userChangePwd.getNewpassword().trim().equals("")) && (userChangePwd.getConpassword() == null || userChangePwd.getConpassword().trim().equals(""))) {
                         result.setState(false).setMsg("新密码和确认密码不能为空！");
                     } else {
-                        if (newpassword == null || newpassword.trim().equals("")) {
+                        if (userChangePwd.getNewpassword() == null || userChangePwd.getNewpassword().trim().equals("")) {
                             result.setState(false).setMsg("新密码不能为空！");
-                        } else if (conpassword == null || conpassword.trim().equals("")) {
+                        } else if (userChangePwd.getConpassword() == null || userChangePwd.getConpassword().trim().equals("")) {
                             result.setState(false).setMsg("确认密码不能为空！");
                         } else {
                             /*newpassword.length()<8 || newpassword.length()>20*/
-                            if (newpassword.length() < 8 || newpassword.length() > 20) {
+                            if (userChangePwd.getNewpassword().length() < 8 || userChangePwd.getNewpassword().length() > 20) {
                                 result.setState(false).setMsg("密码长度需要设置在8-20之间！");
                             } else {
                                 boolean isDigit = false;
                                 boolean isLetter = false;
                                 boolean isChinese = false;
-                                for (int i = 0; i < newpassword.length(); i++) {
-                                    if (Character.isDigit(newpassword.charAt(i))) {  //用char包装类中的判断数字的方法判断每一个字符
+                                for (int i = 0; i < userChangePwd.getNewpassword().length(); i++) {
+                                    if (Character.isDigit(userChangePwd.getNewpassword().charAt(i))) {  //用char包装类中的判断数字的方法判断每一个字符
                                         isDigit = true;
-                                    } else if (Character.isLetter(newpassword.charAt(i))) { //用char包装类中的判断字母的方法判断每一个字符
+                                    } else if (Character.isLetter(userChangePwd.getNewpassword().charAt(i))) { //用char包装类中的判断字母的方法判断每一个字符
                                         isLetter = true;
                                     }
                                 }
 
                                 Pattern p = Pattern.compile("[\u4e00-\u9fa5]");
-                                Matcher m = p.matcher(newpassword);
+                                Matcher m = p.matcher(userChangePwd.getNewpassword());
 
                                 if (m.find()) {
                                     isChinese = true;
@@ -197,10 +194,10 @@ public class UserController {
                                 } else if (!isLetter) {
                                     result.setState(false).setMsg("密码必须包含字母！");
                                 } else {
-                                    if (!newpassword.equals(conpassword)) {
+                                    if (!userChangePwd.getNewpassword().equals(userChangePwd.getConpassword())) {
                                         result.setState(false).setMsg("两次密码输入不一致！");
                                     } else {
-                                        user.setPassword(newpassword);
+                                        user.setPassword(userChangePwd.getNewpassword());
 
                                         //修改密码
                                         userService.changePassword(user);
