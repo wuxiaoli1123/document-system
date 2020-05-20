@@ -276,6 +276,7 @@ public class StudentController {
                     sc.setType("公共课");
                     sc.setTerm(optional.getTerm());
                     optionalService.updateNumber(cno, sno);
+                    optionalService.addSc(sc);
                     result.setMsg("选课成功!该课选课人数为" + optional.getNumber());
                 } else {
                     throw new RuntimeException("已选择"+isChoose.getIsChoose()+"门课，"+"是否放弃课程"+isChoose.getCname());

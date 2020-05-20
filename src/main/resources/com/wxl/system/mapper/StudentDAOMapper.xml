@@ -116,7 +116,7 @@
     <select id="gradefindByPage" resultType="StuCheckGrade">
         select classno,sc_tb.cno,sc_tb.type,sc_tb.credit,grade,term,cname
         from sc_tb,course_tb
-        where sno = #{sno} and sc_tb.cno = course_tb.cno and grade != null
+        where sno = #{sno} and sc_tb.cno = course_tb.cno and grade is not null
         order by cno
         limit #{start},#{rows}
     </select>

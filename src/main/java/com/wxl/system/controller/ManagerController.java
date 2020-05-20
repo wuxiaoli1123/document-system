@@ -103,6 +103,7 @@ public class ManagerController {
         Result result = new Result();
         try {
             managerService.addScheduleTc(list);
+            managerService.addScheduleSc(list);
             result.setMsg("发布课表成功");
         }catch (Exception e){
             e.printStackTrace();
