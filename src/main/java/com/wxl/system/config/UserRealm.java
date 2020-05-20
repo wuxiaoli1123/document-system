@@ -30,7 +30,7 @@ public class UserRealm extends AuthorizingRealm {
     //获取权限信息
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        //System.out.println("执行了=>授权doGetAuthorizationInfo");
+        System.out.println("执行了=>授权doGetAuthorizationInfo");
 
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         //从数据库查询用户的权限和角色
