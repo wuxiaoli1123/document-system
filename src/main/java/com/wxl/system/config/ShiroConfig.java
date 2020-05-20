@@ -41,7 +41,7 @@ public class ShiroConfig {
 
         //（权限操作）
         //登录请求（所有人都可以访问）
-        filterMap.put("/user/login","authc");
+        filterMap.put("/user/login","anon");
 
         //权限控制
         filterMap.put("/user/*","perms[user:power]");
@@ -50,10 +50,6 @@ public class ShiroConfig {
         filterMap.put("/manager/**","perms[manager:power]");
 
         filterMap.put("/user/*","roles[role_student]");
-
-
-
-
 
 
         //退出
