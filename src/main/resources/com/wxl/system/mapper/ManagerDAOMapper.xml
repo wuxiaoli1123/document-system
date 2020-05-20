@@ -39,13 +39,11 @@
         </foreach>
     </insert>
 
-    <insert id="addScheduleSc" parameterType="List">
+    <insert id="addScheduleSc" parameterType="Tc">
         INSERT into sc_tb
         SELECT id as tc_id,sno,tc_tb.classno,tc_tb.cno,type,credit,null,term
         from tc_tb,course_tb,student_tb WHERE
-        <foreach collection="list" item="tc" separator=",">
-        student_tb.classno=#{tc.classno} and student_tb.grade=#{tc.grade} and tc_tb.cno=#{tc.cno} and tc_tb.tno=#{tc.tno}
-        </foreach>
+        student_tb.classno=#{classno} and student_tb.grade=#{grade} and tc_tb.cno=#{cno} and tc_tb.tno=#{tno}
         AND tc_tb.cno=course_tb.cno
         and (student_tb.grade = tc_tb.grade and student_tb.classno=tc_tb.classno)
     </insert>

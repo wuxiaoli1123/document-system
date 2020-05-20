@@ -27,6 +27,6 @@ public interface ManagerDAO  extends BaseDAO<Manager,String>{
     void addScheduleTc(List<Tc> list);
 
     //发布课表插入到sc表
-    void addScheduleSc(List<Tc> list);
+    void addScheduleSc(Tc tc);
 
 }
