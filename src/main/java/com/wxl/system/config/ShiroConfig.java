@@ -39,17 +39,17 @@ public class ShiroConfig {
 
         log.info("页面限制");
 
-//        //（权限操作）
-//        //登录请求（所有人都可以访问）
-//        filterMap.put("/user/login","anon");
-//
-//        //权限控制
-//        filterMap.put("/user/*","perms[user:power]");
-//        filterMap.put("/teacher/**","perms[teacher:power]");
-//        filterMap.put("/student/**","perms[student:power]");
-//        filterMap.put("/manager/**","perms[manager:power]");
-//
-//        filterMap.put("/user/*","roles[role_student]");
+        //（权限操作）
+        //登录请求（所有人都可以访问）
+        filterMap.put("/user/login","anon");
+
+        //权限控制
+        filterMap.put("/user/*","perms[user:power]");
+        filterMap.put("/teacher/**","perms[teacher:power]");
+        filterMap.put("/student/**","perms[student:power]");
+        filterMap.put("/manager/**","perms[manager:power]");
+
+        filterMap.put("/user/*","roles[role_student]");
 
 
         //退出
