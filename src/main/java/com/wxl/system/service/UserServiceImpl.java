@@ -114,4 +114,15 @@ public class UserServiceImpl implements UserService {
     public Set<String> findPCodeByAccount(String account){
          return userDAO.findPCodeByAccount(account);
     }
+
+    //返回学校所有学院
+    public List<String> findAllCollege(){
+          return userDAO.findAllCollege();
+    }
+
+    //根据学院返回该学院的专业
+    public List<String> findMajorByCollege(String college){
+        return userDAO.findMajorByCollege(college);
+    }
+
 }

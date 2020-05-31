@@ -288,4 +288,21 @@ public class UserController {
         return noticeService.findConBySnum(snum);
     }
 
+    /**
+     * 返回学校所有学院
+     * by 吴小莉
+     */
+    @GetMapping("findAllCollege")
+    public List<String> findAllCollege(){
+        return userService.findAllCollege();
+    }
+
+    /**
+     * 根据学院返回专业
+     * by 吴小莉
+     */
+    @GetMapping("findMajorByCollege")
+    public List<String> findMajorByCollege(String college){
+        return userService.findMajorByCollege(college);
+    }
 }
