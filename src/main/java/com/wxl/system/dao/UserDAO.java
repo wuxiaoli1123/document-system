@@ -36,4 +36,10 @@ public interface UserDAO {
     //根据账号返回用户perm_code
     Set<String> findPCodeByAccount(String account);
 
+    //返回学校所有学院
+    List<String> findAllCollege();
+
+    //根据学院返回该学院的专业
+    List<String> findMajorByCollege(String college);
+
 }

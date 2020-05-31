@@ -89,4 +89,21 @@
           AND user_tb.account = #{account}
     </select>
 
+    <!--返回学校所有学院-->
+    <select id="findAllCollege" resultType="String">
+        SELECT college from college_tb
+    </select>
+
+   <!--根据学院返回学院的专业-->
+    <select id="findMajorByCollege" parameterType="String" resultType="String">
+        SELECT
+            major
+        FROM
+            major_tb,college_tb
+        WHERE
+            major_tb.college_id = college_tb.id
+          AND college_tb.college = #{college}
+    </select>
+
+
 </mapper>
