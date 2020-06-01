@@ -34,7 +34,7 @@ public class TeacherController {
     @Autowired
     private UserService userService;
 
-
+     */
 
     /**
      * 教师登录学生成绩
@@ -77,6 +77,14 @@ public class TeacherController {
         return result;
     }
 */
+
+
+    //    查看教师个人信息
+    @GetMapping("findByTno")
+    public Teacher findByTno(String tno){
+        log.info("teacher:"+tno);
+        return teacherService.findByTno(tno);
+    }
 
     /**
      * 根据学期、年级返回教师所教课程名
