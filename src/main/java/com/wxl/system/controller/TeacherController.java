@@ -35,57 +35,12 @@ public class TeacherController {
     private UserService userService;
 
 
-    *//**
-     * 批量录入教师档案信息，并自动插入用户表
-     * by 吴小莉
-     *//*
-    @PostMapping("insertTeacher")
-    public Result insertTeacher(@RequestBody List<Teacher> teachers){
-        Result result = new Result();
-        try {
-            teacherService.insertTeacher(teachers);
-            result.setMsg("成功录入教师档案信息！");
-
-            log.info("值 "+teachers.get(0).getTno());
-
-          if(result.getState()){
-
-              List<User> users = new ArrayList<>();
-                  for(int i = 0;i<teachers.size();i++){
-
-                     User user = new User();
-                     user.setAccount(teachers.get(i).getTno());
-                     user.setPassword(teachers.get(i).getTno());
-                     user.setRole_id(2);
-
-                     users.add(user);
-                  }
-
-                  log.info("users "+users);
-                userService.insertUser(users);
-
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            result.setState(false).setMsg("未成功录入教师档案信息！");
-        }
-        return result;
-    }*/
-
-    //按学号查找教师
-    @GetMapping("findByTno")
-    public Teacher findByTno(String tno){
-        return teacherService.findByTno(tno);
-    }
-
-
 
     /**
      * 教师登录学生成绩
      * by 吴小莉
      */
-    @PostMapping("updateGrade")
+    /*@PostMapping("updateGrade")
     public Result updateGrade(@RequestBody List<StuGrade> stuGrades){
         Result result = new Result();
 
@@ -121,7 +76,7 @@ public class TeacherController {
         }
         return result;
     }
-
+*/
 
     /**
      * 根据学期、年级返回教师所教课程名
@@ -268,7 +223,7 @@ public class TeacherController {
      * 查询学生信息----分页查询----用于登记成绩中，展示学生信息
      * by 吴小莉
      */
-    @GetMapping("findByPage")
+    /*@GetMapping("findByPage")
     public Map<String,Object> findByPage(Integer page,Integer rows,String cname,String grade, String classno){
         page = page == null ? 1 : page;
 
@@ -292,5 +247,5 @@ public class TeacherController {
         return map;
 
     }
-
+*/
 }

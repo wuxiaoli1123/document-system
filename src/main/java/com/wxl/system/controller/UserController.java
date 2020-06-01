@@ -227,6 +227,8 @@ public class UserController {
         return "未经授权无法访问此页面";
     }
 
+
+    /*//增加管理员
     @RequestMapping("insertAdmin")
     public Result insertAdmin(@RequestBody List<User> users) {
         Result result = new Result();
@@ -249,7 +251,7 @@ public class UserController {
             result.setState(false).setMsg("未成功录入管理员信息！");
         }
         return result;
-    }
+    }*/
 
     /**
      * 分页查询广播通知，展示在页面

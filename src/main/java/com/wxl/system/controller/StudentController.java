@@ -24,42 +24,6 @@ public class StudentController {
     @Autowired
     private UserService userService;
 
-   /* *//**
-     * 批量录入学生档案信息，并自动插入用户表
-     * by 吴小莉
-     *//*
-    @PostMapping("insertStudent")
-    public Result insertStudent(@RequestBody List<Student> students){
-        Result result = new Result();
-        try {
-            studentService.insertStudent(students);
-            result.setMsg("成功录入学生档案信息！");
-
-            if(result.getState()){
-
-                List<User> users = new ArrayList<>();
-                for(int i = 0;i<students.size();i++){
-
-                    User user = new User();
-                    user.setAccount(students.get(i).getSno());
-                    user.setPassword(students.get(i).getSno());
-                    user.setRole_id(1);
-
-                    users.add(user);
-                }
-
-                log.info("users "+users);
-                userService.insertUser(users);
-
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            result.setState(false).setMsg("未成功录入学生档案信息！");
-        }
-        return result;
-    }*/
-
 
     //按学号查找学生
     @GetMapping("findBySno")
@@ -81,37 +45,6 @@ public class StudentController {
         }
         return result;
     }
-
-
-   /* *//**
-     * 查询学生信息----分页查询----用于登记成绩中，展示学生信息
-     * by 吴小莉
-     *//*
-    @GetMapping("findByPage")
-    public Map<String,Object> findByPage(Integer page,Integer rows,String cname,String grade, String classno){
-        page = page == null ? 1 : page;
-
-        //前端页面应该是20.这里的“2”，仅用于后端测试
-        rows = rows == null ? 2 : rows;
-
-        HashMap<String,Object> map = new HashMap<>();
-
-        //分页处理
-        List<Student_abbr> student_abbrs = studentService.findByPage(page,rows,cname,grade,classno);
-
-        log.info("student   size" + student_abbrs.size());
-
-        //计算总页数
-        Integer totals = studentService.findTotals(cname,grade,classno);
-        Integer totalPage = totals % rows == 0 ? totals / rows : totals / rows + 1;
-        map.put("students",student_abbrs);
-        map.put("totals",totals);
-        map.put("totalPage",totalPage);
-
-        return map;
-
-    }
-*/
 
     /**
      * 根据学期，学生账号返回学生本学期的课表
@@ -223,9 +156,6 @@ public class StudentController {
             log.info("S "+ScheduleS[i]);
         }
 
-
-
-
         return ScheduleS;
     }
 
@@ -251,14 +181,14 @@ public class StudentController {
     @Autowired
     private OptionalService optionalService;
 
-    //学生选课功能相关
+    /*//学生选课功能相关
     //按cno查找单个课程
     @GetMapping("findByCno")
     public Optional findByCno(String cno){
         return optionalService.findByCno(cno);
-    }
+    }*/
 
-    //  学生选课
+    /*//  学生选课
     @GetMapping("updateNumber")
     public SpcResult updateNumber(String cno,String sno){
         SpcResult result = new SpcResult();
@@ -346,6 +276,6 @@ public class StudentController {
         map.put("page", page);
         return map;
     }
-
+*/
 
 }
