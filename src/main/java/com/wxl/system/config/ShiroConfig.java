@@ -1,6 +1,8 @@
 package com.wxl.system.config;
 
 
+import com.wxl.system.entity.Permission;
+import com.wxl.system.service.PermissionService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
@@ -10,18 +12,23 @@ import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 @Configuration
 @CrossOrigin
 @Slf4j
 public class ShiroConfig {
+
+    @Autowired
+    private PermissionService permissionService;
 
     //ShiroFilterFactoryBean:3 @Qualifier("securityManager")  DefaultWebSecurityManager defaultWebSecurityManager
     @Bean
@@ -37,7 +44,6 @@ public class ShiroConfig {
          * perms: 拥有对某个资源的权限才能访问
          * role: 拥有某个角色权限访问
          */
-
         //有序序列（优先级）
         Map<String, String> filterMap = new LinkedHashMap<>();
 
@@ -47,20 +53,13 @@ public class ShiroConfig {
         //登录请求（所有人都可以访问）
         filterMap.put("/user/login","anon");
 
-        //权限控制
-        filterMap.put("/user/*","perms[user:power]");
-        filterMap.put("/teacher/**","perms[teacher:power]");
-        filterMap.put("/student/**","perms[student:power]");
-        filterMap.put("/manager/**","perms[manager:power]");
+        //动态权限控制
+        List<Permission> permissions = permissionService.findAllPermission();
+        for (Permission permission : permissions){
+             filterMap.put(permission.getUrl(),"perms["+permission.getCode()+"]");
+        }
 
-        filterMap.put("/user/**","roles[role_student]");
-        filterMap.put("/user/**","roles[role_admin]");
-        filterMap.put("/user/**","roles[role_teacher]");
-        filterMap.put("/student/**","roles[role_student]");
-        filterMap.put("/teacher/**","roles[role_teacher]");
-        filterMap.put("/manager/**","roles[role_admin]");
-
-
+        log.info("权限控制"+filterMap);
 
         //退出
         filterMap.put("/user/logout","logout");
