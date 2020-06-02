@@ -34,6 +34,8 @@ public class ManagerController {
     @Autowired
     private NoticeService noticeService;
 
+    @Autowired
+    private PermissionService permissionService;
 
 
 //    查看管理员个人信息
@@ -267,6 +269,13 @@ public class ManagerController {
             result.setState(false).setMsg("未成功录入学生档案信息！");
         }
         return result;
+    }
+
+
+    //返回所有权限信息
+    @GetMapping("/findAllPermission")
+    public List<Permission> findAllPermission(){
+        return permissionService.findAllPermission();
     }
 
 }
