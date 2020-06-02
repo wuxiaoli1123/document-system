@@ -18,4 +18,7 @@ public class Result {
     private String role;
     //登录成功之后，返回给前台
     private String user_account;
+
+    //登录成功之后，返回给前台sessionid
+    private String session_id;
 }

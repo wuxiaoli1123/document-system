@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,6 +46,8 @@ public class UserController {
         //String account,String password
 
         Result result = new Result();
+
+
 
         //获取当前用户
         Subject subject = SecurityUtils.getSubject();
@@ -80,7 +83,24 @@ public class UserController {
                 result.setRole(role);
                 result.setUsername(username);
 
+                //返回用户的账号，以便其他接口的验证，前台数据存放在localstorage里面
+                result.setUser_account(user.getAccount());
+
+                //设置获取sessionid
+                HttpSession session= request.getSession();
+
+                String sessionId=request.getSession().getId();
+
+                log.info("法国红酒"+sessionId);
+
+                result.setSession_id(sessionId);
+
                 result.setState(true).setMsg("登录成功！");
+
+
+
+
+
             }
         } catch (UnknownAccountException e) {
             //用户名不存在
