@@ -277,4 +277,22 @@ public class ManagerController {
         return permissionService.findAllPermission();
     }
 
+    //修改权限信息
+    @PostMapping("updatePermission")
+    public Result updatePermission(Integer id,String name, String code) {
+        Result result = new Result();
+        permissionService.updatePermission(id, name, code);
+        result.setState(true).setMsg("权限信息修改成功！");
+        return result;
+    }
+
+    //删除权限信息
+    @PostMapping("deletePermission")
+    public Result deletePermission(Integer id){
+        Result result = new Result();
+        permissionService.deletePermission(id);
+        result.setState(true).setMsg("删除成功！");
+        return result;
+    }
+
 }

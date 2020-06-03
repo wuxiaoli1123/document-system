@@ -6,4 +6,12 @@
         SELECT * from permission_tb
     </select>
 
+    <update id="updatePermission">
+        UPDATE permission_tb set code =#{code} AND name =#{name} WHERE id=#{id}
+    </update>
+
+    <delete id="deletePermission" parameterType="Integer">
+        delete from permission_tb where id=#{id}
+    </delete>
+
 </mapper>
