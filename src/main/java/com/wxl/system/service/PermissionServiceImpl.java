@@ -21,4 +21,19 @@ public class PermissionServiceImpl implements PermissionService {
     public List<Permission> findAllPermission(){
          return permissionDAO.findAllPermission();
     }
+
+    //修改权限
+    @Override
+    public void updatePermission(Integer id,String name, String code)
+    {
+           permissionDAO.updatePermission(id, name, code);
+    }
+
+    //删除权限信息
+    @Override
+    public void deletePermission(Integer id)
+    {
+        permissionDAO.deletePermission(id);
+    }
+
 }
