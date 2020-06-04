@@ -7,7 +7,7 @@
     </select>
 
     <update id="updatePermission" parameterType="Perm">
-        UPDATE permission_tb set code =#{code} AND name =#{name} WHERE id=#{id}
+        UPDATE permission_tb set `code` =#{code},`name` =#{name} WHERE id=#{id}
     </update>
 
     <delete id="deletePermission" parameterType="Integer">
