@@ -2,6 +2,7 @@ package com.wxl.system.service;
 
 
 import com.wxl.system.dao.PermissionDAO;
+import com.wxl.system.entity.Perm;
 import com.wxl.system.entity.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,9 +25,9 @@ public class PermissionServiceImpl implements PermissionService {
 
     //修改权限
     @Override
-    public void updatePermission(Integer id,String name, String code)
+    public void updatePermission(Perm perm)
     {
-           permissionDAO.updatePermission(id, name, code);
+           permissionDAO.updatePermission(perm);
     }
 
     //删除权限信息

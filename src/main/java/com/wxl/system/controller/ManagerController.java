@@ -279,9 +279,9 @@ public class ManagerController {
 
     //修改权限信息
     @PostMapping("updatePermission")
-    public Result updatePermission(Integer id,String name, String code) {
+    public Result updatePermission(Perm perm) {
         Result result = new Result();
-        permissionService.updatePermission(id, name, code);
+        permissionService.updatePermission(perm);
         result.setState(true).setMsg("权限信息修改成功！");
         return result;
     }

@@ -6,7 +6,7 @@
         SELECT * from permission_tb
     </select>
 
-    <update id="updatePermission">
+    <update id="updatePermission" parameterType="Perm">
         UPDATE permission_tb set code =#{code} AND name =#{name} WHERE id=#{id}
     </update>
 
