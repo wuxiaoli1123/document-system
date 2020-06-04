@@ -1,5 +1,6 @@
 package com.wxl.system.service;
 
+import com.wxl.system.entity.Perm;
 import com.wxl.system.entity.Permission;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,7 +12,7 @@ public interface PermissionService {
     List<Permission> findAllPermission();
 
     //修改权限
-    void updatePermission(Integer id,String name, String code);
+    void updatePermission(Perm perm);
 
     //删除权限信息
     void deletePermission(Integer id);

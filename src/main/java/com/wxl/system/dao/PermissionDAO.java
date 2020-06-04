@@ -1,6 +1,7 @@
 package com.wxl.system.dao;
 
 
+import com.wxl.system.entity.Perm;
 import com.wxl.system.entity.Permission;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -14,7 +15,7 @@ public interface PermissionDAO {
     List<Permission> findAllPermission();
 
     //修改权限
-    void updatePermission(@Param("id") Integer id, @Param("name") String name,@Param("code") String code);
+    void updatePermission(Perm perm);
 
     //删除权限信息
     void deletePermission(Integer id);
