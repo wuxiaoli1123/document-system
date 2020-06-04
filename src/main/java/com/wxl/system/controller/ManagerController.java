@@ -280,7 +280,7 @@ public class ManagerController {
 
     //修改权限信息
     @PostMapping("updatePermission")
-    public Result updatePermission(Perm perm) {
+    public Result updatePermission(@RequestBody Perm perm) {
         Result result = new Result();
         permissionService.updatePermission(perm);
         result.setState(true).setMsg("权限信息修改成功！");
@@ -310,7 +310,7 @@ public class ManagerController {
 
     //增加权限（角色id、权限id）
     @PostMapping("insertPermToRole")
-    public Result insertPermToRole(Role_Perm role_perm){
+    public Result insertPermToRole(@RequestBody Role_Perm role_perm){
         Result result = new Result();
         permissionService.insertPermToRole(role_perm);
         result.setState(true).setMsg("增加权限成功！");
@@ -319,7 +319,7 @@ public class ManagerController {
 
     //删除权限（角色id、权限id）
     @PostMapping("deletePermByRole")
-    public Result deletePermByRole(Role_Perm role_perm){
+    public Result deletePermByRole(@RequestBody Role_Perm role_perm){
         Result result = new Result();
         permissionService.deletePermByRole(role_perm);
         result.setState(true).setMsg("删除权限成功！");
