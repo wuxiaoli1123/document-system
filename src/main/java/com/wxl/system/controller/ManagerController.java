@@ -296,4 +296,36 @@ public class ManagerController {
         return result;
     }
 
+    //返回所有角色信息
+    @GetMapping("findAllRole")
+    public List<Role> findAllRole(){
+        return permissionService.findAllRole();
+    }
+
+    //返回角色现有权限（角色id）
+    @GetMapping("findPermissionByRole")
+    public List<Permission> findPermissionByRole(Integer role_id){
+        return permissionService.findPermissionByRole(role_id);
+    }
+
+    //增加权限（角色id、权限id）
+    @PostMapping("insertPermToRole")
+    public Result insertPermToRole(Role_Perm role_perm){
+        Result result = new Result();
+        permissionService.insertPermToRole(role_perm);
+        result.setState(true).setMsg("增加权限成功！");
+        return result;
+    }
+
+    //删除权限（角色id、权限id）
+    @PostMapping("deletePermByRole")
+    public Result deletePermByRole(Role_Perm role_perm){
+        Result result = new Result();
+        permissionService.deletePermByRole(role_perm);
+        result.setState(true).setMsg("删除权限成功！");
+        return result;
+    }
+
+
+
 }

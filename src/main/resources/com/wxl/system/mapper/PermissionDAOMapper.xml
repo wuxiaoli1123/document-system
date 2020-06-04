@@ -13,5 +13,34 @@
     <delete id="deletePermission" parameterType="Integer">
         delete from permission_tb where id=#{id}
     </delete>
+    
+    <select id="findAllRole" resultType="Role">
+        select * from role_tb
+    </select>
+
+    <select id="findPermissionByRole" parameterType="Integer" resultType="Permission">
+        SELECT
+            *
+        FROM
+            permission_tb
+        WHERE
+                id IN (
+                SELECT
+                    perm_id
+                FROM
+                    role_perm_tb
+                WHERE
+                    role_perm_tb.role_id=#{role_id}
+            )
+    </select>
+
+    <insert id="insertPermToRole" parameterType="Role_Perm">
+        insert into role_perm_tb values (#{role_id},#{perm_id})
+    </insert>
+
+    <delete id="deletePermByRole" parameterType="Role_Perm">
+        delete from role_perm_tb where perm_id=#{perm_id} and role_id=#{role_id}
+    </delete>
+
 
 </mapper>
