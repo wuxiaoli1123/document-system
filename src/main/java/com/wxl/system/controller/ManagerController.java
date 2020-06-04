@@ -73,8 +73,7 @@ public class ManagerController {
 
     //注销学生、教师账号
     @PostMapping("cancelAccount")
-    public Result cancelAccounts(@RequestBody String[] l_accounts){
-        List<String> accounts = java.util.Arrays.asList(l_accounts);
+    public Result cancelAccounts(@RequestBody List<String> accounts){
         Result result = new Result();
         try{
             managerService.cancelAccounts(accounts);
@@ -289,7 +288,8 @@ public class ManagerController {
 
     //删除权限信息
     @PostMapping("deletePermission")
-    public Result deletePermission(Integer id){
+    public Result deletePermission(@RequestBody  String per_id){
+        Integer id = Integer.parseInt(per_id);
         Result result = new Result();
         permissionService.deletePermission(id);
         result.setState(true).setMsg("删除成功！");
