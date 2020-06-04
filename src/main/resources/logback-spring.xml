@@ -65,6 +65,17 @@
         </connectionSource>
     </appender>
 
+        <appender name="LOGSTASH"
+                  class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+            <destination>localhost:4567</destination>
+            <encoder charset="utf-8" class="net.logstash.logback.encoder.LogstashEncoder">
+            </encoder>
+        </appender>
+        <!--默认所有的包以info-->
+        <root level="info">
+            <appender-ref ref="LOGSTASH"/>
+        </root>
+
     <!--myibatis log configure-->
     <logger name="com.apache.ibatis" level="TRACE"/>
     <logger name="java.sql.Connection" level="DEBUG" />

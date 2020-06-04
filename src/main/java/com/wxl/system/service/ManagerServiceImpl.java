@@ -48,11 +48,18 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     public void addScheduleSc(Tc tc) { managerDAO.addScheduleSc(tc); }
 
+    //检测是否该年级班级
+    @Override
+    public void checkGradeandClass(String classno, String grade) {
+        managerDAO.checkGradeandClass(classno,grade);
+    }
+
 
     //注销账号
     @Override
    public void cancelAccounts(List<String> accounts){
         managerDAO.cancelAccounts(accounts);
     }
+
 
 }

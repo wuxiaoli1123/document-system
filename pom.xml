@@ -24,12 +24,6 @@
             SecurityMananger  管理所有用户
             realm 连接数据库
         -->
-        <dependency>
-            <groupId>commons-dbcp</groupId>
-            <artifactId>commons-dbcp</artifactId>
-            <version>1.4</version>
-        </dependency>
-
 
         <dependency>
             <groupId>commons-dbcp</groupId>
@@ -126,16 +120,7 @@
             <artifactId>commons-fileupload</artifactId>
             <version>1.4</version>
         </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
+
 
         <!--引入es的3个依赖包-->
         <dependency>

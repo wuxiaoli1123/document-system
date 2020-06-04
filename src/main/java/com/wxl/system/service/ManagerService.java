@@ -29,4 +29,7 @@ public interface ManagerService {
     //发布课表插入到sc表
     void addScheduleSc(Tc tc);
 
+    //检测是否该年级班级
+    void checkGradeandClass(String classno,String grade);
+
 }
