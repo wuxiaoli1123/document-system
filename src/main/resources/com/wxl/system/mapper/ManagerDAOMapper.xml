@@ -48,6 +48,12 @@
         and (student_tb.grade = tc_tb.grade and student_tb.classno=tc_tb.classno)
     </insert>
 
-
+    <select id="checkGradeandClass" parameterType="String">
+        SELECT id as tc_id,sno,tc_tb.classno,tc_tb.cno,type,credit,null,term
+        from tc_tb,course_tb,student_tb WHERE
+            student_tb.classno=#{classno} and student_tb.grade=#{grade} and tc_tb.cno=#{cno} and tc_tb.tno=#{tno}
+            AND tc_tb.cno=course_tb.cno
+            and (student_tb.grade = tc_tb.grade and student_tb.classno=tc_tb.classno)
+    </select>
 
 </mapper>

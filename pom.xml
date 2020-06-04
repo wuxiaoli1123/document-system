@@ -31,7 +31,6 @@
             <version>1.4</version>
         </dependency>
 
-
         <!--连接mysql驱动-->
         <dependency>
             <groupId>mysql</groupId>
@@ -121,6 +120,11 @@
             <version>1.4</version>
         </dependency>
 
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>5.1</version>
+        </dependency>
 
         <!--引入es的3个依赖包-->
         <dependency>
