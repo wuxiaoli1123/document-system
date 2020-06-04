@@ -12,7 +12,7 @@ import java.io.IOException;
 @Component
 @ServletComponentScan
 @WebFilter(urlPatterns = "/*",filterName = "shiroLoginFilter")
-public class ShiroLoginFilter  implements Filter {
+public class LoginFilter implements Filter {
 
     private FilterConfig config = null;
     @Override
