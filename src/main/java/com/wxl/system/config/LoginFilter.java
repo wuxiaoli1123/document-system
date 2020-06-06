@@ -23,6 +23,7 @@ public class LoginFilter implements Filter {
     public void destroy() {
         this.config = null;
     }
+
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
