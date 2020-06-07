@@ -326,5 +326,34 @@ public class ManagerController {
     }
 
 
+    //更新用户行为表          --syq
+    @PostMapping("updateAction")
+    public Result updateAction(@RequestBody List<Action> list) {
+        Result result = new Result();
+        try {
+            managerService.updateAction(list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.setState(false).setMsg("用户行为记录失败!!!");
+        }
+        return result;
+    }
 
+    //调出用户行为          --syq
+    @GetMapping("showAction")
+    public Map<String, Object> showAction(Integer page, Integer rows, String userID) {
+        page = page == null ? 1 : page;
+        rows = rows == null ? 4 : rows;
+        HashMap<String, Object> map = new HashMap<>();
+        //分页处理
+        List<Action> actions = managerService.showAction(page, rows, userID);
+        //计算总页数
+        Integer totals = managerService.findTotal(userID);
+        Integer totalPage = totals % rows == 0 ? totals / rows : totals / rows + 1;
+        map.put("actions", actions);
+        map.put("totals", totals);
+        map.put("totalPage", totalPage);
+        map.put("page", page);
+        return map;
+    }
 }
