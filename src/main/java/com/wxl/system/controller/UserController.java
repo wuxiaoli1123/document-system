@@ -1,6 +1,7 @@
 package com.wxl.system.controller;
 
 import com.wxl.system.entity.*;
+import com.wxl.system.service.ManagerService;
 import com.wxl.system.service.NoticeService;
 import com.wxl.system.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +36,9 @@ public class UserController {
 
     @Autowired
     private NoticeService noticeService;
+
+    @Autowired
+    private ManagerService managerService;
 
     /**
      * 用户登录
@@ -327,4 +331,19 @@ public class UserController {
     public List<String> findMajorByCollege(String college){
         return userService.findMajorByCollege(college);
     }
+
+
+    //更新用户行为表          --syq
+    @PostMapping("updateAction")
+    public Result updateAction(@RequestBody List<Action> list) {
+        Result result = new Result();
+        try {
+            managerService.updateAction(list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.setState(false).setMsg("用户行为记录失败!!!");
+        }
+        return result;
+    }
+
 }
