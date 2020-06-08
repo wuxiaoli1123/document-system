@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wxl.system.dao.ElasticSearchDAO">
+
+    <select id="findESCollege" resultType="EScollege">
+        SELECT * FROM college_tb
+    </select>
+
+
+    <select id="findESCourse" resultType="EScourse">
+        SELECT * FROM course_tb
+    </select>
+
+    <select id="findESMajor" resultType="Esmajor">
+        select * from major_tb
+    </select>
+
+    <select id="findESManager" resultType="ESmanager">
+        SELECT * FROM manager_tb
+    </select>
+
+    <select id="findESOptional" resultType="ESoptional">
+        SELECT * FROM optional_tb
+    </select>
+
+    <select id="findESPermission" resultType="ESpermission">
+        SELECT * FROM permission_tb
+    </select>
+
+    <select id="findESRole" resultType="ESrole">
+        SELECT * FROM role_tb
+    </select>
+
+    <select id="findESRole_perm" resultType="ESrole_perm">
+        SELECT * FROM role_perm_tb
+    </select>
+
+    <select id="findESSc" resultType="ESsc">
+        SELECT * FROM sc_tb
+    </select>
+
+    <select id="findESSendinfo" resultType="ESsendinfo">
+        SELECT * FROM sendinfo_tb
+    </select>
+
+    <select id="findESStudent" resultType="ESstudent">
+        SELECT * FROM student_tb
+    </select>
+
+    <select id="findESTc" resultType="EStc">
+        SELECT * FROM tc_tb
+    </select>
+
+    <select id="findESTeacher" resultType="ESteacher">
+        SELECT * FROM teacher_tb
+    </select>
+
+    <select id="findESUser" resultType="ESuser">
+        SELECT * FROM user_tb
+    </select>
+
+
+
+</mapper>

@@ -5,18 +5,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.stereotype.Component;
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Accessors(chain = true)
+@Accessors(chain=true)
 @Component
+public class EScollege {
 
-public class Permission {
     private Integer id;
-    private String name;
-    private String code;
-    private String url;
+    @Field(type = FieldType.Text,searchAnalyzer = "ik_smart",analyzer = "ik_max_word")
+    private String college;
 }
