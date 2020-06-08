@@ -67,9 +67,16 @@ public class ManagerServiceImpl implements ManagerService {
         return managerDAO.findTotal(userID);
     }
 
+
+    //查询各行为总数
+    @Override
+    public List<AcCount> showActionCount(List<String> actions) {
+        return managerDAO.showActionCount(actions);
+    }
+
     //注销账号
     @Override
-   public void cancelAccounts(List<String> accounts){
+    public void cancelAccounts(List<String> accounts){
         managerDAO.cancelAccounts(accounts);
     }
 

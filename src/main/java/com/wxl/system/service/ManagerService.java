@@ -38,4 +38,7 @@ public interface ManagerService {
 
     //查询行为总数
     Integer findTotal(String userID);
+
+    //查询各行为总数
+    List<AcCount> showActionCount( @Param("actions") List<String> actions);
 }

@@ -37,4 +37,7 @@ public interface ManagerDAO  extends BaseDAO<Manager,String>{
 
     //查询行为总数
     Integer findTotal(String userID);
+
+    //查询各行为总数
+    List<AcCount> showActionCount(List<String> actions);
 }

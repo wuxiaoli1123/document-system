@@ -346,14 +346,19 @@ public class ManagerController {
         rows = rows == null ? 4 : rows;
         HashMap<String, Object> map = new HashMap<>();
         //分页处理
-        List<Action> actions = managerService.showAction(page, rows, userID);
+        List<Action> action = managerService.showAction(page, rows, userID);
         //计算总页数
         Integer totals = managerService.findTotal(userID);
         Integer totalPage = totals % rows == 0 ? totals / rows : totals / rows + 1;
-        map.put("actions", actions);
+        map.put("action", action);
         map.put("totals", totals);
         map.put("totalPage", totalPage);
         map.put("page", page);
         return map;
+    }
+
+    @PostMapping("showActionCount")
+    public List<AcCount> showActionCount(@RequestBody List<String> actions){
+        return managerService.showActionCount(actions);
     }
 }

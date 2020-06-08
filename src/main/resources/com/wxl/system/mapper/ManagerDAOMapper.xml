@@ -74,6 +74,13 @@
         select count(*) from action_tb where userID=#{userID}
     </select>
 
+    <!-- 查询各行为总数-->
+     <select id="showActionCount" resultType="AcCount">
+         select action,count(*) as count from action_tb where action in
+         <foreach collection="list" item="action" open="(" close=")" separator=",">
+            #{action}
+         </foreach>
+         group by action
+      </select>
 
-
-</mapper>
+  </mapper>
