@@ -1,11 +1,7 @@
 package com.wxl.system.service;
 
-
 import com.wxl.system.dao.ManagerDAO;
-import com.wxl.system.entity.Manager;
-import com.wxl.system.entity.Student;
-import com.wxl.system.entity.Tc;
-import com.wxl.system.entity.Teacher;
+import com.wxl.system.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,12 +50,27 @@ public class ManagerServiceImpl implements ManagerService {
         managerDAO.checkGradeandClass(classno,grade);
     }
 
+    //更新用户行为表
+    @Override
+    public void updateAction(List<Action> list) {managerDAO.updateAction(list); }
+
+    //调出用户表
+    @Override
+    public List<Action> showAction(Integer page, Integer rows,String userID) {
+        int start = (page - 1)*rows;
+        return managerDAO.showAction(page, rows, userID);
+    }
+
+    //查询行为总数
+    @Override
+    public Integer findTotal(String userID) {
+        return managerDAO.findTotal(userID);
+    }
 
     //注销账号
     @Override
    public void cancelAccounts(List<String> accounts){
         managerDAO.cancelAccounts(accounts);
     }
-
 
 }

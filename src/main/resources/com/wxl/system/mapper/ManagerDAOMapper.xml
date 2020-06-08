@@ -48,6 +48,7 @@
         and (student_tb.grade = tc_tb.grade and student_tb.classno=tc_tb.classno)
     </insert>
 
+    <!--检测是否该年级班级-->
     <select id="checkGradeandClass" parameterType="String">
         SELECT id as tc_id,sno,tc_tb.classno,tc_tb.cno,type,credit,null,term
         from tc_tb,course_tb,student_tb WHERE
@@ -55,5 +56,24 @@
             AND tc_tb.cno=course_tb.cno
             and (student_tb.grade = tc_tb.grade and student_tb.classno=tc_tb.classno)
     </select>
+
+    <!--更新用户行为表-->
+    <insert id="updateAction" parameterType="List">
+        INSERT INTO action_tb values
+            <foreach collection="list" item="action" separator=",">
+            (null,#{action.userID},#{action.type},#{action.path},#{action.efID},#{action.className},#{action.sfTime},#{action.efTime},#{action.val},#{action.action})
+            </foreach>
+    </insert>
+
+    <!--调出用户表-->
+    <select id="showAction" parameterType="String" resultType="Action">
+        select * from action_tb where userID=#{userID}
+    </select>
+
+    <select id="findTotal" resultType="Integer">
+        select count(*) from action_tb where userID=#{userID}
+    </select>
+
+
 
 </mapper>

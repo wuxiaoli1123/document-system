@@ -1,9 +1,7 @@
 package com.wxl.system.service;
 
-import com.wxl.system.entity.Manager;
-import com.wxl.system.entity.Student;
-import com.wxl.system.entity.Tc;
-import com.wxl.system.entity.Teacher;
+import com.wxl.system.entity.*;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -32,4 +30,12 @@ public interface ManagerService {
     //检测是否该年级班级
     void checkGradeandClass(String classno,String grade);
 
+    //更新用户行为表
+    void updateAction(List<Action> list);
+
+    //调出用户表
+    List<Action> showAction(@Param("start") Integer start, @Param("rows") Integer rows, @Param("userID") String userID);
+
+    //查询行为总数
+    Integer findTotal(String userID);
 }
