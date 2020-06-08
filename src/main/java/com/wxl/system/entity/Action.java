@@ -21,5 +21,5 @@ public class Action {
     private String sfTime;
     private String efTime;
     private String val;
-    private Integer role_id;
+    private String action;
 }

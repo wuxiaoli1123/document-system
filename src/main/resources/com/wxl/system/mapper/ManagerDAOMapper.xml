@@ -61,7 +61,7 @@
     <insert id="updateAction" parameterType="List">
         INSERT INTO action_tb values
             <foreach collection="list" item="action" separator=",">
-            (null,#{action.userID},#{action.type},#{action.path},#{action.efID},#{action.className},#{action.sfTime},#{action.efTime},#{action.val},#{action.role_id})
+            (null,#{action.userID},#{action.type},#{action.path},#{action.efID},#{action.className},#{action.sfTime},#{action.efTime},#{action.val},#{action.action})
             </foreach>
     </insert>
 
