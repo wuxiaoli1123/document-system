@@ -2,6 +2,7 @@ package com.wxl.system.service;
 
 import com.wxl.system.dao.ManagerDAO;
 import com.wxl.system.entity.*;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,9 +57,9 @@ public class ManagerServiceImpl implements ManagerService {
 
     //调出用户表
     @Override
-    public List<Action> showAction(Integer page, Integer rows,String userID) {
+    public List<Action> showAction(Integer page, Integer rows, @Param("userID") String userID) {
         int start = (page - 1)*rows;
-        return managerDAO.showAction(page, rows, userID);
+        return managerDAO.showAction(start,rows,userID);
     }
 
     //查询行为总数

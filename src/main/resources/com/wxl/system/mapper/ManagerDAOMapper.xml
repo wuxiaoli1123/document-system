@@ -66,8 +66,8 @@
     </insert>
 
     <!--调出用户表-->
-    <select id="showAction" parameterType="String" resultType="Action">
-        select * from action_tb where userID=#{userID}
+    <select id="showAction" resultType="Action">
+        select * from action_tb where userID=#{userID} limit #{start},#{rows}
     </select>
 
     <select id="findTotal" resultType="Integer">

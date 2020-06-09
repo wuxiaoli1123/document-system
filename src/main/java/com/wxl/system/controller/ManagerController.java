@@ -325,20 +325,6 @@ public class ManagerController {
         return result;
     }
 
-//
-//    //更新用户行为表          --syq
-//    @PostMapping("updateAction")
-//    public Result updateAction(@RequestBody List<Action> list) {
-//        Result result = new Result();
-//        try {
-//            managerService.updateAction(list);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            result.setState(false).setMsg("用户行为记录失败!!!");
-//        }
-//        return result;
-//    }
-//
     //调出用户行为          --syq
     @GetMapping("showAction")
     public Map<String, Object> showAction(Integer page, Integer rows, String userID) {
