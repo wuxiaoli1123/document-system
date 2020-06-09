@@ -50,26 +50,26 @@ public class ShiroConfig {
 
         log.info("页面限制");
 
-//        //（权限操作）
-//        //登录请求（所有人都可以访问）
-//        filterMap.put("/user/login","anon");
-//
-//        //动态权限控制
-//        List<Permission> permissions = permissionService.findAllPermission();
-//        for (Permission permission : permissions){
-//             filterMap.put(permission.getUrl(),"perms["+permission.getCode()+"]");
-//        }
-//
-//        log.info("权限控制"+filterMap);
-//
-//        //退出
-//        filterMap.put("/user/logout","logout");
-//
-//        bean.setFilterChainDefinitionMap(filterMap);
-//
-//        //设置登录的请求
-//        bean.setLoginUrl("/user/login");
-//        //未授权页面
+        //（权限操作）
+        //登录请求（所有人都可以访问）
+        filterMap.put("/user/login","anon");
+
+        //动态权限控制
+        List<Permission> permissions = permissionService.findAllPermission();
+        for (Permission permission : permissions){
+             filterMap.put(permission.getUrl(),"perms["+permission.getCode()+"]");
+        }
+
+        log.info("权限控制"+filterMap);
+
+        //退出
+        filterMap.put("/user/logout","logout");
+
+        bean.setFilterChainDefinitionMap(filterMap);
+
+        //设置登录的请求
+        bean.setLoginUrl("/user/login");
+        //未授权页面
         bean.setUnauthorizedUrl("/user/noauth");
 
         return bean;
