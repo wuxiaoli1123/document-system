@@ -19,4 +19,9 @@ public interface SeachService {
     List<Map<String,Object>> searchPage5(String keyword) throws IOException;
 
     List<Map<String,Object>> searchPage6(String keyword) throws IOException;
+
+    List<Map<String,Object>> searchPage7(String keyword) throws IOException;
+
+    //实现搜索高亮功能
+
 }

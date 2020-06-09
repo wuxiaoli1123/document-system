@@ -7,4 +7,5 @@ public class ESconst {
     public static final String sendinfo_role_index = "sendinfo_role_index";
     public static final String optional_major_index = "optional_major_index";
     public static final String manager_index = "manager_index";
+    public static final String log = "log";
 }

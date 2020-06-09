@@ -1,6 +1,7 @@
 package com.wxl.system.service;
 
 
+import com.wxl.system.entity.EScourse;
 import com.wxl.system.utils.ESconst;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
@@ -182,6 +183,33 @@ public class SeachServiceImpl implements SeachService {
 
         MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders
                 .multiMatchQuery(keyword,"tno", "tname","term","type","tel")
+                .minimumShouldMatch("70%");
+
+        sourceBuilder.query(multiMatchQueryBuilder);
+
+        sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
+        //执行搜索
+        searchRequest.source(sourceBuilder);
+        SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+        //解析结果
+        ArrayList<Map<String,Object>> list = new ArrayList<>();
+
+        for (SearchHit documentFields : searchResponse.getHits().getHits()){
+            list.add(documentFields.getSourceAsMap());
+        }
+        return list;
+    }
+
+    //获取数据实现搜索功能
+    @Override
+    public List<Map<String,Object>> searchPage7(String keyword) throws IOException {
+
+        //条件搜索（先查询日志索引）
+        SearchRequest searchRequest = new SearchRequest(ESconst.log);
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+
+        MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders
+                .multiMatchQuery(keyword,"message", "logger_name","level_string")
                 .minimumShouldMatch("70%");
 
         sourceBuilder.query(multiMatchQueryBuilder);

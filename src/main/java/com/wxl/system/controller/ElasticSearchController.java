@@ -54,6 +54,7 @@ public class ElasticSearchController {
         List<Map<String, Object>> list4 = seachService.searchPage4(keyword);
         List<Map<String, Object>> list5 = seachService.searchPage5(keyword);
         List<Map<String, Object>> list6 = seachService.searchPage6(keyword);
+        List<Map<String, Object>> list7 = seachService.searchPage7(keyword);
         if(list1.size()!=0){
             for (int i=0;i<list1.size();i++){
                 Map<String, Object> temp = list1.get(i);
@@ -93,7 +94,13 @@ public class ElasticSearchController {
             }
 
         }
+        if (list7.size()!=0){
+            for (int i=0;i<list7.size();i++){
+                Map<String, Object> temp = list7.get(i);
+                list.add(temp);
+            }
 
+        }
 
         return list;
     }

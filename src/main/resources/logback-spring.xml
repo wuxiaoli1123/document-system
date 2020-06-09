@@ -71,7 +71,7 @@
 
         <appender name="LOGSTASH"
                   class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-            <destination>localhost:4567</destination>
+            <destination>localhost:65419</destination>
             <encoder charset="utf-8" class="net.logstash.logback.encoder.LogstashEncoder">
             </encoder>
         </appender>

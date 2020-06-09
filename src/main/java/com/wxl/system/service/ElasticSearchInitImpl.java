@@ -108,7 +108,6 @@ public class ElasticSearchInitImpl implements ElasticSearchInit {
         }
 
         //==================================================optional_major_index=============================================================//
-
         //将专业信息，批量插入学生索引中
         for (int i=0;i<eSmajors.size();i++){
             bulkRequest.add(
