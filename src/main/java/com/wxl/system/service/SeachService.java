@@ -1,6 +1,7 @@
 package com.wxl.system.service;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,10 @@ public interface SeachService {
     List<Map<String,Object>> searchPage6(String keyword) throws IOException;
 
     List<Map<String,Object>> searchPage7(String keyword) throws IOException;
+
+    List<Map<String,Object>> searchPage8(String keyword) throws IOException, ParseException;
+
+    List<Map<String,Object>> searchPage9(String keyword);
 
     //实现搜索高亮功能
 

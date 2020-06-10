@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.*;
 
 @RestController
@@ -103,6 +104,12 @@ public class ElasticSearchController {
         }
 
         return list;
+    }
+
+
+    @GetMapping("log/{keyword}")
+    public List<Map<String,Object>> log(@PathVariable("keyword") String keyword) throws IOException, ParseException {
+        return seachService.searchPage8(keyword);
     }
 
 

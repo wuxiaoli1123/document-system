@@ -51,4 +51,7 @@ public interface ElasticSearchDAO {
     List<ESuser> findESUser();
 
 
+    //返回日志信息
+
+
 }

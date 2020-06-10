@@ -16,10 +16,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -208,6 +207,7 @@ public class SeachServiceImpl implements SeachService {
         SearchRequest searchRequest = new SearchRequest(ESconst.log);
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
 
+        //"message", "logger_name","level_string"
         MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders
                 .multiMatchQuery(keyword,"message", "logger_name","level_string")
                 .minimumShouldMatch("70%");
@@ -224,6 +224,50 @@ public class SeachServiceImpl implements SeachService {
         for (SearchHit documentFields : searchResponse.getHits().getHits()){
             list.add(documentFields.getSourceAsMap());
         }
+        return list;
+    }
+
+    //获取日志的获取功能
+    @Override
+    public List<Map<String,Object>> searchPage8(String keyword) throws IOException, ParseException {
+
+
+        //条件搜索（先查询日志索引）
+        SearchRequest searchRequest = new SearchRequest(ESconst.log);
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+
+        //WildcardQueryBuilder wildcardQuery = QueryBuilders.wildcardQuery("created_time", keyword);
+
+        //FuzzyQueryBuilder fuzzyQuery = QueryBuilders.fuzzyQuery("create_time", keyword);
+
+        //PrefixQueryBuilder prefixQuery = QueryBuilders.prefixQuery("created_time", keyword);
+
+        MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders
+                .multiMatchQuery(keyword,"created_time")
+                .minimumShouldMatch("50%");
+
+
+        sourceBuilder.query(multiMatchQueryBuilder);
+
+        sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
+        //执行搜索
+        searchRequest.source(sourceBuilder);
+        SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+        //解析结果
+        ArrayList<Map<String,Object>> list = new ArrayList<>();
+
+        for (SearchHit documentFields : searchResponse.getHits().getHits()){
+            list.add(documentFields.getSourceAsMap());
+        }
+        return list;
+    }
+
+
+    public List<Map<String,Object>> searchPage9(String keyword)
+    {
+        ArrayList<Map<String,Object>> list = new ArrayList<>();
+
+
         return list;
     }
 
